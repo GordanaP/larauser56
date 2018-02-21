@@ -130,4 +130,14 @@ class User extends Authenticatable
         return strtolower($name) === strtolower($data['name']) ?  $slug : static::uniqueNameSlug($data['name']);
     }
 
+    /**
+     * Get the token that belongs to the user.
+     *
+     * @return  \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function activationToken()
+    {
+        return $this->hasOne(ActivationToken::class);
+    }
+
 }
