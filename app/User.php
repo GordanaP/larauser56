@@ -140,4 +140,14 @@ class User extends Authenticatable
         return $this->hasOne(ActivationToken::class);
     }
 
+    /**
+     * Get the verified user.
+     *
+     * @return mixed
+     */
+    public function scopeByResetPasswordCredentials($query, $email)
+    {
+        return $query->whereEmail($email)->where('verified', true);
+    }
+
 }

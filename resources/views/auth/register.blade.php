@@ -79,7 +79,7 @@
 @section('scripts')
     <script>
 
-        successNotification("{{ session('message') }}", type="success")
+        successNotification("{{ session('message') }}")
 
     </script>
 @endsection

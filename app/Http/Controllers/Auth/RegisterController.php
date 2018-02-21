@@ -72,6 +72,7 @@ class RegisterController extends Controller
      */
     protected function registered(Request $request, $user)
     {
+        // Prevent login after registration
         $this->guard()->logout();
 
         $response = message('Thank you for signing up! Please check your email to activate your account.');
