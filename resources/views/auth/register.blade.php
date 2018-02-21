@@ -75,3 +75,11 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+
+        successNotification("{{ session('message') }}", type="success")
+
+    </script>
+@endsection

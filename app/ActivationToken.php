@@ -55,16 +55,6 @@ class ActivationToken extends Model
     }
 
     /**
-     * Indicates if the activation token is expired.
-     *
-     * @return bool
-     */
-    public function hasExpired()
-    {
-        return Carbon::today()->gt($this->expires_at);
-    }
-
-    /**
      * Create a new model instance.
      *
      * @param $user
@@ -81,5 +71,15 @@ class ActivationToken extends Model
         $token->save();
 
         return $token;
+    }
+
+    /**
+     * Indicates if the activation token is expired.
+     *
+     * @return bool
+     */
+    public function hasExpired()
+    {
+        return Carbon::today()->gt($this->expires_at);
     }
 }
