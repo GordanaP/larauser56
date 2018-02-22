@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\ActivationToken;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Auth\Events\Registered;

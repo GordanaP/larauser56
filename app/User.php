@@ -56,7 +56,7 @@ class User extends Authenticatable
      */
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'slug';
     }
 
     /**
@@ -148,6 +148,20 @@ class User extends Authenticatable
     public function scopeByResetPasswordCredentials($query, $email)
     {
         return $query->whereEmail($email)->where('verified', true);
+    }
+
+    /**
+     * The user verifies their email address.
+     *
+     * @return void
+     */
+    public function verifyEmail()
+    {
+        $this->verified = true;
+
+        $this->save();
+
+        $this->activationToken->delete();
     }
 
 }

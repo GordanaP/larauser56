@@ -9,7 +9,7 @@ class DatabaseSeeder extends Seeder
      *
      * @var array
      */
-    protected $tables = [ 'users', 'activation_tokens' ];
+    protected $tables = [ 'users' ];
 
     /**
      * Run the database seeds.
@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         $this->call(UsersTableSeeder::class);
-        $this->call(ActivationTokensTableSeeder::class);
     }
 
     /**
