@@ -3,6 +3,7 @@
 namespace App\Listeners\Auth;
 
 use App\Events\Auth\EmailVerified;
+use App\Events\Auth\TokenRequested;
 use App\Mail\Auth\PleaseConfirmYourEmailAddress;
 use App\Mail\Auth\ThankYouForRegisteringWithUs;
 use Illuminate\Auth\Events\Registered;
@@ -30,7 +31,7 @@ class ActivateAccount
      */
     public function sendActivationToken(Registered $event)
     {
-        Mail::to($event->user)->send(new PleaseConfirmYourEmailAddress  ($event->user->activationToken));
+        Mail::to($event->user)->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
     }
 
     /**
@@ -42,5 +43,16 @@ class ActivateAccount
     public function sendThankYouNote(EmailVerified $event)
     {
         Mail::to($event->user)->send(new ThankYouForRegisteringWithUs($event->user));
+    }
+
+    /**
+     * Handle the request for new token event.
+     *
+     * @param  TokenRequested  $event
+     * @return void
+     */
+    public function resendActivationToken(TokenRequested $event)
+    {
+        Mail::to($event->user)->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
     }
 }

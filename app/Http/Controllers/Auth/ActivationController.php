@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\ActivationToken;
 use App\Events\Auth\EmailVerified;
+use App\Events\Auth\TokenRequested;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
 
@@ -27,16 +29,8 @@ class ActivationController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+        $this->middleware('email.unverified')->only('store');
+        $this->middleware('token.valid')->only('show');
     }
 
     /**
@@ -57,7 +51,13 @@ class ActivationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::findBy($request->email);
+
+        ActivationToken::generateNewFor($user);
+
+        event(new TokenRequested($user));
+
+        return $this->resent();
     }
 
     /**
@@ -76,41 +76,7 @@ class ActivationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ActivationToken  $activationToken
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ActivationToken $activationToken)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ActivationToken  $activationToken
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ActivationToken $activationToken)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ActivationToken  $activationToken
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ActivationToken $activationToken)
-    {
-        //
-    }
-
-    /**
-     * Get the response for a successfull email verification.
+     * Get the response for a successfully verified email.
      *
      * @return mixed
      */
@@ -119,5 +85,17 @@ class ActivationController extends Controller
         $response = message('Your account is now active. Please sign in to access the site content');
 
         return redirect($this->redirectPath())->with($response);
+    }
+
+    /**
+     * Get the response for a successfully resent activation token link.
+     *
+     * @return mixed
+     */
+    protected function resent()
+    {
+        $response = message('Please check your email for the activation link.');
+
+        return back()->with($response);
     }
 }

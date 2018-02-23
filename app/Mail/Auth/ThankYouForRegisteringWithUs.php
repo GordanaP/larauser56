@@ -30,6 +30,6 @@ class ThankYouForRegisteringWithUs extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mails.auth.thank_you_note');
+        return $this->subject('Your account is activated.')->markdown('mails.auth.thank_you_note');
     }
 }

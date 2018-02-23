@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
 
@@ -59,6 +58,10 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+
+                                <a href="{{ route('token.create') }}">
+                                    Lost Activation Link?
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -66,7 +69,6 @@
             </div>
         </div>
     </div>
-</div>
 @endsection
 
 @section('scripts')

@@ -20,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Auth\EmailVerified' => [
             'App\Listeners\Auth\ActivateAccount@sendThankYouNote',
         ],
+        'App\Events\Auth\TokenRequested' => [
+            'App\Listeners\Auth\ActivateAccount@resendActivationToken',
+        ],
     ];
 
     /**

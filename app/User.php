@@ -164,4 +164,16 @@ class User extends Authenticatable
         $this->activationToken->delete();
     }
 
+    /**
+     * Find the user by the attribute.
+     *
+     * @param string $value
+     * @param  string $field
+     * @return App\Usser
+     */
+    public static function findBy($value, $field='email')
+    {
+        return static::where($field, $value)->first();
+    }
+
 }

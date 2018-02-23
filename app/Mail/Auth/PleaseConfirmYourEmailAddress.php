@@ -30,6 +30,6 @@ class PleaseConfirmYourEmailAddress extends Mailable
      */
     public function build()
     {
-        return $this->subject('Confirm Your Email Address')->markdown('mails.auth.confirm_email');
+        return $this->subject('Confirm Your Email Address')->markdown('mails.auth.verify_email');
     }
 }
