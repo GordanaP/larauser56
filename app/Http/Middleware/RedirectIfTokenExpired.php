@@ -3,19 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Foundation\Auth\RedirectsUsers;
 
 class RedirectIfTokenExpired
 {
-    use RedirectsUsers;
-
-    /**
-     * Where to redirect users after failed response.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
     /**
      * Handle an incoming request.
      *
@@ -40,8 +30,8 @@ class RedirectIfTokenExpired
      */
     protected function failedResponse()
     {
-        $response = message('The activation token has expired. Click here to get a new one');
+        $response = message('The activation token has expired. Click here to create a new account.', 'error');
 
-        return redirect($this->redirectPath())->with($response);
+        return back()->with($response);
     }
 }

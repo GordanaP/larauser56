@@ -6,6 +6,7 @@ use App\ActivationToken;
 use App\Events\Auth\EmailVerified;
 use App\Events\Auth\TokenRequested;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\ActivationTokenRequest;
 use App\User;
 use Illuminate\Foundation\Auth\RedirectsUsers;
 use Illuminate\Http\Request;
@@ -29,7 +30,6 @@ class ActivationController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-        $this->middleware('email.unverified')->only('store');
         $this->middleware('token.valid')->only('show');
     }
 
@@ -49,7 +49,7 @@ class ActivationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ActivationTokenRequest $request)
     {
         $user = User::findBy($request->email);
 

@@ -50,7 +50,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $response = message('Wecome, '.$user->name);
+        $response = message('Welcome, '.$user->name);
 
         return redirect()->intended($this->redirectPath())->with($response);
     }
