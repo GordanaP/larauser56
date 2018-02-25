@@ -1,5 +1,7 @@
 <?php
 
+Route::view('/test', 'test');
+
 /**
  * Auth
  */
@@ -19,3 +21,15 @@ Route::resource('accounts/token','Auth\ActivationController', [
     'only' => ['create', 'store', 'show']
 ]);
 
+/**
+ * User
+ */
+Route::namespace('User')->prefix('users')->name('users.')->group(function() {
+    /**
+     * Account
+     */
+    Route::resource('/accounts', 'AccountController', [
+        'parameters' => ['accounts' => 'user'],
+        'only' => ['edit', 'update', 'destroy']
+    ]);
+});

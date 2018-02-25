@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use App\ActivationToken;
 use App\Events\Auth\EmailVerified;
 use App\Events\Auth\TokenRequested;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Auth\ActivationTokenRequest;
-use App\User;
 use Illuminate\Foundation\Auth\RedirectsUsers;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\ActivationTokenRequest;
 
 class ActivationController extends Controller
 {
@@ -46,7 +45,7 @@ class ActivationController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\Auth\ActivationTokenRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(ActivationTokenRequest $request)
@@ -76,7 +75,7 @@ class ActivationController extends Controller
     }
 
     /**
-     * Get the response for a successfully verified email.
+     * Get the response for a successfull email verification.
      *
      * @return mixed
      */
@@ -88,7 +87,7 @@ class ActivationController extends Controller
     }
 
     /**
-     * Get the response for a successfully resent activation token link.
+     * Get the response for a successfull activation account link.
      *
      * @return mixed
      */

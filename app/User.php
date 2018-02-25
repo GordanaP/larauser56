@@ -176,4 +176,19 @@ class User extends Authenticatable
         return static::where($field, $value)->first();
     }
 
+    /**
+     * Update the account.
+     *
+     * @param  array $data
+     * @return void
+     */
+    public function updateAccount($data)
+    {
+        $this->name = $data['name'];
+        $this->email = $data['email'];
+
+        $this->password = $data['password'] ? bcrypt($data['password']) : '';
+
+        $this->save();
+    }
 }
