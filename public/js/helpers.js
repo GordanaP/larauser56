@@ -10,7 +10,13 @@ function userNotification(message, type="success")
     return $.notify(message, type)
 }
 
-function removeServerSideFeedback(fields)
+/**
+ * Remove server side validation feedback
+ *
+ * @param  {array} fields
+ * @return {void}
+ */
+function removeServerSideValidationFeedback(fields)
 {
     $.each(fields, function (index, value) {
 
