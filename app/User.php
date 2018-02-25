@@ -187,7 +187,10 @@ class User extends Authenticatable
         $this->name = $data['name'];
         $this->email = $data['email'];
 
-        $this->password = $data['password'] ? bcrypt($data['password']) : '';
+        if($this->password)
+        {
+            $this->password = bcrypt($data['password']);
+        }
 
         $this->save();
     }

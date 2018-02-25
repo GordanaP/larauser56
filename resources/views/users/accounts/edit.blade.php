@@ -2,6 +2,10 @@
 
 @section('title', '| My account')
 
+@section('links')
+    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}">
+@endsection
+
 @section('content')
     <div class="card card-default">
         <div class="card-header">
@@ -10,72 +14,90 @@
             </h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('users.accounts.update', $user) }}" method="POST">
-
-                <p class="required-fields mb-18">
-                    Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
-                </p>
-
-                @method('PUT')
-                @csrf
-
-                <div class="form-group row">
-                    <label for="name" class="col-md-4 col-form-label text-md-right"><sup><i class="fa fa-asterisk fa-form red"></i></sup> Name</label>
-
-                    <div class="col-md-6">
-                        <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Enter your name" value="{{ old('name') ?: $user->name }}" autofocus />
-
-                        @if ($errors->has('name'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="email" class="col-md-4 col-form-label text-md-right"><sup><i class="fa fa-asterisk fa-form red"></i></sup> E-Mail Address</label>
-
-                    <div class="col-md-6">
-                        <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  id="email" name="email" placeholder="example@domain.com" value="{{ old('email') ?: $user->email }}" />
-
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                    <div class="col-md-6">
-                        <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"  id="password" name="password" placeholder="Choose your password" />
-
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm Password</label>
-
-                    <div class="col-md-6">
-                        <input type="password" class="form-control"  id="password-confirm" name="password_confirmation" placeholder="Retype password">
-                    </div>
-                </div>
-
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-warning">Save changes</button>
-                    </div>
-                </div>
-
-            </form>
+            @include('users.accounts.partials._formEdit')
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
+    <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
+
+    <script>
+
+        $('.account-form').formValidation({
+            framework: 'bootstrap4',
+            icon: {
+                valid: 'fa fa-check',
+                invalid: 'fa fa-times',
+                validating: 'fa fa-refresh'
+            },
+            fields: {
+                name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The name is required.'
+                        },
+                        regexp: {
+                            regexp: /^[A-za-z0-9]+$/i,
+                            message: 'Only alphabetical characters and numbers are allowed.'
+                        },
+                        stringLength: {
+                            max: 30,
+                            message: 'The name must be less than 30 characters long.'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email is required.'
+                        },
+                        emailAddress: {
+                            message: 'The value is not a valid email address.'
+                        },
+                        stringLength: {
+                            max: 100,
+                            message: 'The email address must be less than 100 characters long.'
+                        }
+                    }
+                },
+                password: {
+                    validators: {
+                        different: {
+                            field: 'name',
+                            message: 'The password must not be the same as the name.'
+                        },
+                        stringLength: {
+                            min: 6,
+                            message: 'The password must be at least 6 characters long.'
+                        }
+                    }
+                },
+                password_confirmation: {
+                    validators: {
+                        identical: {
+                            field: 'password',
+                            message: 'This value must match the password.'
+                        }
+                    }
+                },
+            }
+        })
+        .on('err.field.fv', function(e, data) {
+
+            var invalidFields = data.fv.getInvalidFields()
+
+            removeServerSideFeedback(invalidFields)
+        })
+        .on('success.field.fv', function(e, data) {
+
+            var validFields = data.element
+
+            removeServerSideFeedback(validFields)
+
+        });
+
+    </script>
+
 @endsection

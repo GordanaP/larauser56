@@ -5,10 +5,15 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class AccountController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

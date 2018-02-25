@@ -1,1 +1,21 @@
 body {color: #555}
+
+/*
+ * Form feedback fields
+ */
+div.fv-has-feedback.has-warning label,
+i.fv-control-feedback.fa.fa-times { color: #bf5329; }
+small.form-control-feedback { color: #bf5329; font-weight: 600 }
+div.fv-has-feedback.has-warning input,
+div.fv-has-feedback.has-warning .form-control:focus { border-color: #bf5329; }
+div.fv-has-feedback.has-success input,
+div.fv-has-feedback.has-success .form-control:focus  { border-color: #5cb85c; }
+div.fv-has-feedback.has-warning .form-control:focus,
+div.fv-has-feedback.has-success .form-control:focus {
+    -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+}
+
+.list-group form button {padding: 0; color: inherit; background: inherit}
+.list-group a {color: inherit; text-decoration: none}
+.list-group form button:hover, .list-group a:hover {color: blue;}
