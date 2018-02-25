@@ -14,7 +14,7 @@
         <main class="py-4 container">
             <div class="row">
                 <div class="col-md-4">
-                    <h1>Sidebar</h1>
+                    @include('partials.side._auth')
                 </div>
                 <div class="col-md-8">
 

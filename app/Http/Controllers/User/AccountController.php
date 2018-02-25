@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
@@ -41,7 +42,11 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        Auth::logout();
+
+        $user->delete();
+
+        return $this->deleted($user);
     }
 
     /**
@@ -54,5 +59,17 @@ class AccountController extends Controller
         $response = message('Your account has been saved.');
 
         return redirect()->route('users.accounts.edit', $user)->with($response);
+    }
+
+    /**
+     * Get the response for a successfull account deletion.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    protected function deleted($user)
+    {
+        $response = message('Your account has been deleted.');
+
+        return redirect()->route('index')->with($response);
     }
 }
