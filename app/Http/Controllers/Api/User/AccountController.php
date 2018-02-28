@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserResource;
 use App\Http\Resources\User\UsersCollection;
 use App\User;
 use Illuminate\Http\Request;
@@ -51,7 +52,7 @@ class AccountController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return new UserResource($user);
     }
 
     /**

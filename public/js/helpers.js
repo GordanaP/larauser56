@@ -66,3 +66,188 @@ function highlightDataTable(modelTable, datatable)
         $( datatable.cells().nodes() ).removeClass( 'highlight' );
     });
 }
+
+/**
+ * Generate random string
+ *
+ * @param  {{numeric}} length
+ * @return string
+ */
+function randomString(length)
+{
+    return Math.random().toString(36).substring(length);
+}
+
+/**
+ * Display validation error message for a single form field.
+ *
+ * @param  {array} errors
+ * @param  {string} error_name
+ * @param  {string} field_name
+ * @return void
+ */
+function displayValidationError(errors, error_name, field_name)
+{
+    var group = $(".form-group-" + field_name);
+
+    group.addClass('has-error');
+    group.find('span.help-block').text(errors[error_name][0]);
+}
+
+/**
+ * Display validation error messages for all form fields.
+ *
+ * @param  {array} errors
+ * @return void
+ */
+function displayValidationErrors(errors)
+{
+    for (let name in errors)
+    {
+        var group = $(".form-group-" + name);
+
+        group.addClass('has-error');
+        group.find('span.help-block').text(errors[name][0]);
+    }
+}
+
+/**
+ * Clear all validation errors at once
+ *
+ * @param  {array} errors
+ * @param  {array} fields
+ * @return {void}
+ */
+function clearAllValidationErrorsOnNewInput(errors, fields)
+{
+    for (let name in errors)
+    {
+        if (errors[name][0] == "Please fill up at least one field") {
+            $(fields).on('keydown', function ()
+            {
+                var group = $(".form-group");
+
+                group.removeClass('has-error');
+                group.find('span.help-block').text('');
+            });
+        }
+    }
+}
+
+/**
+ * Remove the validation error message for a specific form field.
+ *
+ * @param  {string} name
+ * @return void
+ */
+function clearValidationError(name)
+{
+    var group = $(".form-group-" + name);
+
+    group.removeClass('has-error');
+    group.find('span.help-block').text('');
+}
+
+/**
+ * Remove validation error message on inserting the new field value.
+ *
+ * @return void
+ */
+function clearValidationErrorOnNewInput()
+{
+    $("input, textarea").on('keydown', function () {
+        clearValidationError($(this).attr('id').replace('#', ''));
+    });
+
+    $("select").on('change', function () {
+        clearValidationError($(this).attr('id').replace('#', ''));
+    });
+
+    $("input[name*='role_id']").click(function(){
+        if($(this).is(':checked'))
+        {
+            clearValidationError('role_id')
+        }
+    })
+}
+
+/**
+ * Remove validation error messages on modal close.
+ *
+ * @param  {array} fields
+ * @return void
+ */
+function emptyModalErrorMessages(fields)
+{
+    $.each(fields, function (index, value){
+      clearValidationError(value)
+    });
+}
+
+/**
+ * Remove modal form fields values on modal close.
+ *
+ * @return void
+ */
+function emptyModalFormValues()
+{
+    $("h4.modal-title span").text('')
+    $("input, select, textarea").val("").end();
+    $('#role_id').val(null).trigger('change');
+    $('.form-group-avatar').hide()
+}
+
+/**
+ * Empty the modal on close
+ *
+ * @param  {array} fields
+ * @return void
+ */
+function emptyModalOnClose(fields, form)
+{
+    $(".modal").on("hidden.bs.modal", function() {
+        form.formValidation('resetForm', true);
+        emptyModalFormValues()
+        emptyModalErrorMessages(fields)
+    });
+}
+
+/**
+ * Response on failed ajax call
+ *
+ * @param  {array} errors
+ * @param  {string} modal
+ * @return {[void]}
+ */
+function errorResponse(errors, modal)
+{
+    if(errors) {
+        displayValidationErrors(errors)
+        clearValidationErrorOnNewInput()
+    }
+    else {
+        authorizationFailedNotification()
+        modal.modal("hide")
+    }
+}
+
+/**
+ * Set modal autofocus field
+ *
+ * @param {string} modalName
+ * @param {string} inputId
+ * @return {void}
+ */
+function setModalAutofocus(modalName, inputId)
+{
+    modalName.on('shown.bs.modal', function () {
+      $("#" + inputId).focus()
+    })
+}
+
+function successResponse(table, modal, message)
+{
+    table.ajax.reload();
+    modal.modal("hide")
+    successNotification(message)
+}

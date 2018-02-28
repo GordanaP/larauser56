@@ -27,6 +27,49 @@
         </table>
     </div>
 
+    <div class="modal" tabindex="-1" role="dialog" id="accountModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fa"></i>
+                        <span></span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="required-fields mb-18">
+                        Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
+                    </p>
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+
+                        <input type="text" class="form-control"  id="name" name="name" placeholder="Enter your name" />
+
+                            <span class="invalid-feedback"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">E-Mail Address <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+
+                        <input type="text" class="form-control"  id="email" name="email" placeholder="example@domain.com" />
+
+                        <span class="invalid-feedback"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-account">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -37,52 +80,35 @@
     <script>
 
         var table = $('#accountsTable')
-        var ApiAccountUrl = "{{ route('api.accounts') }}"
+        var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
+        var accountModal = $('#accountModal')
 
-        var datatable = table.DataTable({
-            "ajax": {
-                "url": ApiAccountUrl,
-                "type": "GET"
-            },
-            "deferRender": true, // Increase the speed of the table loading
-            "columns": [
+        @include('users.accounts.partials._datatable')
+
+        // Edit account
+        $(document).on('click', '#editAccount', function() {
+
+            accountModal.modal('show')
+
+            var user = $(this).val()
+            var apiAccountsShowUrl = apiAccountsIndexUrl + '/' + user
+
+            $('.modal-title i').addClass('fa-lock')
+            $('.modal-title span').text('Edit account')
+            $('.btn-account').attr('id','updateAccount').val(user) // asign user id(slug) to btn value
+
+            $.ajax({
+                url: apiAccountsShowUrl,
+                type: "GET",
+                success: function(response)
                 {
-                    render: function(data, type, row, meta) {
-                        return ''
-                    },
-                    searchable: false,
-                    orderable: false
-                },
-                {
-                    data: 'name',
-                    render: function(data, type, row, meta) {
-                        return '<a href="#" data-user="' + row.user + '"  id="editProfile">' + data +'</a>'
-                    }
-                },
-                { data: 'email' },
-                { data: 'joined' },
-                {
-                  render: function(data, type, row, meta) {
-                    return '<div class="flex justify-center align-center"><button class="btn btn-xs btn-edit" id="editAccount" value="' + row.user + '"><i class="fa fa-pencil mr-12"></i></button><button class="btn btn-xs btn-link btn-primary btn-link-delete" id="deleteAccount" value="' + row.user + '"><i class="fa fa-trash"></i></button>'
-                  },
-                  searchable: false,
-                  sortable: false,
-                },
-                {
-                    data: 'user',
-                    visible: false
+                    var user = response.data
+
+                    $('#name').val(user.name)
+                    $('#email').val(user.email)
                 }
-            ],
-            "order": [[2, 'desc']],
-            responsive: true,
-            columnDefs: [
-                { responsivePriority: 1, targets: 0 },
-                { responsivePriority: 2, targets: 1 },
-                { responsivePriority: 3, targets: 2 }
-            ]
+            })
         });
-
-        setTableCounterColumn(datatable)
 
     </script>
 @endsection
