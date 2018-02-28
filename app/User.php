@@ -118,7 +118,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Create slug under certain conditions.
+     * Create the user name slug during account update.
      *
      * @param  string $name
      * @param  string $slug
@@ -129,6 +129,7 @@ class User extends Authenticatable
     {
         return strtolower($name) === strtolower($data['name']) ?  $slug : static::uniqueNameSlug($data['name']);
     }
+
 
     /**
      * Get the token that belongs to the user.
@@ -186,8 +187,9 @@ class User extends Authenticatable
     {
         $this->name = $data['name'];
         $this->email = $data['email'];
+        $this->slug = $this->slug($this->name, $this->slug, $data);
 
-        if($this->password)
+        if($data['password'])
         {
             $this->password = bcrypt($data['password']);
         }

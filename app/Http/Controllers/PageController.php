@@ -35,4 +35,14 @@ class PageController extends Controller
     {
         return view('home');
     }
+
+    /**
+     * Show the admin dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function dashboard()
+    {
+        return view('admin.dashboard');
+    }
 }

@@ -9,8 +9,8 @@
  * @param  string  $icon optional
  * @return array
  */
-function message($message, $type="success") {
-
+function message($message, $type="success")
+{
     $response['message'] = $message;
     $response['type'] = $type;
 
