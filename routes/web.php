@@ -47,4 +47,3 @@ Route::namespace('Admin\User')->prefix('admin')->name('admin.')->group(function(
         'parameters' => ['accounts' => 'user'],
     ]);
 });
-

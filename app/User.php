@@ -60,6 +60,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Format the account creation date.
+     *
+     * @return string
+     */
+    public function getFormattedDateAttribute()
+    {
+        return $this->created_at->toFormattedDateString();
+    }
+
+    /**
      * Indicate if the user has verified their email address.
      *
      * @return bool

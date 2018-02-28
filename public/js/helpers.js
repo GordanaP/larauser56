@@ -34,7 +34,7 @@ function removeServerSideValidationFeedback(fields)
  */
 function setTableCounterColumn(datatable)
 {
-    datatable.on( 'order.dt search.dt', function () {
+    datatable.on('order.dt search.dt', function () {
         datatable.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
             x = i+1
             cell.innerHTML = '<span>'+ x +'</span>';
