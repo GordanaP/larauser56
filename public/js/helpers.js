@@ -88,10 +88,11 @@ function randomString(length)
  */
 function displayValidationError(errors, error_name, field_name)
 {
-    var group = $(".form-group-" + field_name);
+    var group = $("." + name);
+    var feedback = $("span." + name);
 
-    group.addClass('has-error');
-    group.find('span.help-block').text(errors[error_name][0]);
+    group.addClass('is-invalid');
+    feedback.text(errors[name][0]);
 }
 
 /**
@@ -104,10 +105,11 @@ function displayValidationErrors(errors)
 {
     for (let name in errors)
     {
-        var group = $(".form-group-" + name);
+        var group = $("#" + name);
+        var feedback = $("span." + name);
 
-        group.addClass('has-error');
-        group.find('span.help-block').text(errors[name][0]);
+        group.addClass('is-invalid');
+        feedback.text(errors[name][0]);
     }
 }
 
@@ -128,7 +130,7 @@ function clearAllValidationErrorsOnNewInput(errors, fields)
                 var group = $(".form-group");
 
                 group.removeClass('has-error');
-                group.find('span.help-block').text('');
+                group.find('span.invalid-feedback').text('');
             });
         }
     }
@@ -142,10 +144,11 @@ function clearAllValidationErrorsOnNewInput(errors, fields)
  */
 function clearValidationError(name)
 {
-    var group = $(".form-group-" + name);
+    var group = $("#" + name);
+    var feedback = $("span." + name);
 
-    group.removeClass('has-error');
-    group.find('span.help-block').text('');
+    group.removeClass('is-invalid');
+    feedback.text('');
 }
 
 /**
@@ -191,7 +194,7 @@ function emptyModalErrorMessages(fields)
  */
 function emptyModalFormValues()
 {
-    $("h4.modal-title span").text('')
+    $("h5.modal-title span").text('')
     $("input, select, textarea").val("").end();
     $('#role_id').val(null).trigger('change');
     $('.form-group-avatar').hide()
@@ -206,7 +209,7 @@ function emptyModalFormValues()
 function emptyModalOnClose(fields, form)
 {
     $(".modal").on("hidden.bs.modal", function() {
-        form.formValidation('resetForm', true);
+        //form.formValidation('resetForm', true);
         emptyModalFormValues()
         emptyModalErrorMessages(fields)
     });
@@ -245,9 +248,9 @@ function setModalAutofocus(modalName, inputId)
     })
 }
 
-function successResponse(table, modal, message)
+function successResponse(datatable, modal, message)
 {
-    table.ajax.reload();
+    datatable.ajax.reload();
     modal.modal("hide")
-    successNotification(message)
+    userNotification(message)
 }

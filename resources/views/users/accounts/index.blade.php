@@ -30,43 +30,45 @@
     <div class="modal" tabindex="-1" role="dialog" id="accountModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fa"></i>
-                        <span></span>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="required-fields mb-18">
-                        Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
-                    </p>
-
-                    <!-- Name -->
-                    <div class="form-group">
-                        <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-
-                        <input type="text" class="form-control"  id="name" name="name" placeholder="Enter your name" />
-
-                            <span class="invalid-feedback"></span>
+                <form id="accountForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa"></i>
+                            <span></span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
+                    <div class="modal-body">
+                        <p class="required-fields mb-18">
+                            Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
+                        </p>
 
-                    <!-- Email -->
-                    <div class="form-group">
-                        <label for="email">E-Mail Address <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+                        <!-- Name -->
+                        <div class="form-group">
+                            <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="text" class="form-control"  id="email" name="email" placeholder="example@domain.com" />
+                            <input type="text" class="form-control"  id="name" name="name" placeholder="Enter your name" />
 
-                        <span class="invalid-feedback"></span>
+                                <span class="invalid-feedback name"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email">E-Mail Address <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+
+                            <input type="text" class="form-control"  id="email" name="email" placeholder="example@domain.com" />
+
+                            <span class="invalid-feedback email"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-account">Save changes</button>
-                </div>
-            </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary btn-account">Save changes</button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
         </div>
     </div>
 
@@ -81,7 +83,13 @@
 
         var table = $('#accountsTable')
         var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
+        var adminAccountsIndexUrl = "{{ route('admin.accounts.index') }}"
         var accountModal = $('#accountModal')
+        var accountForm = $('#accountForm')
+        var accountFields = ['name', 'email']
+
+        setModalAutofocus(accountModal, 'name')
+        emptyModalOnClose(accountFields, accountForm)
 
         @include('users.accounts.partials._datatable')
 
@@ -100,12 +108,39 @@
             $.ajax({
                 url: apiAccountsShowUrl,
                 type: "GET",
-                success: function(response)
-                {
+                success: function(response) {
+
                     var user = response.data
 
                     $('#name').val(user.name)
                     $('#email').val(user.email)
+                }
+            })
+        });
+
+
+        //Update account
+        $(document).on('click', '#updateAccount', function() {
+
+            var user = $(this).val()
+            var adminAccountsUpdateUrl = adminAccountsIndexUrl + '/' + user
+
+            var data = {
+                name : $("#name").val(),
+                email : $("#email").val(),
+            }
+
+            $.ajax({
+                url : adminAccountsUpdateUrl,
+                type : "PUT",
+                data: data,
+                success : function(response) {
+
+                    successResponse(datatable, accountModal, response.message)
+                },
+                error: function(response) {
+
+                    errorResponse(response.responseJSON.errors, accountModal)
                 }
             })
         });

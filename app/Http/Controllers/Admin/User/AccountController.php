@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\AccountRequest;
 use App\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
@@ -68,9 +69,11 @@ class AccountController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(AccountRequest $request, User $user)
     {
-        //
+        $user->updateAccount($request);
+
+        return message('The account has been updated');
     }
 
     /**

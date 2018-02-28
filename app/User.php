@@ -135,9 +135,9 @@ class User extends Authenticatable
      * @param  array $data
      * @return string
      */
-    protected function slug($name, $slug, $data)
+    protected function getSlug($name)
     {
-        return strtolower($name) === strtolower($data['name']) ?  $slug : static::uniqueNameSlug($data['name']);
+        return strtolower($this->name) === strtolower($name) ?  $this->slug : static::uniqueNameSlug($name);
     }
 
 
@@ -195,9 +195,11 @@ class User extends Authenticatable
      */
     public function updateAccount($data)
     {
+        $slug = $this->getSlug($data['name']);
+
         $this->name = $data['name'];
         $this->email = $data['email'];
-        $this->slug = $this->slug($this->name, $this->slug, $data);
+        $this->slug = $slug;
 
         if($data['password'])
         {
