@@ -188,6 +188,23 @@ class User extends Authenticatable
     }
 
     /**
+     * Create a new account.
+     *
+     * @param array $data
+     * @return void
+     */
+    public static function createAccount($data)
+    {
+        $user = new static;
+
+        $user->name = $data['name'];
+        $user->email = $data['email'];
+        $user->password = bcrypt($data['password']);
+
+        $user->save();
+    }
+
+    /**
      * Update the account.
      *
      * @param  array $data

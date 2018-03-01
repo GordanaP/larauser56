@@ -47,7 +47,7 @@
          * Account
          */
         var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
-        var adminAccountsIndexUrl = "{{ route('admin.accounts.index') }}"
+        var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
         var accountModal = $('#accountModal')
         var accountForm = $('#accountForm')
         var accountFields = ['name', 'email']
@@ -59,7 +59,7 @@
         @include('users.accounts.partials._datatable')
 
         // Create account
-        $(document).on('click', '#createAccount', function(){
+        $(document).on('click', '#createAccount', function() {
 
             accountModal.modal('show')
 
@@ -67,6 +67,32 @@
             $('.modal-title span').text('New account')
             $('.btn-account').attr('id','storeAccount').text('Save')
 
+        });
+
+        $(document).on('click', '#storeAccount', function() {
+
+            var password = randomString(length)
+
+            var data = {
+                name : $("#name").val(),
+                email : $("#email").val(),
+                password: password,
+                password_confirmation: password,
+            }
+
+            $.ajax({
+                url: adminAccountsUrl,
+                type: "POST",
+                data: data,
+                success: function(response) {
+
+                    successResponse(datatable, accountModal, response.message)
+                },
+                error: function(response) {
+
+                    errorResponse(response.responseJSON.errors, accountModal)
+                }
+            })
         });
 
         // Edit account
@@ -99,7 +125,7 @@
         $(document).on('click', '#updateAccount', function() {
 
             var user = $(this).val()
-            var adminAccountsUpdateUrl = adminAccountsIndexUrl + '/' + user
+            var adminAccountsUpdateUrl = adminAccountsUrl + '/' + user
 
             var data = {
                 name : $("#name").val(),

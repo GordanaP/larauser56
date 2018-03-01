@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
-use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -32,12 +31,14 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\AccountRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
-        //
+        User::createAccount($request);
+
+        return message("A new account has been created");
     }
 
     /**
@@ -65,7 +66,7 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\AccountRequest  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
