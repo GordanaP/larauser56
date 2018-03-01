@@ -148,7 +148,7 @@ body#adminBody {
 .dataTable thead th { border-bottom: 0 !important;  border-top: 1px solid #e6e6e6 !important}
 .dataTable thead tr { background: #f2f2f2;}
 .dataTable.no-footer { border-bottom: 1px solid #e6e6e6  !important; }
-.dataTable td a, .dataTable td i { color: #007bff; }
+.dataTable td a, .dataTable td i { color: #007BFF; }
 /*.dataTable tbody tr td.highlight,
 .dataTable tr.even:hover,
 .dataTable tr.even:hover td.sorting_1,

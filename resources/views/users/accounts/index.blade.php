@@ -11,8 +11,11 @@
 
 @section('content')
 
-    <div class="pb-2 mb-3">
-        <h1 class="h2">Accounts</h1>
+    <div class="pb-2 mb-3 col-md-12">
+        <h1 class="h2 flex align-center justify-between">
+            <span>Accounts</span>
+            <button class="btn btn-warning" id="createAccount">New account</button>
+        </h1>
     </div>
     <div class="table-responsive admin-table-wrapper">
         <table class="table hover order-column admin-table" id="accountsTable" cellspacing="0" width="100%">
@@ -27,50 +30,7 @@
         </table>
     </div>
 
-    <div class="modal" tabindex="-1" role="dialog" id="accountModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form id="accountForm">
-                    <div class="modal-header">
-                        <h5 class="modal-title">
-                            <i class="fa"></i>
-                            <span></span>
-                        </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p class="required-fields mb-18">
-                            Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
-                        </p>
-
-                        <!-- Name -->
-                        <div class="form-group">
-                            <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-
-                            <input type="text" class="form-control"  id="name" name="name" placeholder="Enter your name" />
-
-                                <span class="invalid-feedback name"></span>
-                        </div>
-
-                        <!-- Email -->
-                        <div class="form-group">
-                            <label for="email">E-Mail Address <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-
-                            <input type="text" class="form-control"  id="email" name="email" placeholder="example@domain.com" />
-
-                            <span class="invalid-feedback email"></span>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-account">Save changes</button>
-                    </div>
-                </form>
-            </div><!-- /.modal-content -->
-        </div>
-    </div>
+    @include('users.accounts.partials._modal')
 
 @endsection
 
@@ -82,6 +42,10 @@
     <script>
 
         var table = $('#accountsTable')
+
+        /**
+         * Account
+         */
         var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
         var adminAccountsIndexUrl = "{{ route('admin.accounts.index') }}"
         var accountModal = $('#accountModal')
@@ -91,7 +55,19 @@
         setModalAutofocus(accountModal, 'name')
         emptyModalOnClose(accountFields, accountForm)
 
+        // DataTable
         @include('users.accounts.partials._datatable')
+
+        // Create account
+        $(document).on('click', '#createAccount', function(){
+
+            accountModal.modal('show')
+
+            $('.modal-title i').addClass('fa-user')
+            $('.modal-title span').text('New account')
+            $('.btn-account').attr('id','storeAccount').text('Save')
+
+        });
 
         // Edit account
         $(document).on('click', '#editAccount', function() {
@@ -103,7 +79,7 @@
 
             $('.modal-title i').addClass('fa-lock')
             $('.modal-title span').text('Edit account')
-            $('.btn-account').attr('id','updateAccount').val(user) // asign user id(slug) to btn value
+            $('.btn-account').attr('id','updateAccount').text('Save changes').val(user) // asign user id(slug) to btn value
 
             $.ajax({
                 url: apiAccountsShowUrl,
@@ -144,6 +120,7 @@
                 }
             })
         });
+
 
     </script>
 @endsection
