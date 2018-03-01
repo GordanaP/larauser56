@@ -209,7 +209,7 @@ function emptyModalFormValues()
 function emptyModalOnClose(fields, form)
 {
     $(".modal").on("hidden.bs.modal", function() {
-        //form.formValidation('resetForm', true);
+        form.formValidation('resetForm', true);
         emptyModalFormValues()
         emptyModalErrorMessages(fields)
     });

@@ -1,6 +1,7 @@
 <div class="modal" tabindex="-1" role="dialog" id="accountModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <form id="accountForm">
                 <div class="modal-header">
                     <h5 class="modal-title">
@@ -36,9 +37,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-account"></button>
+                    <button type="submit" class="btn btn-primary btn-account"></button>
                 </div>
             </form>
+
         </div><!-- /.modal-content -->
     </div>
 </div>

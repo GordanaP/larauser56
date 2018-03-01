@@ -3,7 +3,7 @@
 @section('title', '| My account')
 
 @section('links')
-    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
 @section('content')

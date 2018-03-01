@@ -4,8 +4,9 @@
 
 @section('links')
     {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" /> --}}
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
 
@@ -38,6 +39,8 @@
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
+    <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
 
@@ -59,94 +62,13 @@
         @include('users.accounts.partials._datatable')
 
         // Create account
-        $(document).on('click', '#createAccount', function() {
-
-            accountModal.modal('show')
-
-            $('.modal-title i').addClass('fa-user')
-            $('.modal-title span').text('New account')
-            $('.btn-account').attr('id','storeAccount').text('Save')
-
-        });
-
-        $(document).on('click', '#storeAccount', function() {
-
-            var password = randomString(length)
-
-            var data = {
-                name : $("#name").val(),
-                email : $("#email").val(),
-                password: password,
-                password_confirmation: password,
-            }
-
-            $.ajax({
-                url: adminAccountsUrl,
-                type: "POST",
-                data: data,
-                success: function(response) {
-
-                    successResponse(datatable, accountModal, response.message)
-                },
-                error: function(response) {
-
-                    errorResponse(response.responseJSON.errors, accountModal)
-                }
-            })
-        });
+        @include('users.accounts.js._create')
 
         // Edit account
-        $(document).on('click', '#editAccount', function() {
+        @include('users.accounts.js._edit')
 
-            accountModal.modal('show')
-
-            var user = $(this).val()
-            var apiAccountsShowUrl = apiAccountsIndexUrl + '/' + user
-
-            $('.modal-title i').addClass('fa-lock')
-            $('.modal-title span').text('Edit account')
-            $('.btn-account').attr('id','updateAccount').text('Save changes').val(user) // asign user id(slug) to btn value
-
-            $.ajax({
-                url: apiAccountsShowUrl,
-                type: "GET",
-                success: function(response) {
-
-                    var user = response.data
-
-                    $('#name').val(user.name)
-                    $('#email').val(user.email)
-                }
-            })
-        });
-
-
-        //Update account
-        $(document).on('click', '#updateAccount', function() {
-
-            var user = $(this).val()
-            var adminAccountsUpdateUrl = adminAccountsUrl + '/' + user
-
-            var data = {
-                name : $("#name").val(),
-                email : $("#email").val(),
-            }
-
-            $.ajax({
-                url : adminAccountsUpdateUrl,
-                type : "PUT",
-                data: data,
-                success : function(response) {
-
-                    successResponse(datatable, accountModal, response.message)
-                },
-                error: function(response) {
-
-                    errorResponse(response.responseJSON.errors, accountModal)
-                }
-            })
-        });
-
+        // Validate account
+        @include('users.accounts.js._validate')
 
     </script>
 @endsection
