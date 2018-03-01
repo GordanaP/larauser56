@@ -19,16 +19,6 @@ class AccountController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\AccountRequest  $request
@@ -39,28 +29,6 @@ class AccountController extends Controller
         User::createAccount($request);
 
         return message("A new account has been created");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
     }
 
     /**
@@ -85,6 +53,8 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return message('The account has been deleted');
     }
 }

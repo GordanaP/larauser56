@@ -70,5 +70,8 @@
         // Validate account
         @include('users.accounts.js._validate')
 
+        // Delete account
+        @include('users.accounts.js._delete')
+
     </script>
 @endsection

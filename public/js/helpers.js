@@ -254,3 +254,40 @@ function successResponse(datatable, modal, message)
     modal.modal("hide")
     userNotification(message)
 }
+
+
+/**
+ * Alert the user on deletion
+ *
+ * @param  {string} name
+ * @param  {string} url
+ * @return void
+ */
+function swalDelete(url, name, datatable)
+{
+    swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover the'+ name + '!',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Cancel'
+    }).then((result) => {
+        if(result.value == true)
+        {
+            $.ajax({
+                url : url,
+                type : "DELETE",
+                success : function(response) {
+
+                    datatable.ajax.reload()
+                    userNotification(response.message)
+                },
+                error: function(response)
+                {
+                    //
+                }
+            })
+        }
+    })
+}
