@@ -191,7 +191,7 @@ class User extends Authenticatable
      * Create a new account.
      *
      * @param array $data
-     * @return void
+     * @return \App\User
      */
     public static function createAccount($data)
     {
@@ -202,6 +202,8 @@ class User extends Authenticatable
         $user->password = bcrypt($data['password']);
 
         $user->save();
+
+        return $user;
     }
 
     /**

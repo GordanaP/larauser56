@@ -10,15 +10,15 @@
 
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+                <a class="nav-link  {{ set_active_link('dashboard', 2) }}" href="{{ route('admin.dashboard') }}">
                     <span data-feather="home"></span>
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.accounts.index') }}">
+                <a class="nav-link {{ set_active_link('accounts', 2) }}" href="{{ route('admin.accounts.index') }}">
                     <span data-feather="users"></span>
-                    Users
+                    Accounts
                 </a>
             </li>
             <li class="nav-item">

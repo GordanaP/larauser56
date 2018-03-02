@@ -3,10 +3,8 @@
 /**
  * Create the response message.
  *
- * @param  string  $title optional
  * @param  string  $message
  * @param  string  $type
- * @param  string  $icon optional
  * @return array
  */
 function message($message, $type="success")

@@ -3,7 +3,6 @@
 @section('title', '| Admin | Accounts')
 
 @section('links')
-    {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" /> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
@@ -17,6 +16,7 @@
             <span>Accounts</span>
             <button class="btn btn-warning" id="createAccount">New account</button>
         </h1>
+        <hr>
     </div>
     <div class="table-responsive admin-table-wrapper">
         <table class="table hover order-column admin-table" id="accountsTable" cellspacing="0" width="100%">

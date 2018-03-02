@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
+use Illuminate\Auth\Events\Registered;
 
 class AccountController extends Controller
 {
@@ -26,7 +27,9 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
-        User::createAccount($request);
+        $user = User::createAccount($request);
+
+        event(new Registered($user));
 
         return message("A new account has been created");
     }
