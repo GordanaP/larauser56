@@ -23,7 +23,7 @@
 
                         <input type="text" class="form-control"  id="name" name="name" placeholder="Enter your name" />
 
-                            <span class="invalid-feedback name"></span>
+                        <span class="invalid-feedback name"></span>
                     </div>
 
                     <!-- Email -->

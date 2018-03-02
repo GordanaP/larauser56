@@ -22,6 +22,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ set_active_link('roles', 2) }}" href="{{ route('admin.roles.index') }}">
+                    <span data-feather="briefcase"></span>
+                    Roles
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>
                     Orders

@@ -8,13 +8,12 @@
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
-
 @section('content')
 
     <div class="pb-2 mb-3 col-md-12">
         <h1 class="h2 flex align-center justify-between">
             <span>Accounts</span>
-            <button class="btn btn-warning" id="createAccount">New account</button>
+            <button class="btn btn-warning" id="createAccount"><span data-feather="plus"></span> New account</button>
         </h1>
         <hr>
     </div>
