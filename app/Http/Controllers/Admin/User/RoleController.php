@@ -51,7 +51,11 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        //
+        $role = Role::whereId($id)->first();
+
+        return [
+            'role' => $role
+        ];
     }
 
     /**
@@ -62,7 +66,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        return $role = Role::whereId($id)->first();
+        //
     }
 
     /**
@@ -74,7 +78,11 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, $id)
     {
-        //
+        $role = Role::whereId($id)->first();
+
+        $role->update($request->all());
+
+        return message('The role has been changed');
     }
 
     /**

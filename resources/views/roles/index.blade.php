@@ -50,6 +50,9 @@
         // Create role
         @include('roles.js._create')
 
+        // Edit role
+        @include('roles.js._edit')
+
         // Validate, store & update role
         @include('roles.js._validate')
 

@@ -8,8 +8,11 @@
             </h5>
             <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
 
-            <a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-danger btn-edit">Edit</a>
-            <button class="btn btn-danger btn-delete">Delete</button>
+            <button type="button" class="btn btn-danger btn-edit" id="editRole" value="{{ $role->id }}">
+                Edit
+            </button>
+            <button type="button" class="btn btn-danger btn-delete" id="deleteRole" value="{{ $role->id }}">        Delete
+            </button>
         </div>
     </div>
 </div>
