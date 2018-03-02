@@ -21,16 +21,6 @@ class RoleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\User\RoleRequest  $request
@@ -51,22 +41,9 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        $role = Role::whereId($id)->first();
-
         return [
-            'role' => $role
+            'role' => $this->getRole($id)
         ];
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Role $role
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -78,11 +55,9 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, $id)
     {
-        $role = Role::whereId($id)->first();
+        $this->getRole($id)->update($request->all());
 
-        $role->update($request->all());
-
-        return message('The role has been changed');
+        return message('The role has been changed.');
     }
 
     /**
@@ -93,6 +68,21 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->getRole($id)->delete();
+
+        return message('The role has been deleted.');
+
     }
+
+    /**
+     * Get the specified resource
+     *
+     * @param  int $id
+     * @return \App\Role
+     */
+    protected function getRole($id)
+    {
+        return Role::whereId($id)->first();
+    }
+
 }

@@ -53,6 +53,6 @@ Route::namespace('Admin\User')->prefix('admin')->name('admin.')->group(function(
      */
     Route::resource('/roles', 'RoleController', [
         'parameters' => ['roles' => 'user'],
-        // 'only' => ['index', 'store', 'update', 'destroy']
+        'except' => ['create', 'edit']
     ]);
 });
