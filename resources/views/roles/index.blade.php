@@ -10,7 +10,7 @@
     <div class="pb-2 mb-3 col-md-12">
         <h1 class="h2 flex align-center justify-between">
             <span>Roles</span>
-            <button class="btn btn-warning" id="createRole"><span data-feather="plus"></span> New role</button>
+            <button class="btn btn-info" id="createRole"><span data-feather="plus"></span> New role</button>
         </h1>
 
         <hr>
@@ -18,7 +18,7 @@
         <div id="displayRoles">
             @if ($roles->count())
                 @foreach ($roles->chunk(3) as $chunk)
-                    <div class="row mb-2">
+                    <div class="row mb-2" id="roleCard">
                         @each('roles.partials._card', $chunk, 'role')
                     </div>
                 @endforeach
@@ -57,32 +57,7 @@
         @include('roles.js._validate')
 
         // Delete role
-        $(document).on('click', '#deleteRole', function(){
-
-            var role = $(this).val()
-            var adminRolesDeleteUrl = adminRolesIndexUrl + '/' + role
-
-            swal({
-                title: 'Are you sure?',
-                text: 'You will not be able to recover the role',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Delete',
-                cancelButtonText: 'Cancel'
-            }).then((result) => {
-                if(result.value == true)
-                {
-                    $.ajax({
-                        url : adminRolesDeleteUrl,
-                        type : "DELETE",
-                        success : function(response) {
-                            $('#displayRoles').load(location.href + " #displayRoles")
-                            userNotification(response.message)
-                        },
-                    })
-                }
-            })
-        })
+        @include('roles.js._delete')
 
     </script>
 

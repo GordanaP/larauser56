@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\RoleRequest;
+use App\Traits\ModelFinder;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
 {
+    use ModelFinder;
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +18,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::all();
+        $roles = $this->getRoles();
 
         return view('roles.index', compact('roles'));
     }
@@ -71,18 +74,5 @@ class RoleController extends Controller
         $this->getRole($id)->delete();
 
         return message('The role has been deleted.');
-
     }
-
-    /**
-     * Get the specified resource
-     *
-     * @param  int $id
-     * @return \App\Role
-     */
-    protected function getRole($id)
-    {
-        return Role::whereId($id)->first();
-    }
-
 }

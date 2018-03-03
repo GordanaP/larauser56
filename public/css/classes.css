@@ -53,6 +53,7 @@ h1,h2,h3,h4,h5,h6 {margin: 0}
 p.fs-16{font-size: 16px}
 .fs-22{font-size: 22px;}
 .fs-13{font-size: 13px;}
+.fs-18{font-size: 18px;}
 
 .red{  color: #bf5329;}
 .bg-lightest-gray { background: hsl(0, 0%, 99%); }
