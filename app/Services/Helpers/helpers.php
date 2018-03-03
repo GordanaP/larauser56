@@ -38,3 +38,40 @@ function setAvatar($user)
 
     return 'images/avatars/'.$avatar;
 }
+
+function getResources()
+{
+    $resources = [];
+    $app_resources = [];
+    $vendor_resources = ['Role', 'Permission'];
+
+    $dirs = scandir(app_path());
+
+    foreach ($dirs as $dir) {
+
+        if( $dir !== '.' && $dir !== '..' ) {
+
+            if($dir[-4] === '.') {
+
+                $app_resources[] = substr($dir, 0, -4);
+                $resources = array_merge($app_resources, $vendor_resources);
+            }
+        }
+    }
+
+    return $resources;
+}
+
+function getPermissions($data)
+{
+    $permissions = [];
+
+    foreach ($data['permission'] as $permission)
+    {
+        $permission_name = $permission .'-'. strtolower($data['resource']);
+
+        $permissions[] = $permission_name;
+    }
+
+    return $permissions;
+}

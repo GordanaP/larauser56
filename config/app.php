@@ -209,7 +209,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Cruds' => App\Services\Utilities\Cruds::class,
+        'Resources' => App\Services\Utilities\Resources::class,
     ],
 
 ];

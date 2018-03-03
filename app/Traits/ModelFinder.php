@@ -8,16 +8,6 @@ use Spatie\Permission\Models\Role;
 trait ModelFinder
 {
     /**
-     * Fetch all users.
-     *
-     * @return collection App\User
-     */
-    // public function getUsers()
-    // {
-    //     return User::with('roles')->get();
-    // }
-
-    /**
      * Fetch all roles
      *
      * @return collection App\Role
@@ -28,7 +18,7 @@ trait ModelFinder
     }
 
     /**
-     * Get the specified resource
+     * Get the specified role
      *
      * @param  int $id
      * @return \App\Role
@@ -37,5 +27,4 @@ trait ModelFinder
     {
         return Role::whereId($id)->first();
     }
-
 }

@@ -47,12 +47,23 @@ Route::namespace('Admin\User')->prefix('admin')->name('admin.')->group(function(
         'parameters' => ['accounts' => 'user'],
         'only' => ['index', 'store', 'update', 'destroy']
     ]);
+});
 
+/**
+ * Admin\Role
+ */
+Route::namespace('Admin\Role')->prefix('admin')->name('admin.')->group(function() {
     /**
      * Role
      */
     Route::resource('/roles', 'RoleController', [
-        'parameters' => ['roles' => 'user'],
+        'except' => ['create', 'edit']
+    ]);
+
+    /**
+     * Permission
+     */
+    Route::resource('/permissions', 'PermissionController', [
         'except' => ['create', 'edit']
     ]);
 });

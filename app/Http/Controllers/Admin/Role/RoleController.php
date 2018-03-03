@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin\User;
+namespace App\Http\Controllers\Admin\Role;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\RoleRequest;
+use App\Http\Requests\Role\RoleRequest;
 use App\Traits\ModelFinder;
 use Spatie\Permission\Models\Role;
+
 
 class RoleController extends Controller
 {
@@ -26,7 +27,7 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\User\RoleRequest  $request
+     * @param  \App\Http\Requests\User\Role\RoleRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(RoleRequest $request)
@@ -52,7 +53,7 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\User\RoleRequest  $request
+     * @param  \App\Http\Requests\User\Role\RoleRequest  $request
      * @param  \App\Role $role
      * @return \Illuminate\Http\Response
      */

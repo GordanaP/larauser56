@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Role;
 
 use App\Rules\AlphaNumSpace;
 use Illuminate\Foundation\Http\FormRequest;
@@ -26,8 +26,9 @@ class RoleRequest extends FormRequest
     {
         return [
             'name' => [
-                'required', 'max:30', 'unique:roles,name',
-                new AlphaNumSpace
+                'required', 'max:30',
+                new AlphaNumSpace,
+                'unique:roles,name,'.$this->role,
             ]
         ];
     }

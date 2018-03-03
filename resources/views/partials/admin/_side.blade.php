@@ -28,6 +28,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link {{ set_active_link('permissions', 2) }}" href="{{ route('admin.permissions.index') }}">
+                    <span data-feather="user-check"></span>
+                    Permissions
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#">
                     <span data-feather="file"></span>
                     Orders
