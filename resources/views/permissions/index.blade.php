@@ -1,8 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', '| Admin | Roles')
+@section('title', '| Admin | Permissions')
 
 @section('links')
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
@@ -10,71 +12,45 @@
     <div class="pb-2 mb-3 col-md-12">
         <h1 class="h2 flex align-center justify-between">
             <span>Permissions</span>
-            <button class="btn btn-info" id="createRole">
+            <button class="btn btn-warning" id="createRole">
                 <span data-feather="plus"></span> New permission
             </button>
         </h1>
 
         <hr>
 
-        @include('errors._list')
-
-        <div class="col-md-6" id="displayPermissions">
-            <form action="{{ route('admin.permissions.store') }}" method="POST" id="permissionForm">
-
-                <p class="required-fields mb-18">
-                    <sup><i class="fa fa-asterisk fa-form"></i></sup> Required field.
-                </p>
-
-                @csrf
-
-                <!-- Resources -->
-                <div class="form_group mb-4">
-                    <label for="resource">Resource   <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-                    <select class="form-control" name="resource" id="resource">
-                        <option value="">Select a resource</option>
-                        @foreach (Resources::all() as $resource)
-                            <option value="{{ $resource }}">
-                                {{ $resource }}
-                            </option>
-                        @endforeach
-                    </select>
-
-                    <span class="invalid-feedback resource"></span>
-                </div>
-
-                <!-- CRUD methods -->
-                <div class="form-group mb-4">
-                    <label for="">Select a permission   <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-
-                    @foreach (Cruds::all() as $key => $value)
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="permission[]" id="{{ $key }}" value="{{ $key }}" multiple checked>
-                            <label class="form-check-label" for="{{ $key }}">{{ strtoupper($value) }}</label>
-                        </div>
-                    @endforeach
-
-                    <span class="invalid-feedback permission"></span>
-                </div>
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
+        <div class="table-responsive admin-table-wrapper">
+            <table class="table hover order-column admin-table" id="permissionsTable" cellspacing="0" width="100%">
+                <thead>
+                    <th>#</th>
+                    <th><i data-feather="thumbs-up" class="mr-6"></i> Permission</th>
+                    <th><i class="fa fa-calendar mr-6"></i> Created</th>
+                    <th class="text-center"><i class="fa fa-cog mr-6"></i></th>
+                </thead>
+                <tbody></tbody>
+            </table>
         </div>
     </div>
+
 
     <!-- Modal -->
 
 @endsection
 
 @section('scripts')
+    <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
     <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
 
         var permissionForm = $('#permissionForm')
+        var table = $('#permissionsTable')
+        var apiPermissionsIndexUrl = "{{ route('api.permissions.index') }}"
+
+        @include('permissions.partials._datatable')
 
         permissionForm.formValidation({
             framework: 'bootstrap4',

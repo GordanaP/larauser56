@@ -64,6 +64,6 @@ Route::namespace('Admin\Role')->prefix('admin')->name('admin.')->group(function(
      * Permission
      */
     Route::resource('/permissions', 'PermissionController', [
-        'except' => ['create', 'edit']
+        // 'except' => ['create', 'edit']
     ]);
 });

@@ -17,6 +17,7 @@
         </h1>
         <hr>
     </div>
+
     <div class="table-responsive admin-table-wrapper">
         <table class="table hover order-column admin-table" id="accountsTable" cellspacing="0" width="100%">
             <thead>
