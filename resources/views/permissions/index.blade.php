@@ -12,7 +12,7 @@
     <div class="pb-2 mb-3 col-md-12">
         <h1 class="h2 flex align-center justify-between">
             <span>Permissions</span>
-            <button class="btn btn-warning" id="createRole">
+            <button class="btn btn-warning" id="createPermission">
                 <span data-feather="plus"></span> New permission
             </button>
         </h1>
@@ -32,8 +32,64 @@
         </div>
     </div>
 
-
     <!-- Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="permissionModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <form id="permissionForm">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fa mr-6"></i>
+                            <span></span>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="required-fields mb-18">
+                            <sup><i class="fa fa-asterisk fa-form"></i></sup> Required field.
+                        </p>
+
+                        <!-- Resources -->
+                        <div class="form-group mb-4">
+                            <label for="resource">Resource <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+                            <select class="form-control resource" name="resource" id="resource">
+                                <option value="">Select a resource</option>
+                                @foreach (Resources::all() as $resource)
+                                    <option value="{{ $resource }}">
+                                        {{ $resource }}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            <span class="invalid-feedback resource"></span>
+                        </div>
+
+                        <!-- CRUD methods -->
+                        <div class="form-group">
+                            <label for="">Select a permission <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+
+                            @foreach (Cruds::all() as $key => $value)
+                                <div class="form-check">
+                                    <input class="form-check-input permission" type="checkbox" name="permission[]" id="permission" value="{{ $key }}" multiple="multiple">
+                                    <label class="form-check-label" for="{{ $key }}">{{ strtoupper($value) }}</label>
+                                </div>
+                            @endforeach
+
+                            <span class="invalid-feedback permission"></span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary btn-permission"></button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -47,35 +103,91 @@
     <script>
 
         var permissionForm = $('#permissionForm')
-        var table = $('#permissionsTable')
+        var permissionsTable = $('#permissionsTable')
         var apiPermissionsIndexUrl = "{{ route('api.permissions.index') }}"
+        var adminPermissionsIndexUrl = "{{ route('admin.permissions.index') }}"
+        var permissionModal = $('#permissionModal')
+        var permissionFields = ['resource', 'permission']
 
+        // Set autofocus
+        setModalAutofocus(permissionModal, 'resource')
+
+        // Empty modal on close
+        permissionModal.emptyModal(permissionFields, permissionForm)
+
+        // DataTable
         @include('permissions.partials._datatable')
 
+        // Create permission
+        @include('permissions.js._create')
+
+        // JS form validation
         permissionForm.formValidation({
-            framework: 'bootstrap4',
-            icon: {
-                valid: 'fa fa-check',
-                invalid: 'fa fa-times',
-                validating: 'fa fa-refresh'
-            },
-            fields: {
-                resource: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The name is required.'
-                        },
-                    }
+                framework: 'bootstrap4',
+                excluded: ':disabled',
+                icon: {
+                    valid: 'fa fa-check',
+                    invalid: 'fa fa-times',
+                    validating: 'fa fa-refresh'
                 },
-                'permission[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'The name is required.'
+                fields: {
+                    resource: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The resource is required.'
+                            },
+                        }
+                    },
+                    'permission[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'The permission is required.'
+                            },
+                        }
+                    },
+                }
+            })
+            .on('success.form.fv', function(e) {
+
+                // form button must be type="submit"!!!
+                e.preventDefault();
+
+                var permissions = $("input[name*='permission']:checked")
+
+                var data = {
+                    resource : $('#resource').val(),
+                    permission: checkboxValues(permissions)
+                }
+
+                // Store permission
+                if($(".btn-permission").attr('id') == 'storePermission') {
+
+                    $.ajax({
+                        url: adminPermissionsIndexUrl,
+                        type: "POST",
+                        data: data,
+                        success: function(response) {
+
+                            datatable.ajax.reload();
+                            successResponse(permissionModal, response.message)
+
                         },
-                    }
-                },
-            }
-        })
+                        error: function(response) {
+
+                            errorResponse(response.responseJSON.errors, permissionModal)
+                        }
+                    })
+                }
+
+                // Update permission
+                if($(".btn-permission").attr('id') == 'updatePermission') {
+
+                    //
+                }
+            });
+
+
+
 
     </script>
 

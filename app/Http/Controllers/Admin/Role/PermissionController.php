@@ -49,7 +49,7 @@ class PermissionController extends Controller
             ]);
         }
 
-        return back()->with('message', 'The new permission has been created.');
+        return message('A new permission has been created');
     }
 
     /**

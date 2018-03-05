@@ -1,4 +1,4 @@
-var datatable = table.DataTable({
+var datatable = permissionsTable.DataTable({
     "ajax": {
         "url": apiPermissionsIndexUrl,
         "type": "GET"

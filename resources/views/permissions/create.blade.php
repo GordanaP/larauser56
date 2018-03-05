@@ -29,9 +29,9 @@
                 @csrf
 
                 <!-- Resources -->
-                <div class="form_group mb-4">
+                <div class="form-group mb-4">
                     <label for="resource">Resource   <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-                    <select class="form-control" name="resource" id="resource">
+                    <select class="form-control resource" name="resource" id="resource">
                         <option value="">Select a resource</option>
                         @foreach (Resources::all() as $resource)
                             <option value="{{ $resource }}">
@@ -87,7 +87,7 @@
                 resource: {
                     validators: {
                         notEmpty: {
-                            message: 'The name is required.'
+                            message: 'The resource is required.'
                         },
                     }
                 },
