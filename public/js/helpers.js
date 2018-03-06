@@ -30,15 +30,15 @@ function userNotification(message, type="success")
  * @param  {array} fields
  * @return {void}
  */
-// function removeServerSideValidationFeedback(fields)
-// {
-//     $.each(fields, function (index, value) {
+function removeServerSideValidationFeedback(fields) // login page
+{
+    $.each(fields, function (index, value) {
 
-//         var inputId = value.id
+        var inputId = value.id
 
-//         $('input#'+inputId+'.form-control').removeClass('is-invalid')
-//     })
-// }
+        $('input#'+inputId+'.form-control').removeClass('is-invalid')
+    })
+}
 
 
 /**
@@ -263,11 +263,12 @@ function displayErrors(errors)
         var field = $("."+name)
         var feedback = $("span."+name).show()
 
+        // Attach server side validation
+        displayServerError(field, feedback, errors[name][0])
+
         // Remove client side validation
         clearJSError(field)
 
-        // Attach server side validation
-        displayServerError(field, feedback, errors[name][0])
     }
 }
 
@@ -298,8 +299,12 @@ function clearErrorOnNewInput()
         clearError($(this).attr('id').replace('#', ''));
     });
 
-    $("input[type=checkbox]").click(function() {
-        clearError($(this).attr('id').replace('#', ''))
+    $("input[type=checkbox], input[type=radio]").click(function() {
+
+        var splitted = $(this).attr('id').replace('#', '').split("-")
+        var name = splitted[0]
+
+        clearError(name)
     })
 }
 

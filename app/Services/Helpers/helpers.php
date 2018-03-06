@@ -43,7 +43,7 @@ function getResources()
 {
     $resources = [];
     $app_resources = [];
-    $vendor_resources = ['Role', 'Permission'];
+    $vendor_resources = ['role', 'permission'];
 
     $dirs = scandir(app_path());
 
@@ -53,7 +53,7 @@ function getResources()
 
             if($dir[-4] === '.') {
 
-                $app_resources[] = substr($dir, 0, -4);
+                $app_resources[] = strtolower(substr($dir, 0, -4));
                 $resources = array_merge($app_resources, $vendor_resources);
             }
         }
@@ -62,16 +62,22 @@ function getResources()
     return $resources;
 }
 
-function getPermissions($data)
+function getPermissionsNames($data)
 {
     $permissions = [];
 
     foreach ($data['permission'] as $permission)
     {
-        $permission_name = $permission .'-'. strtolower($data['resource']);
+        $permission_name = $permission .'-'. $data['resource'];
 
         $permissions[] = $permission_name;
     }
 
     return $permissions;
 }
+
+function getPermissionName($data) {
+
+    return $data['permission'] .'-'. $data['resource'];
+}
+

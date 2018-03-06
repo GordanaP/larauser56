@@ -26,16 +26,36 @@ class PermissionRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'resource' => [
-                'required',
-                Rule::in(array_values(Resources::all())),
-            ],
-            'permission' => [
-                'required', 'array', 'max:'.sizeof(Cruds::all()),
-                Rule::in(array_keys(Cruds::all())),
-            ],
-            'permission.*' => 'distinct'
-        ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    'resource' => [
+                        'required',
+                        Rule::in(array_values(Resources::all())),
+                    ],
+                    'permission' => [
+                        'required',
+                        'array', 'max:'.sizeof(Cruds::all()),
+                        Rule::in(array_keys(Cruds::all())),
+                    ],
+                    'permission.*' => 'distinct'
+                ];
+                break;
+
+            case 'PUT':
+            case 'PATCH':
+                return [
+                    'resource' => [
+                        'required',
+                        Rule::in(array_values(Resources::all())),
+                    ],
+                    'permission' => [
+                        'required',
+                        Rule::in(array_keys(Cruds::all())),
+                    ],
+                ];
+                break;
+        }
+
     }
 }

@@ -40,7 +40,7 @@ class PermissionController extends Controller
      */
     public function store(PermissionRequest $request)
     {
-        $permissions = getPermissions($request);
+        $permissions = getPermissionsNames($request);
 
         foreach ($permissions as $name) {
 
@@ -83,7 +83,15 @@ class PermissionController extends Controller
      */
     public function update(PermissionRequest $request, $id)
     {
-        //
+        $permission = $this->getPermission($id);
+
+        $name = getPermissionName($request);
+
+        $permission->update([
+            'name' => $name
+        ]);
+
+        return message('The permission name has been updated');
     }
 
     /**

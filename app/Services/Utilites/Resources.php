@@ -18,7 +18,7 @@ class Resources
     {
         $array = getResources();
 
-        foreach (array_keys($array, 'ActivationToken') as $key) {
+        foreach (array_keys($array, 'activationtoken') as $key) {
             unset($array[$key]);
         }
 
