@@ -59,16 +59,15 @@
         var permissionFields = ['resource', 'permission']
 
         // Set autofocus
-        setModalAutofocus(createPermissionModal, 'resource')
         setModalAutofocus(editPermissionModal, 'resource')
+        setModalAutofocus(createPermissionModal, 'resource')
 
-        // Empty modal on close
+        // Empty modal upon close
         createPermissionModal.emptyModal(permissionFields, createPermissionForm)
         editPermissionModal.emptyModal(permissionFields, editPermissionForm)
 
         // DataTable
         @include('permissions.partials._datatable')
-
 
         // Create permission
         @include('permissions.js._create')
@@ -82,6 +81,8 @@
         // JS update permission
         @include('permissions.js._validateUpdate')
 
+        // Delete permission
+        @include('permissions.js._delete')
 
     </script>
 

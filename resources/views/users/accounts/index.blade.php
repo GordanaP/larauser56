@@ -56,7 +56,7 @@
         var accountFields = ['name', 'email']
 
         setModalAutofocus(accountModal, 'name')
-        emptyModalOnClose(accountFields, accountForm)
+        accountModal.emptyModal(accountFields, accountForm)
 
         // DataTable
         @include('users.accounts.partials._datatable')

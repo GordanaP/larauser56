@@ -102,7 +102,11 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $permission = $this->getPermission($id);
+
+        $permission->delete();
+
+        return message('The permission name has been deleted');
     }
 
 }

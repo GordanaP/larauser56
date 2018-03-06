@@ -45,7 +45,7 @@
         var roleFields = ['name']
 
         setModalAutofocus(roleModal, 'name')
-        emptyModalOnClose(roleFields, roleForm)
+        roleModal.emptyModal(roleFields, roleForm)
 
         // Create role
         @include('roles.js._create')

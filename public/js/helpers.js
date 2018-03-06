@@ -8,7 +8,7 @@
 function setModalAutofocus(modalName, inputId)
 {
     modalName.on('shown.bs.modal', function () {
-      $("#" + inputId).focus()
+        $(this).find("#" + inputId).focus()
     })
 }
 

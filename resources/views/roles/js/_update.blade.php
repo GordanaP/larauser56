@@ -8,8 +8,7 @@ $.ajax({
     success: function(response) {
 
         $('#displayRoles').load(location.href + " #displayRoles")
-        roleModal.modal('hide')
-        userNotification(response.message)
+        successResponse(roleModal, response.message)
     },
     error: function(response) {
 
