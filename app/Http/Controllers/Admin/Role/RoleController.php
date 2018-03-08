@@ -45,9 +45,18 @@ class RoleController extends Controller
      */
     public function show($id)
     {
-        return [
-            'role' => $this->getRole($id)
-        ];
+
+        $role = $this->getRole($id);
+        $permissions = $this->getPermissions()->pluck('name')->toArray();
+
+        if(request()->ajax()) {
+
+            return [
+                'role' => $role
+            ];
+        }
+
+        return view('roles.show', compact('role', 'permissions'));
     }
 
     /**
@@ -59,7 +68,9 @@ class RoleController extends Controller
      */
     public function update(RoleRequest $request, $id)
     {
-        $this->getRole($id)->update($request->all());
+        $role = $this->getRole($id);
+
+        $role->update($request->all());
 
         return message('The role has been changed.');
     }

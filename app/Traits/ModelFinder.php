@@ -13,9 +13,9 @@ trait ModelFinder
      *
      * @return collection App\Role
      */
-    protected function getRoles()
+    protected function getRoles($order = "name")
     {
-        return Role::orderBy('name')->get();
+        return Role::orderBy($order)->get();
     }
 
     /**
@@ -34,9 +34,9 @@ trait ModelFinder
      *
      * @return collection App\Role
      */
-    protected function getPermissions()
+    protected function getPermissions($order = "id")
     {
-        return Permission::orderBy('name')->get();
+        return Permission::orderBy($order)->get();
     }
 
     /**

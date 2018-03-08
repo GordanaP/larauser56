@@ -25,7 +25,7 @@ createPermissionForm.formValidation({
 })
 .on('success.form.fv', function(e) {
 
-    // form button must be type="submit"!!!
+    // Form button must be type="submit"!!!
     e.preventDefault();
 
     var permissions = $("input[name*='permission']:checked")
@@ -36,6 +36,6 @@ createPermissionForm.formValidation({
         permission: checkboxValues(permissions)
     }
 
-    //Store permission
+    // Store permission
     @include('permissions.js._store')
 });
