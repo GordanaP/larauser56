@@ -35,6 +35,7 @@ Route::namespace('User')->prefix('users')->name('users.')->group(function() {
     ]);
 });
 
+Route::get('admin/accounts', 'User\AccountController@index')->name('admin.accounts.index');
 
 /**
  * Admin\User
@@ -45,6 +46,6 @@ Route::namespace('Admin\User')->prefix('admin')->name('admin.')->group(function(
      */
     Route::resource('/accounts', 'AccountController', [
         'parameters' => ['accounts' => 'user'],
-        'only' => ['index', 'store', 'update', 'destroy']
+        'only' => ['store', 'update', 'destroy']
     ]);
 });

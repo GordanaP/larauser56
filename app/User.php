@@ -3,12 +3,14 @@
 namespace App;
 
 use App\Observers\UserObserver;
+use App\Traits\User\HasSlug;
+use App\Traits\User\VerifiesEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasSlug, VerifiesEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'verified'
+        'name', 'email', 'password'
     ];
 
     /**
@@ -42,7 +44,7 @@ class User extends Authenticatable
      *
      * @return void
      */
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
 
@@ -70,78 +72,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Indicate if the user has verified their email address.
-     *
-     * @return bool
-     */
-    public function isVerified()
-    {
-        return $this->verified;
-    }
-
-
-    /**
-     * Generate the unique name slug.
-     *
-     * @param  string $name
-     * @return string
-     */
-    public static function uniqueNameSlug($name)
-    {
-        $slug = str_slug($name);
-
-        if (static::nameSlugExists($slug))
-        {
-
-            $pieces = explode('-', static::nameSlugLatest($slug));
-
-            $number = intval(end($pieces));
-
-            $slug .= '-' .($number + 1);
-        }
-
-        return $slug;
-    }
-
-    /**
-     * Determine if the name slug exists.
-     *
-     * @param  string $slug
-     * @return boolean
-     */
-    protected static function nameSlugExists($slug)
-    {
-        return (bool) static::whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")->count();
-    }
-
-    /**
-     * Fetch the latest user.
-     * @param  string $slug
-     * @return App\Slug
-     */
-    protected static function nameSlugLatest($slug)
-    {
-        return static::whereRaw("slug REGEXP '^{$slug}(-[0-9]*)?$'")
-                ->latest('slug', 'desc')
-                ->pluck('slug')
-                ->first();
-    }
-
-    /**
-     * Create the user name slug during account update.
-     *
-     * @param  string $name
-     * @param  string $slug
-     * @param  array $data
-     * @return string
-     */
-    protected function getSlug($name)
-    {
-        return strtolower($this->name) === strtolower($name) ?  $this->slug : static::uniqueNameSlug($name);
-    }
-
-
-    /**
      * Get the token that belongs to the user.
      *
      * @return  \Illuminate\Database\Eloquent\Relations\HasOne
@@ -161,19 +91,6 @@ class User extends Authenticatable
         return $query->whereEmail($email)->where('verified', true);
     }
 
-    /**
-     * The user verifies their email address.
-     *
-     * @return void
-     */
-    public function verifyEmail()
-    {
-        $this->verified = true;
-
-        $this->save();
-
-        $this->activationToken->delete();
-    }
 
     /**
      * Find the user by the attribute.

@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p class="required-fields mb-18">
+                    <p cklass="required-fields mb-18">
                         Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
                     </p>
 
@@ -33,6 +33,29 @@
                         <input type="text" class="form-control"  id="email" name="email" placeholder="example@domain.com" />
 
                         <span class="invalid-feedback email"></span>
+                    </div>
+
+                    <!-- Create Password Choice-->
+                    <div class="form-group">
+                        <label for="create_password">Password <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="create_password" id="auto" value="auto" checked>
+                            <label class="form-check-label" for="auto">
+                                Auto-create
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="create_password" id="manual" value="manual" >
+                            <label class="form-check-label" for="manual">
+                                Create manually
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group form-group-password">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Choose password" />
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -8,7 +8,9 @@ accountForm.formValidation({
     // form button must be type="submit"!!!
     e.preventDefault();
 
-    var password = randomString(6)
+
+    var checked_choice = $("form input[type=radio]:checked").val();
+    var password = generatePassword(checked_choice);
 
     var data = {
         name : $("#name").val(),

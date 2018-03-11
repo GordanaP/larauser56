@@ -12,7 +12,7 @@
             <ul class="navbar-nav mr-auto">
                 <li>
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                        Admin Dasboard
+                        Admin Dashboard
                     </a>
                 </li>
             </ul>

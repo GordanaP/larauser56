@@ -54,6 +54,8 @@
         var accountModal = $('#accountModal')
         var accountForm = $('#accountForm')
         var accountFields = ['name', 'email']
+        var password = $("#password")
+        password.hide()
 
         setModalAutofocus(accountModal, 'name')
         emptyModalOnClose(accountFields, accountForm)

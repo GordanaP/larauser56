@@ -1,3 +1,11 @@
+function generatePassword(checked_choice)
+{
+    var auto_password = randomString(6);
+    var manual_password = $('#password').val();
+
+    return checked_choice == 'auto' ? auto_password : manual_password;
+}
+
 /**
  * Send user notification.
  *
