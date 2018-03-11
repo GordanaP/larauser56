@@ -1,9 +1,26 @@
-function generatePassword(checked_choice)
+/**
+ * Determine how to create the password.
+ *
+ * @param  {string} field
+ * @return {string}
+ */
+function generatePassword(field)
 {
     var auto_password = randomString(6);
     var manual_password = $('#password').val();
 
-    return checked_choice == 'auto' ? auto_password : manual_password;
+    return isChecked(field) ? auto_password : manual_password;
+}
+
+/**
+ * Determine if the field is checked.
+ *
+ * @param  {string}  field
+ * @return {Boolean}
+ */
+function isChecked(field) {
+
+    return field[0].checked
 }
 
 /**

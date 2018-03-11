@@ -6,9 +6,8 @@ $(document).on('click', '#createAccount', function() {
     $('.modal-title span').text('New account')
     $('.btn-account').attr('id','storeAccount').text('Save')
 
-    $('input:radio').change(function(){
-        var checked = $("form input[type=radio]:checked").val();
+    $("#auto_password").change(function() {
 
-        checked == 'manual' ? password.show() : password.hide()
+        this.checked ? password.hide() : password.show()
     });
 });

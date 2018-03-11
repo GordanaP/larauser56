@@ -37,18 +37,25 @@
 
                     <!-- Create Password Choice-->
                     <div class="form-group">
-                        <label for="create_password">Password <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
+                        {{-- <label for="create_password">Password <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="create_password" id="auto" value="auto" checked>
                             <label class="form-check-label" for="auto">
-                                Auto-create
+                                Auto generate password
                             </label>
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="create_password" id="manual" value="manual" >
                             <label class="form-check-label" for="manual">
                                 Create manually
+                            </label>
+                        </div> --}}
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="auto_password" id="auto_password" checked>
+                            <label class="form-check-label" for="auto-password">
+                                Auto generate password
                             </label>
                         </div>
                     </div>
