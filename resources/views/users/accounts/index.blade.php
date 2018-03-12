@@ -24,6 +24,7 @@
                 <th>#</th>
                 <th><i class="fa fa-user mr-6"></i> Name</th>
                 <th><i class="fa fa-envelope mr-6"></i> Email</th>
+                <th><i class="fa "></i> Status</th>
                 <th><i class="fa fa-calendar mr-6"></i> Joined</th>
                 <th class="text-center"><i class="fa fa-cog mr-6"></i></th>
             </thead>
@@ -54,11 +55,12 @@
         var accountModal = $('#accountModal')
         var accountForm = $('#accountForm')
         var accountFields = ['name', 'email']
-        var password = $("#password")
-        password.hide()
+        var checked_field = '#auto_password'
+        var hidden_field = $("#password")
+        hidden_field.hide()
 
         setModalAutofocus(accountModal, 'name')
-        emptyModalOnClose(accountFields, accountForm)
+        accountModal.emptyModal(accountFields, accountForm, checked_field, hidden_field)
 
         // DataTable
         @include('users.accounts.partials._datatable')

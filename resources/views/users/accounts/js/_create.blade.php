@@ -6,8 +6,8 @@ $(document).on('click', '#createAccount', function() {
     $('.modal-title span').text('New account')
     $('.btn-account').attr('id','storeAccount').text('Save')
 
-    $("#auto_password").change(function() {
+    $(checked_field).change(function() {
 
-        this.checked ? password.hide() : password.show()
+        this.checked ? hidden_field.hide() : hidden_field.show()
     });
 });

@@ -27,4 +27,14 @@ trait VerifiesEmail
     {
         return $this->verified;
     }
+
+    /**
+     * Determine the account status
+     *
+     * @return string
+     */
+    public function accountStatus()
+    {
+        return $this->isVerified() ? 'active' : 'inactive';
+    }
 }

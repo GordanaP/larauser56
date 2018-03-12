@@ -5,7 +5,7 @@ namespace App\Services\Utilities;
 class AvatarOptions
 {
     /*
-    *  A list of countries
+    *  A list of options
     */
     protected static $options = [
       1 => "Upload a new avatar",

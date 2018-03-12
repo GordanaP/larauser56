@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Events\Auth\AccountCreatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
@@ -22,6 +23,21 @@ class AccountController extends Controller
     public function index()
     {
         return view('users.accounts.index');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\AccountRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(AccountRequest $request)
+    {
+        $user = User::createAccount($request);
+
+        event(new AccountCreatedByAdmin($user, $request->password));
+
+        return message("A new account has been created");
     }
 
     /**

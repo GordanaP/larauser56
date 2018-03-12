@@ -7,20 +7,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class PleaseConfirmYourEmailAddress extends Mailable
+class PleaseActivateYourAccount extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $token;
+    public $password;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($token)
+    public function __construct($token, $password)
     {
         $this->token = $token;
+        $this->password = $password;
     }
 
     /**
@@ -31,6 +33,6 @@ class PleaseConfirmYourEmailAddress extends Mailable
     public function build()
     {
         return $this->subject('Confirm Your Email Address')
-            ->markdown('mails.auth.verify_email');
+            ->markdown('mails.auth.activate_account');
     }
 }

@@ -19,6 +19,7 @@ var datatable = table.DataTable({
             }
         },
         { data: 'email' },
+        { data: 'status' },
         { data: 'joined' },
         {
           render: function(data, type, row, meta) {

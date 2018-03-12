@@ -17,6 +17,7 @@ class UsersCollection extends Resource
         return [
             'name' => $this->name,
             'email' => $this->email,
+            'status' => $this->accountStatus(),
             'joined' => $this->formatted_date,
             'user' => $this->slug,
         ];

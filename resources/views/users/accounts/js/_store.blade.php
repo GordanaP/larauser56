@@ -4,7 +4,8 @@ $.ajax({
     data: data,
     success: function(response) {
 
-        successResponse(datatable, accountModal, response.message)
+        datatable.ajax.reload()
+        successResponse(accountModal, response.message)
     },
     error: function(response) {
 
