@@ -4,5 +4,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.12.3/sweetalert2.min.js"></script>
 
 <script>
-    userNotification("{{ session('message') }}", "{{ session('type') }}")
+    $.notify("{{ session('message') }}", "{{ session('type') }}")
 </script>

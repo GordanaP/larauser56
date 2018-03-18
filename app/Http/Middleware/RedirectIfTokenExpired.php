@@ -30,7 +30,7 @@ class RedirectIfTokenExpired
      */
     protected function failedResponse()
     {
-        $response = message('The activation token has expired. Click here to create a new account.', 'error');
+        $response = message('The activation token has expired.', 'error');
 
         return back()->with($response);
     }

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
-
 @section('content')
 
     <div class="pb-2 mb-3 col-md-12">
@@ -32,7 +31,9 @@
         </table>
     </div>
 
-    @include('users.accounts.partials._modal')
+    <!-- Account Modals -->
+    @include('users.accounts.partials._createModal')
+    @include('users.accounts.partials._editModal')
 
 @endsection
 
@@ -52,15 +53,23 @@
          */
         var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
-        var accountModal = $('#accountModal')
-        var accountForm = $('#accountForm')
-        var accountFields = ['name', 'email']
-        var checked_field = '#auto_password'
-        var hidden_field = $("#password")
-        hidden_field.hide()
+        var createAccountModal = $('#createAccountModal')
+        var createAccountForm = $('#createAccountForm')
+        var editAccountModal = $('#editAccountModal')
+        var editAccountForm = $('#editAccountForm')
+        var accountFields = ['name', 'email', 'password']
+        var auto_password = $('#auto_password')
+        var _unchanged_password = $('#_unchanged_password')
+        var password = $("#password")
+        var _password = $("#_password")
+        password.hide()
+        _password.hide()
 
-        setModalAutofocus(accountModal, 'name')
-        accountModal.emptyModal(accountFields, accountForm, checked_field, hidden_field)
+        setModalAutofocus(createAccountModal, 'name')
+        setModalAutofocus(editAccountModal, '_name')
+        createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
+        editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
+
 
         // DataTable
         @include('users.accounts.partials._datatable')
@@ -68,11 +77,14 @@
         // Create account
         @include('users.accounts.js._create')
 
+        // Store account
+        @include('users.accounts.js._store')
+
         // Edit account
         @include('users.accounts.js._edit')
 
-        // Validate account
-        @include('users.accounts.js._validate')
+        // Update account
+        @include('users.accounts.js._update')
 
         // Delete account
         @include('users.accounts.js._delete')

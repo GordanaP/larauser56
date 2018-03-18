@@ -33,7 +33,8 @@ class ActivateAccount
      */
     public function sendActivationToken(Registered $event)
     {
-        Mail::to($event->user)->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
+        Mail::to($event->user)
+            ->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
     }
 
     /**
@@ -44,7 +45,8 @@ class ActivateAccount
      */
     public function sendThankYouNote(EmailVerified $event)
     {
-        Mail::to($event->user)->send(new ThankYouForRegisteringWithUs($event->user));
+        Mail::to($event->user)
+            ->send(new ThankYouForRegisteringWithUs($event->user));
     }
 
     /**
@@ -55,7 +57,8 @@ class ActivateAccount
      */
     public function resendActivationToken(TokenRequested $event)
     {
-        Mail::to($event->user)->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
+        Mail::to($event->user)
+            ->send(new PleaseConfirmYourEmailAddress($event->user->activationToken));
     }
 
     /**
@@ -66,6 +69,7 @@ class ActivateAccount
      */
     public function sendTokenAndPassword(AccountCreatedByAdmin $event)
     {
-        Mail::to($event->user)->send(new PleaseActivateYourAccount($event->user->activationToken, $event->password));
+        Mail::to($event->user)
+            ->send(new PleaseActivateYourAccount($event->user->activationToken, $event->password));
     }
 }

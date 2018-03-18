@@ -1,12 +1,11 @@
-<div class="modal" tabindex="-1" role="dialog" id="accountModal">
+<div class="modal" tabindex="-1" role="dialog" id="createAccountModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
-            <form id="accountForm">
+            <form id="createAccountForm">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fa"></i>
-                        <span></span>
+                        <i class="fa fa-user"></i> New account
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -44,10 +43,10 @@
                         <span class="invalid-feedback password"></span>
                     </div>
 
-                    <div class="form-group mt-12">
+                    <div class="form-group mt-12" id="check-password">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="auto_password" id="auto_password" checked />
-                            <label class="form-check-label" for="auto-password">
+                            <input class="form-check-input" type="checkbox" name="create-password" id="auto_password" value="auto"  checked />
+                            <label class="form-check-label" for="auto_password">
                                 Auto generate password
                             </label>
                         </div>
@@ -56,7 +55,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-account"></button>
+                    <button type="submit" class="btn btn-primary btn-account" id="storeAccount">Save</button>
                 </div>
             </form>
 

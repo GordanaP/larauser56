@@ -81,7 +81,7 @@ class ActivationController extends Controller
      */
     protected function verified()
     {
-        $response = message('Your account is now active. Please sign in to access the site content');
+        $response = message('Your account is now active. Please sign in to access the site content.');
 
         return redirect($this->redirectPath())->with($response);
     }

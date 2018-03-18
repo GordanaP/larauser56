@@ -1,13 +1,13 @@
-$(document).on('click', '#editAccount', function() {
+$(document).on('click', '#editAccount', function(){
 
-    accountModal.modal('show')
+    editAccountModal.modal('show')
 
     var user = $(this).val()
     var apiAccountsShowUrl = apiAccountsIndexUrl + '/' + user
 
-    $('.modal-title i').addClass('fa-lock')
-    $('.modal-title span').text('Edit account')
-    $('.btn-account').attr('id','updateAccount').text('Save changes').val(user) // asign user id(slug) to btn value
+    $('#updateAccount').val(user)
+
+    toggleHiddenFieldWithRadio('manual', _password)
 
     $.ajax({
         url: apiAccountsShowUrl,
@@ -16,8 +16,8 @@ $(document).on('click', '#editAccount', function() {
 
             var user = response.data
 
-            $('#name').val(user.name)
-            $('#email').val(user.email)
+            $('#_name').val(user.name)
+            $('#_email').val(user.email)
         }
     })
 });

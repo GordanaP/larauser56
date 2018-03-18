@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Rules\differentFromName;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AccountRequest extends FormRequest
@@ -29,7 +30,13 @@ class AccountRequest extends FormRequest
                 return [
                     'name' => 'required|string|alpha_num|max:30',
                     'email' => 'required|string|email|max:100|unique:users,email',
-                    'password' => 'required|string|min:6|different:name|confirmed',
+                    'password' => [
+                        'required',
+                        'string',
+                        'min:6',
+                        new differentFromName($this->name, $this->password),
+                        'confirmed'
+                    ],
                 ];
                 break;
 
@@ -38,7 +45,13 @@ class AccountRequest extends FormRequest
                 return [
                     'name' => 'required|string|alpha_num|max:30',
                     'email' => 'required|string|email|max:100|unique:users,email,'.$this->user->id,
-                    'password' => 'nullable|string|min:6|different:name|confirmed',
+                    'password' => [
+                        'required_if:create_password,manual',
+                        'string',
+                        'min:6',
+                        new differentFromName($this->name, $this->password),
+                        'confirmed'
+                    ],
                 ];
                 break;
         }

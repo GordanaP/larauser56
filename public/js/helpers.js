@@ -1,14 +1,34 @@
+/**
+ * Toggle hidden field visibility by changing checkbox field value
+ *
+ * @param  {string} checked_field
+ * @param  {string} hidden_field
+ * @return {void}
+ */
+function toggleHiddenFieldWithCheckbox(checked_field, hidden_field)
+{
+    checked_field.change(function() {
+
+        this.checked ? hidden_field.hide().val('').end() : hidden_field.show()
+
+    });
+}
 
 /**
- * Send user notification.
+ * Toggle hidden field by changing the radio field value.
  *
- * @param  {string} message
- * @param  {string} type
- * @return {mixed}
+ * @param  {string} checked_value
+ * @param  {string} hidden_field
+ * @return {void}
  */
-function userNotification(message, type="success")
+function toggleHiddenFieldWithRadio(checked_value, hidden_field)
 {
-    return $.notify(message, type)
+    $('input:radio').change(function(){
+
+        var value = $("form input[type='radio']:checked").val();
+
+        value == checked_value ? hidden_field.show() : hidden_field.hide().val('').end()
+    });
 }
 
 /**
@@ -330,17 +350,17 @@ function displayErrors(errors)
 function clearErrorOnNewInput()
 {
     $("input, textarea").on('keydown', function () {
-        clearError($(this).attr('id').replace('#', ''));
+        clearError($(this).attr('name'));
     });
 
     $("select").on('change', function () {
-        clearError($(this).attr('id').replace('#', ''));
+        clearError($(this).attr('name'));
     });
 
     $("input[type=checkbox], input[type=radio]").click(function() {
 
-        var splitted = $(this).attr('id').replace('#', '').split("-")
-        var name = splitted[0]
+        var splitted = $(this).attr('name').split("-")
+        var name = splitted[1]
 
         clearError(name)
     })
@@ -408,7 +428,7 @@ function setModalAutofocus(modalName, inputId)
 function generatePassword(field)
 {
     var auto_password = randomString(6);
-    var manual_password = $('#password').val();
+    var manual_password = $('input[type=password]').val();
 
     return isChecked(field) ? auto_password : manual_password;
 }
@@ -422,6 +442,30 @@ function generatePassword(field)
 function isChecked(field) {
 
     return field[0].checked
+}
+
+/**
+ * Change password
+ *
+ * @return {string}
+ */
+function changePassword()
+{
+    var auto_password = randomString(6)
+    var manual_password = $("#_password").val()
+
+    var checked_value = $("input[type='radio']:checked").val();
+
+    if(checked_value == "manual")
+    {
+        var password = manual_password
+    }
+    else if(checked_value == "auto")
+    {
+        var password = auto_password
+    }
+
+    return password;
 }
 
 /**

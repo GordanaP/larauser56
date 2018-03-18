@@ -1,4 +1,4 @@
-accountForm.formValidation({
+createAccountForm.formValidation({
     framework: 'bootstrap4',
     excluded: ':disabled', // form in BS modal
     @include('validators.accounts._fields')
