@@ -26,6 +26,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Auth\AccountCreatedByAdmin' => [
             'App\Listeners\Auth\ActivateAccount@sendTokenAndPassword',
         ],
+        'App\Events\Auth\AccountUpdatedByAdmin' => [
+            'App\Listeners\Auth\ActivateAccount@sendPassword',
+        ],
     ];
 
     /**

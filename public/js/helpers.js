@@ -1,4 +1,16 @@
 /**
+ * Notify user about a successful action
+ *
+ * @param  {string} message
+ * @param  {string} type
+ * @return {mixed}
+ */
+function userNotification(message, type="success")
+{
+    return $.notify(message, type)
+}
+
+/**
  * Toggle hidden field visibility by changing checkbox field value
  *
  * @param  {string} checked_field
@@ -255,13 +267,6 @@ function randomString(length)
 //     }
 // }
 
-// function successResponse(datatable, modal, message)
-// {
-//     datatable.ajax.reload();
-//     modal.modal("hide")
-//     userNotification(message)
-// }
-
 
 /**
  * Alert the user on deletion
@@ -401,8 +406,8 @@ function clearJSError(field)
  */
 function successResponse(modal, message)
 {
-    modal.modal("hide")
     userNotification(message)
+    modal.modal("hide")
 }
 
 /**
@@ -412,9 +417,9 @@ function successResponse(modal, message)
  * @param {string} inputId
  * @return {void}
  */
-function setModalAutofocus(modalName, inputId)
+$.fn.setAutofocus = function(inputId)
 {
-    modalName.on('shown.bs.modal', function () {
+    $(this).on('shown.bs.modal', function () {
         $(this).find("#" + inputId).focus()
     })
 }

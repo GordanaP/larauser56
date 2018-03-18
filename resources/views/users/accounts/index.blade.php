@@ -17,6 +17,8 @@
         </h1>
         <hr>
     </div>
+
+    <!-- Accounts Table -->
     <div class="table-responsive admin-table-wrapper">
         <table class="table hover order-column admin-table" id="accountsTable" cellspacing="0" width="100%">
             <thead>
@@ -65,11 +67,11 @@
         password.hide()
         _password.hide()
 
-        setModalAutofocus(createAccountModal, 'name')
-        setModalAutofocus(editAccountModal, '_name')
+        createAccountModal.setAutofocus('name')
+        editAccountModal.setAutofocus('name')
+
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
         editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
-
 
         // DataTable
         @include('users.accounts.partials._datatable')

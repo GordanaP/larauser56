@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Events\Auth\AccountCreatedByAdmin;
+use App\Events\Auth\AccountUpdatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\User;
@@ -10,6 +11,11 @@ use Auth;
 
 class AccountController extends Controller
 {
+    /**
+     * Create new controller instance.
+     *
+     * @return  void
+     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -64,6 +70,8 @@ class AccountController extends Controller
 
         if ($request->ajax()) {
 
+            event(new AccountUpdatedByAdmin($user, $request->password));
+
             return message('The account has been updated');
         }
 
@@ -81,6 +89,11 @@ class AccountController extends Controller
         Auth::logout();
 
         $user->delete();
+
+        if ($request->ajax()) {
+
+            return message('The account has been deleted.');
+        }
 
         return $this->deleted($user);
     }
