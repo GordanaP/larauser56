@@ -175,3 +175,8 @@ td.sorting_1:hover { background: #d2d9df !important }
 .dataTable ul.dtr-details li:last-child { display: flex; align-items: center }
 .dataTable tbody td.highlight, table.dataTable tbody tr:hover { background-color: #f0f1f4 !important; }
 
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+.btn-edit {background: none; color: inherit;}
+.btn-delete {background: none; border: none; color: #dc3545}
+.btn-delete:hover {background: none; border: none; color: #c32232; font-weight: bold}

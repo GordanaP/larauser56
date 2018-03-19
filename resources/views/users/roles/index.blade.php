@@ -19,7 +19,7 @@
             @if ($roles->count())
                 @foreach ($roles->chunk(3) as $chunk)
                     <div class="row mb-2" id="roleCard">
-                        @each('roles.partials._card', $chunk, 'role')
+                        @each('users.roles.partials._card', $chunk, 'role')
                     </div>
                 @endforeach
             @else
@@ -28,8 +28,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    @include('roles.partials._modal')
 
 @endsection
 
@@ -38,26 +36,6 @@
     <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
-
-        var roleModal = $('#roleModal')
-        var roleForm = $("#roleForm")
-        var adminRolesIndexUrl = "{{ route('admin.roles.index') }}"
-        var roleFields = ['name']
-
-        setModalAutofocus(roleModal, 'name')
-        roleModal.emptyModal(roleFields, roleForm)
-
-        // Create role
-        @include('roles.js._create')
-
-        // Edit role
-        @include('roles.js._edit')
-
-        // Validate, store & update role
-        @include('roles.js._validate')
-
-        // Delete role
-        @include('roles.js._delete')
 
     </script>
 

@@ -57,6 +57,10 @@ p.fs-16{font-size: 16px}
 .fs-13{font-size: 13px;}
 
 .red{  color: #bf5329;}
+.bg-lightest-gray { background: hsl(0, 0%, 99%); }
+.fw-600 { font-weight: 600 }
+.text-bold-grey { font-weight: 600 !important; color: #67737e!important}
+
 
 .help-block {margin: 3px 0 0 0; color: #a94442}
 .help-label {color: #777; font-size: 12px; font-weight: normal;}
