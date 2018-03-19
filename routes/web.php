@@ -48,6 +48,7 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
  * Admin
  */
 Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
+
     /**
      * Account
      */
@@ -55,4 +56,9 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
         'parameters' => ['accounts' => 'user'],
         'only' => ['index', 'store', 'update', 'destroy']
     ]);
+
+    /**
+     * Role
+     */
+    Route::resource('/roles', 'RoleController');
 });

@@ -7,5 +7,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/accounts', 'Api\User\AccountController@index')->name('api.accounts.index');
-Route::get('/accounts/{user}', 'Api\User\AccountController@show')->name('api.accounts.show');
+Route::name('api.')->group(function(){
+
+    /**
+     * Account
+     */
+    Route::apiResource('/accounts', 'Api\User\AccountController', [
+        'parameters' => ['accounts' => 'user'],
+        'only' => ['index', 'show'],
+    ]);
+
+    /**
+     * Role
+     */
+    Route::apiResource('/roles', 'Api\User\RoleController', [
+        'only' => ['index', 'show'],
+    ]);
+});

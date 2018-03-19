@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
-use App\Http\Resources\User\UsersCollection;
-use App\User;
+use App\Http\Resources\Role\RoleResource;
+use App\Http\Resources\Role\RolesCollection;
+use App\Role;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
 
-class AccountController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,19 +17,19 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $roles = Role::all();
 
-        return UsersCollection::collection($users);
+        return RolesCollection::collection($roles);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $user
+     * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Role $role)
     {
-        return new UserResource($user);
+        return new RoleResource($role);
     }
 }

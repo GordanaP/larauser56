@@ -144,4 +144,14 @@ class User extends Authenticatable
 
         $this->save();
     }
+
+    /**
+     * Get the roles that belong to the user.
+     *
+     * @return  \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
 }
