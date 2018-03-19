@@ -86,11 +86,11 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        Auth::logout();
+        //Auth::logout();
 
         $user->delete();
 
-        if ($request->ajax()) {
+        if (request()->ajax()) {
 
             return message('The account has been deleted.');
         }

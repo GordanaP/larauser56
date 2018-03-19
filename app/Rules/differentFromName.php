@@ -7,7 +7,6 @@ use Illuminate\Contracts\Validation\Rule;
 class differentFromName implements Rule
 {
     public $name;
-
     public $password;
 
     /**

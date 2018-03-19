@@ -478,6 +478,7 @@ function changePassword()
  *
  * @param  {array} fields
  * @param  {object} form
+ * @param  {string} checked_filed
  * @param  {string} hidden_filed
  * @return {void}
  */

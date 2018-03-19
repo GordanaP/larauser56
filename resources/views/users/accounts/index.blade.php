@@ -25,7 +25,7 @@
                 <th>#</th>
                 <th><i class="fa fa-user mr-6"></i> Name</th>
                 <th><i class="fa fa-envelope mr-6"></i> Email</th>
-                <th><i class="fa "></i> Status</th>
+                <th><i class="fa fa-circle"></i> Status</th>
                 <th><i class="fa fa-calendar mr-6"></i> Joined</th>
                 <th class="text-center"><i class="fa fa-cog mr-6"></i></th>
             </thead>
@@ -48,29 +48,38 @@
 
     <script>
 
-        var table = $('#accountsTable')
-
         /**
          * Account
          */
+        // Table
+        var table = $('#accountsTable')
+
+        // Url
         var apiAccountsIndexUrl = "{{ route('api.accounts.index') }}"
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
+
+        // Form fields
+        var accountFields = ['name', 'email', 'password']
+
+        // Create
         var createAccountModal = $('#createAccountModal')
         var createAccountForm = $('#createAccountForm')
+        var auto_password = $('#auto_password')
+        var password = $("#password")
+        password.hide()
+
+        // Edit
         var editAccountModal = $('#editAccountModal')
         var editAccountForm = $('#editAccountForm')
-        var accountFields = ['name', 'email', 'password']
-        var auto_password = $('#auto_password')
         var _unchanged_password = $('#_unchanged_password')
-        var password = $("#password")
         var _password = $("#_password")
-        password.hide()
         _password.hide()
 
+        // Modals
         createAccountModal.setAutofocus('name')
-        editAccountModal.setAutofocus('name')
-
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
+
+        editAccountModal.setAutofocus('name')
         editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
 
         // DataTable

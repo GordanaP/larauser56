@@ -35,7 +35,14 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
     ]);
 });
 
-// Route::get('/account', 'User\AccountController@edit')->name('users.accounts.edit');
+// Route::prefix('account')->namespace('User')->name('users.accounts.')->group(function() {
+//     /**
+//      * Account
+//      */
+//     Route::get('/', 'AccountController@edit')->name('edit');
+//     Route::put('/', 'AccountController@update')->name('update');
+//     Route::delete('/', 'AccountController@destroy')->name('destroy');
+// });
 
 /**
  * Admin
@@ -47,18 +54,5 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
     Route::resource('/accounts', 'AccountController', [
         'parameters' => ['accounts' => 'user'],
         'only' => ['index', 'store', 'update', 'destroy']
-    ]);
-});
-
-/**
- * Admin\User
- */
-Route::namespace('Admin\User')->prefix('admin')->name('admin.')->group(function() {
-    /**
-     * Account
-     */
-    Route::resource('/accounts', 'AccountController', [
-        'parameters' => ['accounts' => 'user'],
-        'only' => ['destroy']
     ]);
 });
