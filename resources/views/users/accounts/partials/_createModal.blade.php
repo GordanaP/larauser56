@@ -16,6 +16,20 @@
                         Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
                     </p>
 
+                    <!-- Role -->
+                    <div class="form-group">
+                        <label for="role_id">Role</label>
+                        <select class="role_id form-control req_place" name="role_id[]" id="role_id" multiple="multiple">
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">
+                                    {{ $role->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <span class="invalid-feedback role_id"></span>
+                    </div>
+
                     <!-- Name -->
                     <div class="form-group">
                         <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>

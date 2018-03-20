@@ -6,6 +6,7 @@ use App\Events\Auth\AccountCreatedByAdmin;
 use App\Events\Auth\AccountUpdatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
+use App\Role;
 use App\User;
 use Auth;
 
@@ -28,7 +29,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('users.accounts.index');
+        $roles = Role::all();
+
+        return view('users.accounts.index', compact('roles'));
     }
 
     /**

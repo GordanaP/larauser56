@@ -13,7 +13,7 @@
 
             <div class="flex justify-between">
                 <div class="div">
-                    <a class="btn btn-danger btn-edit" href="{{ route('admin.roles.show', $role) }}">
+                    <a class="btn btn-danger btn-edit" href="#">
                         Details
                     </a>
                     <button type="button" class="btn btn-danger btn-delete" id="editRole" value="{{ $role->slug }}">

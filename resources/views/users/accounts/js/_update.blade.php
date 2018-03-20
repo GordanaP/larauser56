@@ -83,6 +83,7 @@ editAccountForm.formValidation({
     var checked = $("form input[type='radio']:checked").val();
 
     var data = {
+        role_id: $("#_role_id").val(),
         name : $("#_name").val(),
         email : $("#_email").val(),
         create_password: checked,

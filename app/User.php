@@ -120,6 +120,8 @@ class User extends Authenticatable
 
         $user->save();
 
+        $user->assignRole($data['role_id']);
+
         return $user;
     }
 
@@ -142,6 +144,11 @@ class User extends Authenticatable
             $this->password = bcrypt($data['password']);
         }
 
+        if($data['role_id'])
+        {
+            $this->assignRole($data['role_id']);
+        }
+
         $this->save();
     }
 
@@ -153,5 +160,32 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * A user has a specified role.
+     *
+     * @param  App\Role  $role
+     * @return boolean
+     */
+    public function hasRole($role)
+    {
+        if (is_string($role))
+        {
+            return $this->roles->contains('name', $role);
+        }
+
+        return !! $role->intersect($this->roles)->count();
+    }
+
+    /**
+     * Assigne a role to a user.
+     *
+     * @param  \App\Role $role
+     * @return mixed
+     */
+    public function assignRole($role)
+    {
+        return $this->roles()->sync($role);
     }
 }

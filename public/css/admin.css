@@ -180,3 +180,10 @@ td.sorting_1:hover { background: #d2d9df !important }
 .btn-edit {background: none; color: inherit;}
 .btn-delete {background: none; border: none; color: #dc3545}
 .btn-delete:hover {background: none; border: none; color: #c32232; font-weight: bold}
+
+
+/*
+ * Select2
+ */
+input.select2-search__field {width: 100% !important;}
+.select2-selection--multiple {border: 1px solid #ccd0d2 !important;}

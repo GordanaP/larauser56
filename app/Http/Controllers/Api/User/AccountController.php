@@ -18,7 +18,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
 
         return UsersCollection::collection($users);
     }

@@ -15,6 +15,7 @@ class UsersCollection extends Resource
     public function toArray($request)
     {
         return [
+            'roles' => $this->roles->count() ? $this->roles->pluck('name') : '',
             'name' => $this->name,
             'email' => $this->email,
             'status' => $this->accountStatus(),

@@ -19,6 +19,12 @@ var datatable = table.DataTable({
             }
         },
         { data: 'email' },
+        {
+            data: 'roles',
+            render: function(role, type, row, meta) {
+                return role ? role + ' <a href="#" data-user="' + row.user + '" id="editRoles">Revoke</a>' : '';
+            }
+        },
         { data: 'status' },
         { data: 'joined' },
         {

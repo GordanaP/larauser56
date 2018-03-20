@@ -80,6 +80,7 @@ createAccountForm.formValidation({
     var password = generatePassword(field);
 
     var data = {
+        role_id: $("#role_id").val(),
         name : $("#name").val(),
         email : $("#email").val(),
         password: password,

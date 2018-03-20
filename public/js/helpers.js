@@ -504,8 +504,9 @@ $.fn.emptyModal = function(fields, form, checked_field, hidden_field) {
 function clearForm(form, checked_field, hidden_field)
 {
     $(form)
-        .find("input[type=text], input[type=password], select, textarea")
+        .find("input[type=text], input[type=password], textarea")
         .val('').end()
+        .find("select").val(null).trigger('change')
         .find("input[type=checkbox], input[type=radio]")
         .prop("checked", "").end()
         .find(checked_field).prop('checked', true);

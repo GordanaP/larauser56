@@ -5,6 +5,7 @@
 @section('links')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
@@ -25,6 +26,7 @@
                 <th>#</th>
                 <th><i class="fa fa-user mr-6"></i> Name</th>
                 <th><i class="fa fa-envelope mr-6"></i> Email</th>
+                <th><i class="fa fa-briefcase mr-6"></i> Role</th>
                 <th><i class="fa fa-circle"></i> Status</th>
                 <th><i class="fa fa-calendar mr-6"></i> Joined</th>
                 <th class="text-center"><i class="fa fa-cog mr-6"></i></th>
@@ -43,10 +45,17 @@
     <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
     <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
+
+        // Select2 selectbox
+        $('select.role_id').select2({
+            placeholder: "Select a role",
+            width: "100%"
+        })
 
         /**
          * Account
@@ -76,7 +85,7 @@
         _password.hide()
 
         // Modals
-        createAccountModal.setAutofocus('name')
+        createAccountModal.setAutofocus('role_id')
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
 
         editAccountModal.setAutofocus('name')

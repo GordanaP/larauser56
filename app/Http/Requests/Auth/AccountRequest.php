@@ -46,6 +46,7 @@ class AccountRequest extends FormRequest
                     'name' => 'required|string|alpha_num|max:30',
                     'email' => 'required|string|email|max:100|unique:users,email,'.$this->user->id,
                     'password' => [
+                        'nullable',
                         'required_if:create_password,manual',
                         'string',
                         'min:6',
