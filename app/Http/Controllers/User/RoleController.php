@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\RoleRequest;
 use App\Role;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class RoleController extends Controller
 {
@@ -33,15 +34,12 @@ class RoleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $role = new Role();
-
-        $role->name = $request->name;
-        $role->save();
+        Role::createNew($request);
 
         return message("A new role has been created");
     }
@@ -73,16 +71,15 @@ class RoleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\RoleRequest  $request
      * @param  \App\Role  $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(RoleRequest $request, Role $role)
     {
-        $role->name = $request->name;
-        $role->save();
+        $role->saveChanges($request);
 
-        return message("A new role has been created");
+        return message("The role name has been updated");
     }
 
     /**

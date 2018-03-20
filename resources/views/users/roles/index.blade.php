@@ -44,88 +44,22 @@
         var roleModal = $("#roleModal")
         var roleForm = $("#roleForm")
         var rolesIndexUrl = "{{ route('admin.roles.index') }}"
+        var roleFields = ['name']
 
-        $(document).on("click", '#createRole', function(){
+        roleModal.setAutofocus('name')
+        roleModal.emptyModal(roleFields, roleForm)
 
-            roleModal.modal('show')
+        // Create role
+        @include('users.roles.js._create')
 
-            $('.modal-title i').addClass('fa-briefcase')
-            $('.modal-title span').text('New role')
-            $('.btn-role').text('Save').attr('id', 'storeRole');
-        })
+        // Edit role
+        @include('users.roles.js._edit')
 
-        $(document).on('click', '#storeRole', function(){
+        // Store & update with client side validation
+        @include('users.roles.js._JSvalidation')
 
-            var data = {
-                name : $('#name').val()
-            }
-
-            $.ajax({
-                url: rolesIndexUrl,
-                method: "POST",
-                data: data,
-                success: function(response)
-                {
-                    $('#displayRoles').load(location.href + " #displayRoles")
-                    successResponse(roleModal, response.message)
-                },
-            })
-        })
-
-        $(document).on("click", '#editRole', function() {
-
-            roleModal.modal('show')
-
-            var role = $(this).val()
-            var rolesShowUrl = rolesIndexUrl + '/' + role
-
-            $('.modal-title i').addClass('fa-briefcase')
-            $('.modal-title span').text('Edit role')
-            $('.btn-role').text('Save changes').attr('id', 'updateRole').val(role);
-
-            $.ajax({
-                url : rolesShowUrl,
-                type: "GET",
-                success: function(response) {
-
-                    $('#name').val(response.role.name)
-                }
-            })
-
-
-        })
-
-        $(document).on('click', '#updateRole', function() {
-
-            var role = $(this).val()
-            var rolesUpdateUrl = rolesIndexUrl + '/' + role
-
-            var data = {
-                name : $('#name').val()
-            }
-
-            $.ajax({
-                url : rolesUpdateUrl,
-                type: "PUT",
-                data: data,
-                success: function(response) {
-
-                    $('#displayRoles').load(location.href + " #displayRoles")
-                    successResponse(roleModal, response.message)
-                }
-            })
-        });
-
-        $(document).on('click', '#deleteRole', function(){
-
-            var role = $(this).val();
-            var rolesDeleteUrl = rolesIndexUrl + '/' + role
-            name = 'role'
-            var field = '#displayRoles'
-
-            swalDelete(rolesDeleteUrl, name, datatable=null, field)
-
-        })
+        // Delete role
+        @include('users.roles.js._delete')
 
     </script>
 @endsection

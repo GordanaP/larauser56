@@ -50,5 +50,31 @@ class Role extends Model
         return $this->created_at->toFormattedDateString();
     }
 
+    /**
+     * Create a new role.
+     *
+     * @param  array $data
+     * @return void
+     */
+    public static function createNew($data)
+    {
+        $role = new static;
 
+        $role->name = $data['name'];
+
+        $role->save();
+    }
+
+    /**
+     * Update the role.
+     *
+     * @param  array $data
+     * @return void
+     */
+    public function saveChanges($data) {
+
+        $this->name = $data['name'];
+
+        $this->save();
+    }
 }

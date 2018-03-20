@@ -510,7 +510,7 @@ function clearForm(form, checked_field, hidden_field)
         .prop("checked", "").end()
         .find(checked_field).prop('checked', true);
 
-    hidden_field.hide()
+    hidden_field ? hidden_field.hide() : ''
 }
 
 /**
