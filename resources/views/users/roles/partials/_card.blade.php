@@ -16,11 +16,11 @@
                     <a class="btn btn-danger btn-edit" href="{{ route('admin.roles.show', $role) }}">
                         Details
                     </a>
-                    <button type="button" class="btn btn-danger btn-delete" id="editRole" value="{{ $role->id }}">
+                    <button type="button" class="btn btn-danger btn-delete" id="editRole" value="{{ $role->slug }}">
                         Edit
                     </button>
                 </div>
-                <button type="button" class="btn btn-danger btn-delete" id="deleteRole" value="{{ $role->id }}">
+                <button type="button" class="btn btn-danger btn-delete" id="deleteRole" value="{{ $role->slug }}">
                     <i class="fa fa-trash fs-18"></i>
                 </button>
             </div>

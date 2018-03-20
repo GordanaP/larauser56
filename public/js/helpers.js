@@ -275,7 +275,7 @@ function randomString(length)
  * @param  {string} url
  * @return void
  */
-function swalDelete(url, name, datatable)
+function swalDelete(url, name, datatable, field)
 {
     swal({
         title: 'Are you sure?',
@@ -292,13 +292,11 @@ function swalDelete(url, name, datatable)
                 type : "DELETE",
                 success : function(response) {
 
-                    datatable.ajax.reload()
+                    datatable ? datatable.ajax.reload() : ''
+                    field ? $(field).load(location.href + ' ' + field) : ''
+
                     userNotification(response.message)
                 },
-                error: function(response)
-                {
-                    //
-                }
             })
         }
     })
