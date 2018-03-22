@@ -17,7 +17,7 @@
                     </p>
 
                     <!-- Role -->
-                    <div class="form-group">
+                    <div class="form-group select-box">
                         <label for="role_id">Role</label>
                         <select class="role_id form-control req_place" name="role_id[]" id="role_id" multiple="multiple">
                             @foreach ($roles as $role)

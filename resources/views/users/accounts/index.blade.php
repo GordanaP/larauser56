@@ -5,7 +5,7 @@
 @section('links')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
@@ -51,15 +51,6 @@
 
     <script>
 
-        // Select2 selectbox
-        $('select.role_id').select2({
-            placeholder: "Select a role",
-            width: "100%"
-        })
-
-        /**
-         * Account
-         */
         // Table
         var table = $('#accountsTable')
 
@@ -68,7 +59,7 @@
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
 
         // Form fields
-        var accountFields = ['name', 'email', 'password']
+        var accountFields = ['role_id', 'name', 'email', 'password']
 
         // Create
         var createAccountModal = $('#createAccountModal')
@@ -88,7 +79,7 @@
         createAccountModal.setAutofocus('role_id')
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
 
-        editAccountModal.setAutofocus('name')
+        editAccountModal.setAutofocus('_role_id')
         editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
 
         // DataTable

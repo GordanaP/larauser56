@@ -1,5 +1,19 @@
-editAccountForm.formValidation({
+editAccountForm
+.find('select.role_id')
+.select2({
+    placeholder: "Select roles",
+    width: "100%"
+})
+.change(function(e) {
+    editAccountForm.formValidation('revalidateField', 'role_id[]');
+})
+.end()
+.formValidation({
     framework: 'bootstrap4',
+    button: {
+        selector: '#updateAccount',
+        disabled: "disabled"
+    },
     excluded: ':disabled', // form in BS modal
     icon: {
         valid: 'fa fa-check',
@@ -7,10 +21,22 @@ editAccountForm.formValidation({
         validating: 'fa fa-refresh'
     },
     fields: {
+        'role_id[]': {
+            validators: {
+                callback: {
+                    message: 'Please select roles',
+                    callback: function(value, validator, $field) {
+
+                        var option = validator.getFieldElements('role_id[]').val();
+                        return (option != null);
+                    }
+                },
+            },
+        },
         name: {
             validators: {
                 notEmpty: {
-                    message: 'The name is required.'
+                    message: "The name is required"
                 },
                 regexp: {
                     regexp: /^[A-za-z0-9]+$/i,

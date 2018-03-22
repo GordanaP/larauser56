@@ -353,11 +353,17 @@ function displayErrors(errors)
 function clearErrorOnNewInput()
 {
     $("input, textarea").on('keydown', function () {
+
         clearError($(this).attr('name'));
     });
 
     $("select").on('change', function () {
-        clearError($(this).attr('name'));
+
+        var id = $(this).attr('id');
+        var _id = id.charAt(0) == '_' ? id.substring(1) : ''
+
+        clearError(id)
+        clearError(_id)
     });
 
     $("input[type=checkbox], input[type=radio]").click(function() {

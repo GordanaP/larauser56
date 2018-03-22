@@ -1,4 +1,15 @@
-createAccountForm.formValidation({
+createAccountForm
+.find('select.role_id')
+.select2({
+    placeholder: "Select roles",
+    width: "100%"
+})
+// Revalidate the color when it is changed
+.change(function(e) {
+    createAccountForm.formValidation('revalidateField', 'role_id[]');
+})
+.end()
+.formValidation({
     framework: 'bootstrap4',
     excluded: ':disabled', // form in BS modal
     icon: {
@@ -7,6 +18,17 @@ createAccountForm.formValidation({
         validating: 'fa fa-refresh'
     },
     fields: {
+        'role_id[]': {
+            validators: {
+                callback: {
+                    message: 'Please select roles',
+                    callback: function(value, validator, $field) {
+                        var options = validator.getFieldElements('role_id[]').val();
+                        return (options != null && options.length >= 0);
+                    }
+                }
+            }
+        },
         name: {
             validators: {
                 notEmpty: {
@@ -97,7 +119,6 @@ createAccountForm.formValidation({
             successResponse(createAccountModal, response.message)
         },
         error: function(response) {
-
             errorResponse(response.responseJSON.errors, createAccountModal)
         }
     })

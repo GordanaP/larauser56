@@ -28,6 +28,7 @@ class AccountRequest extends FormRequest
         {
             case 'POST':
                 return [
+                    'role_id' => 'exists:roles,id',
                     'name' => 'required|string|alpha_num|max:30',
                     'email' => 'required|string|email|max:100|unique:users,email',
                     'password' => [
@@ -43,6 +44,7 @@ class AccountRequest extends FormRequest
             case 'PUT':
             case 'PATCH':
                 return [
+                    'role_id' => 'exists:roles,id',
                     'name' => 'required|string|alpha_num|max:30',
                     'email' => 'required|string|email|max:100|unique:users,email,'.$this->user->id,
                     'password' => [
