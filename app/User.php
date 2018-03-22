@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Observers\UserObserver;
+use App\Role;
 use App\Traits\User\HasSlug;
 use App\Traits\User\VerifiesEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -187,5 +188,37 @@ class User extends Authenticatable
     public function assignRole($role)
     {
         return $this->roles()->sync($role);
+    }
+
+    /**
+     * Revoke a user's role.
+     *
+     * @param  numeric $role
+     * @return void
+     */
+    public function revokeRole($role)
+    {
+        $roles = Role::whereIn('id', $role)->get();
+
+        $this->roles()->detach($roles);
+    }
+
+    /**
+     * Determine if the user is an administrator
+     *
+     * @return boolean
+     */
+    public function isAdmin()
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
+     * Determine if the user is a super-administrator
+     * @return boolean
+     */
+    public function isSuperAdmin()
+    {
+        return $this->hasRole('superadmin');
     }
 }

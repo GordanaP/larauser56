@@ -60,5 +60,6 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
     /**
      * Role
      */
+    Route::delete('/roles-revoke/{user}', 'RoleController@revoke')->name('roles.revoke');
     Route::resource('/roles', 'RoleController');
 });

@@ -346,6 +346,26 @@ function displayErrors(errors)
 }
 
 /**
+ * Get checkbox values
+ *
+ * @param  {array} checked
+ * @return {array}
+ */
+function checkedValues(checkbox)
+{
+    var array = [];
+
+    var items = $('input[name*="'+checkbox+'"]:checked')
+
+    $.each(items, function(key, value) {
+
+        var value = $(this).val()
+        array.push(value)
+    })
+
+    return array;
+}
+/**
  * Remove the error on inserting the new value.
  *
  * @return void

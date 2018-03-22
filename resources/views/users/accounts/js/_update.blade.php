@@ -6,14 +6,11 @@ editAccountForm
 })
 .change(function(e) {
     editAccountForm.formValidation('revalidateField', 'role_id[]');
+    editAccountForm.formValidation('revalidateField', 'password');
 })
 .end()
 .formValidation({
     framework: 'bootstrap4',
-    button: {
-        selector: '#updateAccount',
-        disabled: "disabled"
-    },
     excluded: ':disabled', // form in BS modal
     icon: {
         valid: 'fa fa-check',

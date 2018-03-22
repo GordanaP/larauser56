@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
 use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
@@ -93,5 +94,19 @@ class RoleController extends Controller
         $role->delete();
 
         return message("The role has been deleted");
+    }
+
+    /**
+     * Revoke the user's roles.
+     *
+     * @param  \App\Http\Requests\RevokeRolesRequest  $request
+     * @param  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function revoke(Request $request, User $user)
+    {
+        $user->revokeRole($request->role_id);
+
+        return message("The selected role(s) have been revoked.'");
     }
 }

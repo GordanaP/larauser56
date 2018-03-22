@@ -6,6 +6,7 @@ use App\Events\Auth\AccountCreatedByAdmin;
 use App\Events\Auth\AccountUpdatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
+use App\Http\Resources\User\UserResource;
 use App\Role;
 use App\User;
 use Auth;
@@ -57,6 +58,16 @@ class AccountController extends Controller
      */
     public function edit(User $user)
     {
+        if(request()->ajax()) {
+
+            $html = view('users.roles.partials._html', compact('user'))->render();
+
+            return response([
+                'user' => new UserResource($user),
+                'html' => $html
+            ]);
+        }
+
         return view('users.accounts.edit', compact('user'));
     }
 
