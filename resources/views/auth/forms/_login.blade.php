@@ -51,11 +51,11 @@
             </button>
 
             <a class="btn btn-link" href="{{ route('password.request') }}">
-                Forgot Your Password?
+                Forgot Password?
             </a>
 
             <a href="{{ route('token.create') }}">
-                Lost Activation Link?
+                Renew Activation Link?
             </a>
         </div>
     </div>

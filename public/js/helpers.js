@@ -388,10 +388,14 @@ function clearErrorOnNewInput()
 
     $("input[type=checkbox], input[type=radio]").click(function() {
 
-        var splitted = $(this).attr('name').split("-")
-        var name = splitted[1]
+        var id = $(this).parents(':eq(1)').attr('id');
+        var name = $(this).attr('name');
 
-        clearError(name)
+        var splitted = $(this).attr('name').split("-")
+        var splitted_name = splitted[1]
+
+        clearError(splitted_name)
+        clearError(id)
     })
 }
 

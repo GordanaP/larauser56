@@ -124,7 +124,6 @@ editAccountForm
             successResponse(editAccountModal, response.message)
         },
         error: function(response) {
-
             errorResponse(response.responseJSON.errors, editAccountModal)
         }
     })

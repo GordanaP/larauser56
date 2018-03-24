@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RevokeRolesRequest;
 use App\Http\Requests\RoleRequest;
 use App\Role;
 use App\User;
@@ -10,6 +11,16 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    /**
+     * Create new controller instance
+     *
+     * @return  void
+     */
+    public function __construct() {
+
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -103,7 +114,7 @@ class RoleController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function revoke(Request $request, User $user)
+    public function revoke(RevokeRolesRequest $request, User $user)
     {
         $user->revokeRole($request->role_id);
 

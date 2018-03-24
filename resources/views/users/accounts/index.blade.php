@@ -118,6 +118,11 @@
         var _password = $("#_password")
         _password.hide()
 
+        // Revoke roles
+        var revokeRolesModal = $('#revokeRolesModal')
+        var revokeRolesForm = $('#revokeRolesForm')
+        var revokeFields = ['role_id']
+
         // Modals
         createAccountModal.setAutofocus('role_id')
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
@@ -125,8 +130,7 @@
         editAccountModal.setAutofocus('_role_id')
         editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
 
-        var revokeRolesModal = $('#revokeRolesModal')
-        var revokeRolesFomr = $('#revokeRolesForm')
+        revokeRolesModal.emptyModal(revokeFields, revokeRolesForm)
 
         // DataTable
         @include('users.accounts.partials._datatable')
@@ -172,6 +176,9 @@
                     datatable.ajax.reload()
                     successResponse(revokeRolesModal, response.message)
                 },
+                error: function(response) {
+                    errorResponse(response.responseJSON.errors, revokeRolesModal)
+                }
             })
         })
 
