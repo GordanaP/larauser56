@@ -16,6 +16,47 @@
         Revoke roles
     </button>
 
+
+    "data": [
+      {
+        "roles": [
+          "admin"
+        ],
+        "name": "Gordana",
+        "email": "g@gmail.com",
+        "status": "active",
+        "joined": "Mar 24, 2018",
+        "user": "gordana"
+      },
+    ]
+
+    "data": [
+        {
+          "id": 1,
+          "name": "Gordana",
+          "slug": "gordana",
+          "email": "g@gmail.com",
+          "verified": true,
+          "created_at": "2018-03-24 22:06:46",
+          "updated_at": "2018-03-24 22:06:46",
+          "roles": [
+            {
+              "id": 2,
+              "name": "admin",
+              "slug": "admin",
+              "created_at": "2018-03-24 22:06:48",
+              "updated_at": "2018-03-24 22:06:48",
+              "pivot": {
+                "user_id": 1,
+                "role_id": 2
+              }
+            }
+          ]
+        },
+    ]
+
+
+
     <div class="modal" tabindex="-1" role="dialog" id="revokeRolesModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

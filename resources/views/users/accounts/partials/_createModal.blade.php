@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="text" class="form-control name" id="name" name="name" placeholder="Enter your name" />
+                        <input type="text" class="form-control name" id="name" name="name" placeholder="Give name to the user" />
 
                         <span class="invalid-feedback name"></span>
                     </div>

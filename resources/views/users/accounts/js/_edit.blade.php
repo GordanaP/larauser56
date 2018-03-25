@@ -3,14 +3,14 @@ $(document).on('click', '#editAccount', function(){
     editAccountModal.modal('show')
 
     var user = $(this).val()
-    var apiAccountsShowUrl = apiAccountsIndexUrl + '/' + user
+    var adminAccountsEditUrl = adminAccountsUrl + '/' + user + '/edit'
 
     $('#updateAccount').val(user)
 
     toggleHiddenFieldWithRadio('manual', _password)
 
     $.ajax({
-        url: apiAccountsShowUrl,
+        url: adminAccountsEditUrl,
         type: "GET",
         success: function(response) {
 

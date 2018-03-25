@@ -1,6 +1,6 @@
 var datatable = table.DataTable({
     "ajax": {
-        "url": apiAccountsIndexUrl,
+        "url": adminAccountsUrl,
         "type": "GET"
     },
     "deferRender": true, // Increase the speed of the table loading
@@ -15,31 +15,41 @@ var datatable = table.DataTable({
         {
             data: 'name',
             render: function(data, type, row, meta) {
-                return '<a href="#" data-user="' + row.user + '"  id="editProfile">' + data +'</a>'
+                return '<a href="#" data-user="' + row.slug + '"  id="editProfile">' + data +'</a>'
             }
         },
         { data: 'email' },
         {
             data: 'roles',
-            render: function(role, type, row, meta) {
-                return role ? role + ' <a href="#" data-user="' + row.user + '" id="editRoles">Revoke</a>' : '';
+            render: function(data, type, row, meta) {
+                return data[0] ? data[0].name + ' <a href="#" data-user="' + row.slug + '" id="editRoles">Revoke</a>' : '';
             }
         },
-        { data: 'status' },
-        { data: 'joined' },
+        {
+            data: 'verified',
+            render: function(data, type, row, meta) {
+                return data == true ? 'active' : 'inactive'
+            }
+        },
+        {
+            data: 'created_at',
+            render: function(data, type, row, meta) {
+                return getFormattedDate(data)
+            }
+        },
         {
           render: function(data, type, row, meta) {
-            return '<div class="flex justify-center align-center"><button class="btn btn-xs btn-edit" id="editAccount" value="' + row.user + '"><i class="fa fa-pencil mr-12"></i></button><button class="btn btn-xs btn-link btn-primary btn-link-delete" id="deleteAccount" value="' + row.user + '"><i class="fa fa-trash"></i></button>'
+            return '<div class="flex justify-center align-center"><button class="btn btn-xs btn-edit" id="editAccount" value="' + row.slug + '"><i class="fa fa-pencil mr-12"></i></button><button class="btn btn-xs btn-link btn-primary btn-link-delete" id="deleteAccount" value="' + row.slug + '"><i class="fa fa-trash"></i></button>'
           },
           searchable: false,
           sortable: false,
         },
         {
-            data: 'user',
+            data: 'slug',
             visible: false
         }
     ],
-    "order": [[4, 'desc']],
+    "order": [4, 'desc'],
     responsive: true,
     columnDefs: [
         { responsivePriority: 1, targets: 0 },

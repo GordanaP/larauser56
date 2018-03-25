@@ -1,7 +1,7 @@
 editAccountForm
 .find('select.role_id')
 .select2({
-    placeholder: "Select roles",
+    placeholder: "Select role(s)",
     width: "100%"
 })
 .change(function(e) {

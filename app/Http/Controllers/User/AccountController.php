@@ -6,7 +6,6 @@ use App\Events\Auth\AccountCreatedByAdmin;
 use App\Events\Auth\AccountUpdatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
-use App\Http\Resources\User\UserResource;
 use App\Role;
 use App\User;
 use Auth;
@@ -30,7 +29,16 @@ class AccountController extends Controller
      */
     public function index()
     {
+        $this->authorize('access', User::class);
+
         $roles = Role::all();
+
+        $users = User::withRelationship('roles', 'name');
+
+        if (request()->ajax()) {
+
+            return [ 'data' => $users ];
+        }
 
         return view('users.accounts.index', compact('roles'));
     }
@@ -43,6 +51,8 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
+        $this->authorize('access', User::class);
+
         $user = User::createAccount($request);
 
         event(new AccountCreatedByAdmin($user, $request->password));
@@ -60,13 +70,17 @@ class AccountController extends Controller
     {
         if(request()->ajax()) {
 
+            $this->authorize('access', User::class);
+
             $html = view('users.roles.partials._html', compact('user'))->render();
 
             return response([
-                'user' => new UserResource($user),
+                'data' => $user,
                 'html' => $html
             ]);
         }
+
+        $this->authorize('update', $user);
 
         return view('users.accounts.edit', compact('user'));
     }
@@ -80,9 +94,13 @@ class AccountController extends Controller
      */
     public function update(AccountRequest $request, User $user)
     {
+        $this->authorize('update', $user);
+
         $user->updateAccount($request);
 
         if ($request->ajax()) {
+
+            $this->authorize('access', User::class);
 
             event(new AccountUpdatedByAdmin($user, $request->password));
 
@@ -100,7 +118,9 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        //Auth::logout();
+        $this->authorize('delete', $user);
+
+        ! Auth::user()->isAdmin() ? Auth::logout() : '';
 
         $user->delete();
 

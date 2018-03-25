@@ -10,6 +10,7 @@ function userNotification(message, type="success")
     return $.notify(message, type)
 }
 
+
 /**
  * Toggle hidden field visibility by changing checkbox field value
  *
@@ -279,7 +280,7 @@ function swalDelete(url, name, datatable, field)
 {
     swal({
         title: 'Are you sure?',
-        text: 'You will not be able to recover the'+ name + '!',
+        text: 'You will not be able to recover the '+ name + '!',
         type: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Delete',
@@ -297,6 +298,10 @@ function swalDelete(url, name, datatable, field)
 
                     userNotification(response.message)
                 },
+                error: function(response) {
+                    userNotification("This action is unauthorized", "error")
+                    modal.modal("hide")
+                }
             })
         }
     })
@@ -318,7 +323,7 @@ function errorResponse(errors, modal)
         clearErrorOnNewInput()
     }
     else {
-        authorizationFailedNotification()
+        userNotification("This action is unauthorized", "error")
         modal.modal("hide")
     }
 }
@@ -570,4 +575,26 @@ function clearError(name)
 
     field.removeClass('is-invalid');
     feedback.text('');
+}
+
+
+function getFormattedDate(date) {
+
+    //var monthNames = getMonthsNames()
+
+    var d = new Date(date);
+
+    var date = d.getDate();
+    var month = getMonthsNames()[d.getMonth()];
+    var year = d.getFullYear();
+
+    return date +  " " + month + " " + year;
+}
+
+function getMonthsNames()
+{
+    return [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ]
 }

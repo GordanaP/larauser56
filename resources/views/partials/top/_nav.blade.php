@@ -10,11 +10,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+
+                @can('access', 'App\User')
                 <li>
                     <a class="nav-link" href="{{ route('admin.dashboard') }}">
                         Admin Dashboard
                     </a>
                 </li>
+                @endcan
+
             </ul>
 
             <!-- Right Side Of Navbar -->
