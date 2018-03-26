@@ -32,8 +32,7 @@ class AccountController extends Controller
         $this->authorize('access', User::class);
 
         $roles = Role::all();
-
-        $users = User::withRelationship('roles', 'name');
+        $users = User::with('roles:name')->get();
 
         if (request()->ajax()) {
 

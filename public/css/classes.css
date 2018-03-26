@@ -56,7 +56,9 @@ p.fs-16{font-size: 16px}
 .fs-22{font-size: 22px;}
 .fs-13{font-size: 13px;}
 
-.red{  color: #bf5329;}
+.red{  color: #bf5329 !important;}
+.green{  color: lightgreen !important;}
+.orange{  color: #ffc107 !important;}
 .bg-lightest-gray { background: hsl(0, 0%, 99%); }
 .fw-600 { font-weight: 600 }
 .text-bold-grey { font-weight: 600 !important; color: #67737e!important}

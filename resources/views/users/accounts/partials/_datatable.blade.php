@@ -22,13 +22,13 @@ var datatable = table.DataTable({
         {
             data: 'roles',
             render: function(data, type, row, meta) {
-                return data[0] ? data[0].name + ' <a href="#" data-user="' + row.slug + '" id="editRoles">Revoke</a>' : '';
+                return getRoleNames(data).length > 0 ? getRoleNames(data) + ' <a href="#" data-user="' + row.slug + '" id="editRoles">Revoke</a>' : '';
             }
         },
         {
             data: 'verified',
             render: function(data, type, row, meta) {
-                return data == true ? 'active' : 'inactive'
+                return getAccountStatus(data)
             }
         },
         {
@@ -49,7 +49,7 @@ var datatable = table.DataTable({
             visible: false
         }
     ],
-    "order": [4, 'desc'],
+    "order": [5, 'desc'],
     responsive: true,
     columnDefs: [
         { responsivePriority: 1, targets: 0 },

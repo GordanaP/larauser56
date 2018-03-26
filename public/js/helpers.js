@@ -577,11 +577,14 @@ function clearError(name)
     feedback.text('');
 }
 
-
-function getFormattedDate(date) {
-
-    //var monthNames = getMonthsNames()
-
+/**
+ * Format the date.
+ *
+ * @param  {timestamp} date
+ * @return {string}
+ */
+function getFormattedDate(date)
+{
     var d = new Date(date);
 
     var date = d.getDate();
@@ -591,6 +594,11 @@ function getFormattedDate(date) {
     return date +  " " + month + " " + year;
 }
 
+/**
+ * Get the months names.
+ *
+ * @return {array}
+ */
 function getMonthsNames()
 {
     return [
@@ -598,3 +606,35 @@ function getMonthsNames()
         "July", "August", "September", "October", "November", "December"
     ]
 }
+
+/**
+ * Determine if the user is verified.
+ *
+ * @param  {boolean} verified
+ * @return {string}
+ */
+function getAccountStatus(verified)
+{
+    return verified == true ? '<i class="fa fa-check-circle"></i> verified' : '<i class="fa fa-times-circle orange"></i> inactive'
+}
+
+/**
+ * Get the roles names.
+ *
+ * @param  {array} roles
+ * @return {array}
+ */
+function getRoleNames(roles)
+{
+    var roleNames = []
+
+    $.each(roles, function(key, value) {
+
+        roleNames.push(value.name)
+    })
+
+    return roleNames
+}
+
+
+

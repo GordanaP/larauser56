@@ -222,12 +222,4 @@ class User extends Authenticatable
         return $this->hasRole('superadmin');
     }
 
-    public static function withRelationship($relationship, $columns)
-    {
-        return static::with(array($relationship => function($query) use($columns) {
-
-            $query->select($columns);
-
-        }))->get();
-    }
 }
