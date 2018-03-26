@@ -4,7 +4,7 @@ $.ajax({
     data: data,
     success: function(response)
     {
-        $('#displayRoles').load(location.href + " #displayRoles")
+        $('#displayRoles').load(location.href + " #displayRoles") //!!! mind blank space !!!
         successResponse(roleModal, response.message)
     },
     error: function(response) {

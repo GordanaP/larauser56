@@ -64,9 +64,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        return response([
-            'role' => $role
-        ]);
+        //
     }
 
     /**
@@ -77,7 +75,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return response([
+            'role' => $role
+        ]);
     }
 
     /**

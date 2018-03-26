@@ -636,5 +636,3 @@ function getRoleNames(roles)
     return roleNames
 }
 
-
-
