@@ -18,7 +18,7 @@ class AccountPolicy
      */
     public function view(User $auth, User $model)
     {
-        //
+        return $auth->is($model);
     }
 
     /**
@@ -53,6 +53,6 @@ class AccountPolicy
      */
     public function delete(User $auth, User $model)
     {
-        return $auth->is($model);
+        return $auth->isAdmin() || $auth->is($model);
     }
 }

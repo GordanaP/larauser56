@@ -13,13 +13,15 @@
 
         <main class="py-4 container">
             <div class="row">
-                <div class="col-md-4">
-                    @include('partials.side._auth')
-                </div>
-                <div class="col-md-8">
 
+                <div class="col-md-4">
+                    @yield('side')
+                </div>
+
+                <div class="col-md-8">
                     @yield('content')
                 </div>
+
             </div>
         </main>
     </div>

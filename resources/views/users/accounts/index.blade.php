@@ -36,9 +36,11 @@
     </div>
 
     <!-- Account Modals -->
-    @include('users.accounts.partials._createModal')
-    @include('users.accounts.partials._editModal')
-    @include('users.accounts.partials._revokeRolesModal')
+    @can('access', 'App\User')
+        @include('users.accounts.partials._createModal')
+        @include('users.accounts.partials._editModal')
+        @include('users.accounts.partials._revokeRolesModal')
+    @endcan
 
 @endsection
 

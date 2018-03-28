@@ -1,5 +1,5 @@
 <div class="col-md-4">
-    <div class="card mb-4 box-shadow bg-lightest-gray">
+    <div class="card mb-4 box-shadow bg-lightest-grey">
         <div class="card-body">
             <h5 class="mb-3">
                 <a class="ls-1 text-uppercase text-bold-grey">
@@ -12,7 +12,7 @@
             </p>
 
             <div class="flex justify-between">
-                <div class="div">
+                <div>
                     <a class="btn btn-danger btn-edit" href="#">
                         Details
                     </a>

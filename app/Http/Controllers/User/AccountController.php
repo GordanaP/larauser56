@@ -7,11 +7,14 @@ use App\Events\Auth\AccountUpdatedByAdmin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\AccountRequest;
 use App\Role;
+use App\Traits\ModelFinder;
 use App\User;
 use Auth;
 
 class AccountController extends Controller
 {
+    use ModelFinder;
+
     /**
      * Create new controller instance.
      *
@@ -31,8 +34,8 @@ class AccountController extends Controller
     {
         $this->authorize('access', User::class);
 
-        $roles = Role::all();
-        $users = User::with('roles:name')->get();
+        $users = $this->getUsers();
+        $roles = $this->getRoles();
 
         if (request()->ajax()) {
 
@@ -79,7 +82,7 @@ class AccountController extends Controller
             ]);
         }
 
-        $this->authorize('update', $user);
+        $this->authorize('view', $user);
 
         return view('users.accounts.edit', compact('user'));
     }
@@ -119,8 +122,6 @@ class AccountController extends Controller
     {
         $this->authorize('delete', $user);
 
-        ! Auth::user()->isAdmin() ? Auth::logout() : '';
-
         $user->delete();
 
         if (request()->ajax()) {
@@ -128,7 +129,7 @@ class AccountController extends Controller
             return message('The account has been deleted.');
         }
 
-        return $this->deleted($user);
+        return $this->deleted();
     }
 
     /**
@@ -148,7 +149,7 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function deleted($user)
+    protected function deleted()
     {
         $response = message('Your account has been deleted.');
 

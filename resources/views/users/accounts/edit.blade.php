@@ -6,6 +6,10 @@
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
 @endsection
 
+@section('side')
+    @include('partials.side._auth')
+@endsection
+
 @section('content')
     <div class="card card-default">
         <div class="card-header">

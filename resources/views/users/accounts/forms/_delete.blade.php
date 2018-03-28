@@ -1,4 +1,4 @@
-<form action="{{ route('users.accounts.destroy', Auth::user()) }}" method="POST">
+<form action="{{ route('users.accounts.destroy', $user) }}" method="POST">
 
     @method('DELETE')
     @csrf
