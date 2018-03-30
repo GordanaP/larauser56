@@ -40,9 +40,12 @@
                         <span class="invalid-feedback location"></span>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary btn-profile" id="updateProfile">Save changes</button>
+                <div class="modal-footer flex justify-between">
+                    <button type="button" class="btn btn-danger btn-profile" id="deleteProfile">Delete</button>
+                    <div>
+                        <button type="button" class="btn btn-primary btn-profile" id="updateProfile">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </form>
         </div>

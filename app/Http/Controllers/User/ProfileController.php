@@ -94,6 +94,10 @@ class ProfileController extends Controller
     {
         $user->deleteProfile();
 
+        if (request()->ajax()) {
+            return message('The profile has been deleted.');
+        }
+
         return $this->deleted();
     }
 
