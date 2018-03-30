@@ -27,6 +27,7 @@ class UsersTableSeeder extends Seeder
             factory(App\User::class)->create([
                 'name' => $user['name'],
                 'email' => $user['email'],
+                'verified' => true
             ]);
         }
 

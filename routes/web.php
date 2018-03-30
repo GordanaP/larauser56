@@ -26,12 +26,21 @@ Route::resource('accounts/token','Auth\ActivationController', [
  * User
  */
 Route::prefix('users')->namespace('User')->name('users.')->group(function() {
+
     /**
      * Account
      */
     Route::resource('/accounts', 'AccountController', [
         'parameters' => ['accounts' => 'user'],
         'only' => ['edit', 'update', 'destroy']
+    ]);
+
+    /**
+     * Profile
+     */
+    Route::resource('/profiles', 'ProfileController', [
+        'parameters' => ['profiles' => 'user'],
+        'except' => ['index', 'create', 'store']
     ]);
 });
 
@@ -65,3 +74,7 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
         'middleware' => 'auth.admin'
     ]);
 });
+
+
+
+
