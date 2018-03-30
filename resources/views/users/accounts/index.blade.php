@@ -106,76 +106,6 @@
         // DataTable
         @include('users.accounts.partials._datatable')
 
-        // Edit profile
-        $(document).on('click', '#editProfile', function(){
-
-            $('#profileModal').modal('show')
-            $('#deleteProfile').hide()
-
-            var user = $(this).attr('data-user')
-            var showProfileUrl = '/users/profiles/' + user
-
-            $('.modal-title i').addClass('fa-user')
-            $('.modal-title span').text(user)
-            $('#updateProfile').val(user)
-            $('#deleteProfile').val(user)
-
-            $.ajax({
-                url: showProfileUrl,
-                type: "GET",
-                success: function(response) {
-
-                    var profile = response.profile
-
-                    profile ? $('#deleteProfile').show() : ''
-                    $('#profileName').val(profile.name)
-                    $('#about').val(profile.about)
-                    $('#location').val(profile.location)
-                }
-            })
-        })
-
-        // Update profile
-        $(document).on('click', '#updateProfile', function(){
-
-            var user = $(this).val()
-            var updateProfileUrl = '/users/profiles/' + user
-
-            var data = {
-                name : $("#profileName").val(),
-                about : $("#about").val(),
-                location : $("#location").val(),
-            }
-
-            $.ajax({
-                url: updateProfileUrl,
-                type: "PUT",
-                data: data,
-                success: function(response) {
-                    successResponse(profileModal, response.message)
-                },
-                error: function(response) {
-                    errorResponse(response.responseJSON.errors, profileModal)
-                }
-            })
-        })
-
-        // Delete profile
-        $(document).on('click', '#deleteProfile', function(){
-
-            var user = $(this).val()
-            var deleteProfileUrl = '/users/profiles/' + user
-
-            $.ajax({
-                url: deleteProfileUrl,
-                type: "DELETE",
-                success: function(response) {
-                    successResponse(profileModal, response.message)
-                }
-            })
-        })
-
-
 
         // Edit user roles
         $(document).on('click', '#editRoles', function() {
@@ -224,7 +154,6 @@
             })
         })
 
-
         // Create account
         @include('users.accounts.js._create')
 
@@ -239,6 +168,16 @@
 
         // Delete account
         @include('users.accounts.js._delete')
+
+        // Edit profile
+        @include('users.profiles.js._edit')
+
+        // Save profile
+        @include('users.profiles.js._JSvalidation')
+
+        // Delete profile
+        @include('users.profiles.js._delete')
+
 
     </script>
 @endsection

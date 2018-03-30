@@ -64,7 +64,6 @@ p.fs-16{font-size: 16px}
 .text-bold-grey { font-weight: 600 !important; color: #67737e!important}
 
 
-.help-block {margin: 3px 0 0 0; color: #a94442}
 .help-label {color: #777; font-size: 12px; font-weight: normal;}
 .fa-form { font-size: 6px; }
 .fa-panel { color: #808080 }
@@ -72,6 +71,15 @@ p.fs-16{font-size: 16px}
 .fa-info-circle {margin-left: 6px;}
 /*.form-control-feedback {margin-top: 25px}*/
 p.required-fields {font-size: 12px; letter-spacing: 0.5px; color: #8c8c8c}
+
+.form-group.has-success {
+  border-color: #5cb85c !important;
+  /*box-shadow: none !important*/
+}
+.form-group.has-warning textarea {
+  border-color: #bf5329 !important;
+  /*box-shadow: none !important*/
+}
 
 @media only screen and (min-width : 768px)
 {
