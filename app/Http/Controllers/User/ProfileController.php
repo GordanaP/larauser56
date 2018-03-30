@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProfileRequest;
 use App\Profile;
 use App\User;
-use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -48,7 +48,11 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
-        //
+        if(request()->ajax()){
+            return [
+                'profile' => $user->profile ?? '',
+            ];
+        }
     }
 
     /**
@@ -65,13 +69,17 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\ProfileRequest  $request
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(ProfileRequest $request, User $user)
     {
         Profile::newOrUpdate($user, $request);
+
+        if ($request->ajax()) {
+            return message('The profile has been saved.');
+        }
 
         return $this->updated();
     }

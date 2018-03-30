@@ -42,6 +42,8 @@
         @include('users.accounts.partials._revokeRolesModal')
     @endcan
 
+    @include('users.profiles.partials._modal')
+
 @endsection
 
 @section('scripts')
@@ -56,6 +58,8 @@
 
         // Table
         var table = $('#accountsTable')
+
+        // ACCOUNT //
 
         // Url
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
@@ -82,6 +86,11 @@
         var revokeRolesForm = $('#revokeRolesForm')
         var revokeFields = ['role_id']
 
+        // Profile
+        var profileModal = $('#profileModal')
+        var profileForm = $('#adminProfileForm')
+        var profileFields = ['name', 'about', 'location']
+
         // Modals
         createAccountModal.setAutofocus('role_id')
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
@@ -91,8 +100,63 @@
 
         revokeRolesModal.emptyModal(revokeFields, revokeRolesForm)
 
+        profileForm.setAutofocus('profileName')
+        profileModal.emptyModal(profileFields, profileForm)
+
         // DataTable
         @include('users.accounts.partials._datatable')
+
+        $(document).on('click', '#editProfile', function(){
+
+            $('#profileModal').modal('show')
+
+            var user = $(this).attr('data-user')
+            var showProfileUrl = '/users/profiles/' + user
+
+            $('.modal-title i').addClass('fa-user')
+            $('.modal-title span').text(user)
+            $('#updateProfile').val(user)
+
+            $.ajax({
+                url: showProfileUrl,
+                type: "GET",
+                success: function(response) {
+
+                    var profile = response.profile
+
+                    $('#profileName').val(profile.name)
+                    $('#about').val(profile.about)
+                    $('#location').val(profile.location)
+                }
+            })
+        })
+
+
+        $(document).on('click', '#updateProfile', function(){
+
+            var user = $(this).val()
+            var updateProfileUrl = '/users/profiles/' + user
+
+            var data = {
+                name : $("#profileName").val(),
+                about : $("#about").val(),
+                location : $("#location").val(),
+            }
+
+            $.ajax({
+                url: updateProfileUrl,
+                type: "PUT",
+                data: data,
+                success: function(response) {
+                    successResponse(profileModal, response.message)
+                },
+                error: function(response) {
+                    errorResponse(response.responseJSON.errors, profileModal)
+                }
+            })
+        })
+
+
 
         // Edit user roles
         $(document).on('click', '#editRoles', function() {
