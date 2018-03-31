@@ -484,7 +484,7 @@ function getRoleNames(roles)
  * @param {[type]} userAvatarFilename    [description]
  * @param {[type]} defaultAvatarFilename [description]
  */
-function setAvatar(avatarFilename)
+function setAvatar(avatarFilename, className)
 {
-    return '<img src="/images/avatars/'+ avatarFilename +'" class="dt-avatar">';
+    return '<img src="/images/avatars/'+ avatarFilename +'" class="'+className+'">';
 }

@@ -25,7 +25,7 @@ var datatable = table.DataTable({
 
                 var filename = data ? data.filename : 'default.jpg'
 
-                return '<a href="#" data-user="' + row.slug + '"  id="editAvatar">' + setAvatar(filename) + '</a>'
+                return '<a href="#" data-user="' + row.slug + '"  id="editAvatar">' + setAvatar(filename, 'dt-avatar') + '</a>'
             },
             searchable: false,
             orderable: false

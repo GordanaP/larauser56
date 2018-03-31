@@ -19,7 +19,11 @@ class AvatarController extends Controller
      */
     public function show(User $user)
     {
-        //
+        if(request()->ajax()) {
+            return response([
+                'filename' => optional($user->avatar)->filename
+            ]);
+        }
     }
 
     /**
@@ -43,6 +47,10 @@ class AvatarController extends Controller
     public function update(AvatarRequest $request, User $user)
     {
         Avatar::newOrUpdate($user, $request, public_path($this->avatarPath));
+
+        if($request->ajax()) {
+            return message('The avatar has been saved.');
+        }
 
         return $this->updated($user);
     }
