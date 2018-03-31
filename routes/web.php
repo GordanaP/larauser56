@@ -42,16 +42,16 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
         'parameters' => ['profiles' => 'user'],
         'except' => ['index', 'create', 'store']
     ]);
-});
 
-// Route::prefix('account')->namespace('User')->name('users.accounts.')->group(function() {
-//     /**
-//      * Account
-//      */
-//     Route::get('/', 'AccountController@edit')->name('edit');
-//     Route::put('/', 'AccountController@update')->name('update');
-//     Route::delete('/', 'AccountController@destroy')->name('destroy');
-// });
+    /**
+     * Avatar
+     */
+    Route::resource('avatars', 'AvatarController', [
+        'parameters' => ['avatars' => 'user'],
+        'except' => ['index', 'create', 'store']
+    ]);
+
+});
 
 /**
  * Admin
@@ -73,8 +73,13 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
     Route::resource('/roles', 'RoleController', [
         'middleware' => 'auth.admin'
     ]);
+
+    /**
+     * Profile
+     */
+    Route::resource('/profiles', 'ProfileController', [
+        'parameters' => ['profiles' => 'user'],
+        'except' => ['index', 'edit', 'create', 'store'],
+        'middleware' => 'auth.admin'
+    ]);
 });
-
-
-
-

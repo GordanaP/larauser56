@@ -40,9 +40,9 @@
         @include('users.accounts.partials._createModal')
         @include('users.accounts.partials._editModal')
         @include('users.accounts.partials._revokeRolesModal')
+        @include('users.profiles.partials._modal')
     @endcan
 
-    @include('users.profiles.partials._modal')
 
 @endsection
 
@@ -60,11 +60,7 @@
         var table = $('#accountsTable')
 
         // ACCOUNT //
-
-        // Url
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
-
-        // Form fields
         var accountFields = ['role_id', 'name', 'email', 'password']
 
         // Create
@@ -105,7 +101,6 @@
 
         // DataTable
         @include('users.accounts.partials._datatable')
-
 
         // Edit user roles
         $(document).on('click', '#editRoles', function() {

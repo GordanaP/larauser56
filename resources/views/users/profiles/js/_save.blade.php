@@ -1,5 +1,5 @@
 var user = $('#saveProfile').val()
-var updateProfileUrl = '/users/profiles/' + user
+var updateProfileUrl = '/admin/profiles/' + user
 
 var data = {
     name : $("#profileName").val(),

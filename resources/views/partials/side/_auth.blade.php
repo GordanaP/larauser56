@@ -10,7 +10,7 @@
         </a>
     </li>
     <li class="list-group-item">
-        <a href="#">
+        <a href="{{ route('users.avatars.edit', $user) }}">
             Change avatar
         </a>
     </li>

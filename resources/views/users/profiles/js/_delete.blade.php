@@ -1,7 +1,7 @@
 $(document).on('click', '#deleteProfile', function(){
 
     var user = $(this).val()
-    var deleteProfileUrl = '/users/profiles/' + user
+    var deleteProfileUrl = '/admin/profiles/' + user
 
     $.ajax({
         url: deleteProfileUrl,

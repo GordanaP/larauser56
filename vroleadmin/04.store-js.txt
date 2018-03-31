@@ -1,8 +1,6 @@
 resources\views\users\roles\index.blade.php
 -------------------------------------------
-
     @section('scripts')
-
         <script>
 
             var roleModal = $("#roleModal")
@@ -10,7 +8,7 @@ resources\views\users\roles\index.blade.php
             var rolesIndexUrl = "{{ route('admin.roles.index') }}"
             var roleFields = ['name']
 
-            setAutofocus(roleMOdal, 'name')
+            setAutofocus(roleModal, 'name')
             emptyModal(roleModal, roleForm, roleFileds)
 
             // Create role
@@ -32,13 +30,11 @@ resources\views\users\roles\index.blade.php
                 url: rolesIndexUrl,
                 method: "POST",
                 data: data,
-                success: function(response)
-                {
+                success: function(response){
                     $('#displayRoles').load(location.href + " #displayRoles") //!!! mind blank space !!!
                     successResponse(roleModal, response.message)
                 },
                 error: function(response) {
-
                     errorResponse(response.responseJSON.errors, roleModal)
                 }
             })
@@ -46,9 +42,21 @@ resources\views\users\roles\index.blade.php
         </script>
     @endsection
 
-
     public\js\helpers.js
     --------------------
+        /**
+         * Success ajax response.
+         *
+         * @param  {string} modal
+         * @param  {string} message
+         * @return {void}
+         */
+        function successResponse(modal, message)
+        {
+            userNotification(message)
+            modal.modal("hide")
+        }
+
         /**
          * Set modal autofocus field
          *
@@ -120,18 +128,6 @@ resources\views\users\roles\index.blade.php
             feedback.text('');
         }
 
-        /**
-         * Success ajax response.
-         *
-         * @param  {string} modal
-         * @param  {string} message
-         * @return {void}
-         */
-        function successResponse(modal, message)
-        {
-            userNotification(message)
-            modal.modal("hide")
-        }
 
         /**
          * Ajax error response
@@ -142,9 +138,8 @@ resources\views\users\roles\index.blade.php
          */
         function errorResponse(errors)
         {
-            if(errors) {
-                displayErrors(errors)
-            }
+            displayErrors(errors)
+            clearErrorOnNewInput()
         }
 
         /**
@@ -160,7 +155,34 @@ resources\views\users\roles\index.blade.php
                 var field = $("."+error)
                 var feedback = $("span."+error).show()
 
-                field.addClass('is-invalid')
-                feedback.text(error)
+                // Attach server side validation
+                displayServerError(field, feedback, errors[error][0])
             }
+        }
+
+        /**
+         * Display server error.
+         *
+         * @param  {string} field
+         * @param  {string} feedback
+         * @param  {string} error
+         * @return {void}
+         */
+        function displayServerError(field, feedback, error)
+        {
+            field.addClass('is-invalid')
+            feedback.text(error)
+        }
+
+        /**
+         * Remove the error on inserting the new value.
+         *
+         * @return void
+         */
+        function clearErrorOnNewInput()
+        {
+            $("input, textarea").on('keydown', function () {
+
+                clearError($(this).attr('name'));
+            });
         }

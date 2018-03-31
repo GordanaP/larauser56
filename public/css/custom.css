@@ -1,7 +1,7 @@
 body {color: #555}
 
 /*
- * Form feedback fields
+ * Form feedback fields(JS formvalidation)
  */
 div.fv-has-feedback.has-warning label,
 i.fv-control-feedback.fa.fa-times { color: #bf5329; }
@@ -15,6 +15,12 @@ div.fv-has-feedback.has-success .form-control:focus {
     -webkit-box-shadow: none !important;
      box-shadow: none !important;
 }
+
+/*
+ * Form feedback (php validation)
+ */
+span.invalid-feedback{display: block}
+
 
 .list-group form button {padding: 0; color: inherit; background: inherit}
 .list-group a {color: inherit; text-decoration: none}

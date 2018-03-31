@@ -34,7 +34,8 @@ function selected($current, $selected)
 
 function setAvatar($user)
 {
-    $avatar = $user->avatar ? $user->avatar->filename : 'default.jpg';
+    $avatar = optional($user->avatar)->filename ?: 'default.jpg';
+    //$avatar = $user->avatar ? $user->avatar->filename : 'default.jpg';
 
     return 'images/avatars/'.$avatar;
 }

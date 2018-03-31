@@ -112,162 +112,6 @@ function randomString(length)
     return Math.random().toString(36).substring(length);
 }
 
-/**
- * Display validation error message for a single form field.
- *
- * @param  {array} errors
- * @param  {string} error_name
- * @param  {string} field_name
- * @return void
- */
-// function displayValidationError(errors, error_name, field_name)
-// {
-//     var group = $("." + name);
-//     var feedback = $("span." + name);
-
-//     group.addClass('is-invalid');
-//     feedback.text(errors[name][0]);
-// }
-
-/**
- * Display validation error messages for all form fields.
- *
- * @param  {array} errors
- * @return void
- */
-// function displayValidationErrors(errors)
-// {
-//     for (let name in errors)
-//     {
-//         var group = $("#" + name);
-//         var feedback = $("span." + name);
-
-//         group.addClass('is-invalid');
-//         feedback.text(errors[name][0]);
-//     }
-// }
-
-/**
- * Clear all validation errors at once
- *
- * @param  {array} errors
- * @param  {array} fields
- * @return {void}
- */
-// function clearAllValidationErrorsOnNewInput(errors, fields)
-// {
-//     for (let name in errors)
-//     {
-//         if (errors[name][0] == "Please fill up at least one field") {
-//             $(fields).on('keydown', function ()
-//             {
-//                 var group = $(".form-group");
-
-//                 group.removeClass('has-error');
-//                 group.find('span.invalid-feedback').text('');
-//             });
-//         }
-//     }
-// }
-
-/**
- * Remove the validation error message for a specific form field.
- *
- * @param  {string} name
- * @return void
- */
-// function clearValidationError(name)
-// {
-//     var group = $("#" + name);
-//     var feedback = $("span." + name);
-
-//     group.removeClass('is-invalid');
-//     feedback.text('');
-// }
-
-/**
- * Remove validation error message on inserting the new field value.
- *
- * @return void
- */
-// function clearValidationErrorOnNewInput()
-// {
-//     $("input, textarea").on('keydown', function () {
-//         clearValidationError($(this).attr('id').replace('#', ''));
-//     });
-
-//     $("select").on('change', function () {
-//         clearValidationError($(this).attr('id').replace('#', ''));
-//     });
-
-//     $("input[name*='role_id']").click(function(){
-//         if($(this).is(':checked'))
-//         {
-//             clearValidationError('role_id')
-//         }
-//     })
-// }
-
-/**
- * Remove validation error messages on modal close.
- *
- * @param  {array} fields
- * @return void
- */
-// function emptyModalErrorMessages(fields)
-// {
-//     $.each(fields, function (index, value){
-//       clearValidationError(value)
-//     });
-// }
-
-/**
- * Remove modal form fields values on modal close.
- *
- * @return void
- */
-// function emptyModalFormValues()
-// {
-//     $("h5.modal-title span").text('')
-//     $("input, select, textarea").val("").end();
-//     $('#role_id').val(null).trigger('change');
-//     $('.form-group-avatar').hide()
-// }
-
-/**
- * Empty the modal on close
- *
- * @param  {array} fields
- * @return void
- */
-// function emptyModalOnClose(fields, form, hidden_field)
-// {
-//     $(".modal").on("hidden.bs.modal", function() {
-//         clearForm(form, hidden_field)
-//         emptyModalErrorMessages(fields)
-//         form.formValidation('resetForm', true);
-//     });
-// }
-
-/**
- * Response on failed ajax call
- *
- * @param  {array} errors
- * @param  {string} modal
- * @return {[void]}
- */
-// function errorResponse(errors, modal)
-// {
-//     if(errors) {
-//         displayValidationErrors(errors)
-//         clearValidationErrorOnNewInput()
-//     }
-//     else {
-//         authorizationFailedNotification()
-//         modal.modal("hide")
-//     }
-// }
-
 
 /**
  * Alert the user on deletion
@@ -307,8 +151,6 @@ function swalDelete(url, name, datatable, field)
     })
 }
 
-//-------------------------------------------------------------------------
-//=============================================================================
 /**
  * Ajax error response
  *
@@ -336,17 +178,16 @@ function errorResponse(errors, modal)
  */
 function displayErrors(errors)
 {
-    for (let name in errors)
+    for (let error in errors)
     {
-        var field = $("."+name)
-        var feedback = $("span."+name).show()
+        var field = $("."+error)
+        var feedback = $("span."+error).show()
 
         // Attach server side validation
-        displayServerError(field, feedback, errors[name][0])
+        displayServerError(field, feedback, errors[error][0])
 
         // Remove client side validation
         clearJSError(field)
-
     }
 }
 
@@ -370,6 +211,7 @@ function checkedValues(checkbox)
 
     return array;
 }
+
 /**
  * Remove the error on inserting the new value.
  *
@@ -541,7 +383,7 @@ function clearForm(form, checked_field, hidden_field)
     $(form)
         .find("input[type=text], input[type=password], textarea")
         .val('').end()
-        .find("select").val(null).trigger('change')
+        .find("select").val("").trigger('change')
         .find("input[type=checkbox], input[type=radio]")
         .prop("checked", "").end()
         .find(checked_field).prop('checked', true);

@@ -4,6 +4,10 @@ namespace App;
 
 use App\Observers\UserObserver;
 use App\Role;
+use App\Traits\User\HasAccount;
+use App\Traits\User\HasAvatar;
+use App\Traits\User\HasProfile;
+use App\Traits\User\HasRoles;
 use App\Traits\User\HasSlug;
 use App\Traits\User\VerifiesEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +15,13 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasSlug, VerifiesEmail;
+    use Notifiable,
+    HasAccount,
+    HasAvatar,
+    HasProfile,
+    HasRoles,
+    HasSlug,
+    VerifiesEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -87,11 +97,10 @@ class User extends Authenticatable
      *
      * @return mixed
      */
-    public function scopeByResetPasswordCredentials($query, $email)
-    {
-        return $query->whereEmail($email)->where('verified', true);
-    }
-
+    // public function scopeByResetPasswordCredentials($query, $email)
+    // {
+    //     return $query->whereEmail($email)->where('verified', true);
+    // }
 
     /**
      * Find the user by the attribute.
@@ -104,153 +113,4 @@ class User extends Authenticatable
     {
         return static::where($field, $value)->first();
     }
-
-    /**
-     * Create a new account.
-     *
-     * @param array $data
-     * @return \App\User
-     */
-    public static function createAccount($data)
-    {
-        $user = new static;
-
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
-
-        $user->save();
-
-        $user->assignRole($data['role_id']);
-
-        return $user;
-    }
-
-    /**
-     * Update the account.
-     *
-     * @param  array $data
-     * @return void
-     */
-    public function updateAccount($data)
-    {
-        $slug = $this->getSlug($data['name']);
-
-        $this->name = $data['name'];
-        $this->email = $data['email'];
-        $this->slug = $slug;
-
-        if($data['password'])
-        {
-            $this->password = bcrypt($data['password']);
-        }
-
-        if($data['role_id'])
-        {
-            $this->assignRole($data['role_id']);
-        }
-
-        $this->save();
-    }
-
-    /**
-     * Get the roles that belong to the user.
-     *
-     * @return  \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-    /**
-     * A user has a specified role.
-     *
-     * @param  App\Role  $role
-     * @return boolean
-     */
-    public function hasRole($role)
-    {
-        if (is_string($role))
-        {
-            return $this->roles->contains('name', $role);
-        }
-
-        return !! $role->intersect($this->roles)->count();
-    }
-
-    /**
-     * Assigne a role to a user.
-     *
-     * @param  \App\Role $role
-     * @return mixed
-     */
-    public function assignRole($role)
-    {
-        return $this->roles()->sync($role);
-    }
-
-    /**
-     * Revoke a user's role.
-     *
-     * @param  numeric $role
-     * @return void
-     */
-    public function revokeRole($role)
-    {
-        $roles = Role::whereIn('id', $role)->get();
-
-        $this->roles()->detach($roles);
-    }
-
-    /**
-     * Determine if the user is an administrator
-     *
-     * @return boolean
-     */
-    public function isAdmin()
-    {
-        return $this->hasRole('admin');
-    }
-
-    /**
-     * Determine if the user is a super-administrator
-     * @return boolean
-     */
-    public function isSuperAdmin()
-    {
-        return $this->hasRole('superadmin');
-    }
-
-    /**
-     * Get the profile that belongs to the user.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    /**
-     * The user's profile has been created.
-     *
-     * @return bool
-     */
-    public function hasProfile()
-    {
-        return $this->profile;
-    }
-
-    /**
-     * Delete the user's profile
-     *
-     * @return void
-     */
-    public function deleteProfile()
-    {
-        $this->profile()->delete();
-    }
-
-
 }

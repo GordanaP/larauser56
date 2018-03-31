@@ -4,7 +4,7 @@ $(document).on('click', '#editProfile', function(){
     $('#deleteProfile').hide()
 
     var user = $(this).attr('data-user')
-    var showProfileUrl = '/users/profiles/' + user
+    var showProfileUrl = '/admin/profiles/' + user
 
     $('.modal-title i').addClass('fa-user')
     $('.modal-title span').text(user)
