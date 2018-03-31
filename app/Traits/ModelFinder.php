@@ -24,6 +24,6 @@ trait ModelFinder
      */
     public function getUsers()
     {
-        return User::with('roles:name')->get();
+        return User::with('roles:name')->with('avatar')->get();
     }
 }
