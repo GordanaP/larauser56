@@ -85,7 +85,7 @@
 
                                 <!-- Avatar -->
                                 <div class="form-group">
-                                    <input type="file" class="mt-18 avatar" name="avatar" id="avatar" />
+                                    <input type="file" class="avatar mt-18" name="avatar" id="avatar" />
 
                                     <span class="invalid-feedback avatar"></span>
                                 </div>
@@ -166,6 +166,10 @@
         profileForm.setAutofocus('profileName')
         profileModal.emptyModal(profileFields, profileForm)
 
+        avatarModal.setAutofocus('avatar_options')
+        avatarModal.emptyModal(avatarFields, avatarForm)
+
+
         // DataTable
         @include('users.accounts.partials._datatable')
 
@@ -213,6 +217,7 @@
                 },
                 error: function(response)
                 {
+                    console.log(response.responseJSON.errors)
                     errorResponse(response.responseJSON.errors, avatarModal)
                 }
             })

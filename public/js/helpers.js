@@ -226,11 +226,10 @@ function clearErrorOnNewInput()
 
     $("select").on('change', function () {
 
-        var id = $(this).attr('id');
-        var _id = id.charAt(0) == '_' ? id.substring(1) : ''
+        var select_id = $(this).attr('id');
+        var id = select_id.charAt(0) == '_' ? select_id.substring(1) : select_id
 
         clearError(id)
-        clearError(_id)
     });
 
     $("input[type=checkbox], input[type=radio]").click(function() {
@@ -381,9 +380,9 @@ $.fn.emptyModal = function(fields, form, checked_field, hidden_field) {
 function clearForm(form, checked_field, hidden_field)
 {
     $(form)
-        .find("input[type=text], input[type=password], textarea")
+        .find("input[type=text], input[type=password], input[type=file], textarea")
         .val('').end()
-        .find("select").val("").trigger('change')
+        .find("select").val(null).trigger('change')
         .find("input[type=checkbox], input[type=radio]")
         .prop("checked", "").end()
         .find(checked_field).prop('checked', true);

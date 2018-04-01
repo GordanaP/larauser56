@@ -12,7 +12,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p cklass="required-fields mb-18">
+                    <p class="required-fields mb-18">
                         Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.
                     </p>
 
