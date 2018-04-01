@@ -32,7 +32,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $this->authorize('access', User::class);
+        //$this->authorize('access', User::class);
 
         $users = $this->getUsers();
         $roles = $this->getRoles();

@@ -34,6 +34,8 @@ class AvatarController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('view', $user);
+
         return view('users.avatars.edit', compact('user'));
     }
 
@@ -53,17 +55,6 @@ class AvatarController extends Controller
         }
 
         return $this->updated($user);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 
     /**

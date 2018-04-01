@@ -40,7 +40,7 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
      */
     Route::resource('/profiles', 'ProfileController', [
         'parameters' => ['profiles' => 'user'],
-        'except' => ['index', 'create', 'store']
+        'only' => ['edit', 'update', 'destroy']
     ]);
 
     /**
@@ -48,7 +48,7 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
      */
     Route::resource('avatars', 'AvatarController', [
         'parameters' => ['avatars' => 'user'],
-        'except' => ['index', 'create', 'store']
+        'only' => ['edit', 'update']
     ]);
 
 });
@@ -79,7 +79,16 @@ Route::prefix('admin')->namespace('User')->name('admin.')->group(function() {
      */
     Route::resource('/profiles', 'ProfileController', [
         'parameters' => ['profiles' => 'user'],
-        'except' => ['index', 'edit', 'create', 'store'],
+        'only' => ['show', 'update', 'destroy'],
+        'middleware' => 'auth.admin'
+    ]);
+
+    /**
+     * Avatar
+     */
+    Route::resource('avatars', 'AvatarController', [
+        'parameters' => ['avatars' => 'user'],
+        'only' => ['show', 'update'],
         'middleware' => 'auth.admin'
     ]);
 });

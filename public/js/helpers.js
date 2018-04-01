@@ -224,6 +224,13 @@ function clearErrorOnNewInput()
         clearError($(this).attr('name'));
     });
 
+    $('input[type="file"]').change(function(){
+
+        var id = $(this).attr('id');
+
+        clearError(id)
+    })
+
     $("select").on('change', function () {
 
         var select_id = $(this).attr('id');

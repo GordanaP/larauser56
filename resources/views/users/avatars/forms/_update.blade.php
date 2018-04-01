@@ -36,8 +36,8 @@
             </div>
 
             <!-- Avatar -->
-            <div class="form-group">
-                <input type="file" class="mt-18 {{ $errors->has('avatar_options') ? ' is-invalid' : '' }}" name="avatar" id="avatar"/>
+            <div class="form-group mt-30">
+                <input type="file" class="{{ $errors->has('avatar_options') ? ' is-invalid' : '' }}" name="avatar" id="avatar"/>
 
                 @if ($errors->has('avatar'))
                     <span class="invalid-feedback">
