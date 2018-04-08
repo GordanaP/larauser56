@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="revokeRolesModal">
+<div class="modal admin-modal" tabindex="-1" role="dialog" id="revokeRolesModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -32,8 +32,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="revokeRoles">Revoke</button>
+                    <button type="button" class="btn btn-primary admin-modal-btn" id="revokeRoles">Revoke</button>
+                    <button type="button" class="btn btn-secondary admin-modal-btn-close" data-dismiss="modal">Close</button>
                 </div>
             </form>
 

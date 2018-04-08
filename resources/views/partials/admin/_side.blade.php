@@ -1,14 +1,33 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar p-0">
 
     <!-- Show sidebar -->
     <i class="fa fa-bars sidebar-toggle"></i>
 
-    <div class="sidebar-sticky">
+    <div class="sidebar-sticky pt-0">
+        <div id="adminDetails" class="flex">
+            <div class="flex-1">
+                <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 45px; height: 45px;">
+            </div>
 
-        <!-- Hide sidebar -->
-        <p class="mb-18"><i class="fa fa-times pull-right sidebar-close"></i></p>
+            <div class="flex-2">
+                <p class="mb-8"><b>{{ Auth::user()->name }}</b></p>
+                <p class="mb-0 fs-11">
+                    <a href="{{ route('users.accounts.edit', Auth::user()) }}" class="mr-18"><i class="fa fa-cog"></i> Settings</a>
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();"
+                    >
+                        <i class="fa fa-sign-out"></i> Logout
+                    </a>
 
-        <ul class="nav flex-column">
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </p>
+            </div>
+        </div>
+
+        <ul class="nav flex-column mt-12">
             <li class="nav-item">
                 <a class="nav-link  {{ set_active_link('dashboard', 2) }}" href="{{ route('admin.dashboard') }}">
                     <span data-feather="home"></span>
@@ -43,39 +62,6 @@
                 <a class="nav-link" href="#">
                     <span data-feather="layers"></span>
                     Integrations
-                </a>
-            </li>
-        </ul>
-
-        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Saved reports</span>
-            <a class="d-flex align-items-center text-muted" href="#">
-                <span data-feather="plus-circle"></span>
-            </a>
-        </h6>
-        <ul class="nav flex-column mb-2">
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Current month
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Last quarter
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Social engagement
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Year-end sale
                 </a>
             </li>
         </ul>

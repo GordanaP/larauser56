@@ -11,10 +11,10 @@
 @endsection
 
 @section('content')
-    <div class="card card-default">
+    <div class="card user-panel">
         <div class="card-header">
             <h4>
-                <i class="fa fa-lock fa-panel mr-6"></i> Edit account
+                <i class="fa fa-lock fa-panel mr-6"></i> My account
             </h4>
         </div>
         <div class="card-body">
@@ -33,7 +33,6 @@
             framework: 'bootstrap4',
 
             @include('validators.accounts._fields')
-
         })
 
         @include('validators.accounts._removeSSfeedback')

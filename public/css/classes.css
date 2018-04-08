@@ -30,8 +30,10 @@ h1,h2,h3,h4,h5,h6 {margin: 0}
 
 .square{border-radius: 0 !important}
 
+.p-0 {padding: 0}
 .pl-0 {padding-left: 0}
 .pt-6 {padding-top: 6px}
+.pt-0 {padding-top: 0}
 .pt-12 {padding-top: 12px}
 .pr-48 {padding-right: 48px}
 .pl-48 {padding-left: 48px}
@@ -52,9 +54,12 @@ h1,h2,h3,h4,h5,h6 {margin: 0}
 .mr-24{margin-right: 24px;}
 .mt-0{margin-top: 0px;}
 .mb-0{margin-bottom: 0px !important;}
+.mb-8{margin-bottom: 8px;}
+.mr-7{margin-right: 7px;}
 p.fs-16{font-size: 16px}
 .fs-22{font-size: 22px;}
 .fs-13{font-size: 13px;}
+.fs-11{font-size: 11px;}
 
 .red{  color: #bf5329 !important;}
 .green{  color: lightgreen !important;}
@@ -80,6 +85,8 @@ p.required-fields {font-size: 12px; letter-spacing: 0.5px; color: #8c8c8c}
   border-color: #bf5329 !important;
   /*box-shadow: none !important*/
 }
+
+.form-check-label {font-weight: normal !important;}
 
 @media only screen and (min-width : 768px)
 {

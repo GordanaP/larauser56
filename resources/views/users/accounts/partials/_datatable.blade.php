@@ -70,3 +70,5 @@ var datatable = table.DataTable({
 });
 
 setTableCounterColumn(datatable)
+
+$("#accountsTable_length select, #accountsTable_filter input").addClass('admin-modal-input')

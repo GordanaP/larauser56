@@ -1,4 +1,4 @@
-<div class="modal fade" tabindex="-1" role="dialog" id="avatarModal">
+<div class="modal admin-modal" tabindex="-1" role="dialog" id="avatarModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +27,7 @@
                             <!-- Avatar options -->
                             <div class="form-group">
                                 <label for="avatar_options">Avatar <span class="red">&#42;</span></label>
-                                <select name="avatar_options" id="avatar_options" class="form-control avatar_options">
+                                <select name="avatar_options" id="avatar_options" class="form-control avatar_options admin-modal-input">
                                     <option value="">Choose an avatar</option>
                                     @foreach (AvatarOptions::all() as $value => $text)
                                         <option value="{{ $value }}">{{ $text }}</option>
@@ -49,10 +49,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="saveAvatar">
-                        Save changes
-                    </button>
+                    <button type="submit" class="btn btn-primary admin-modal-btn" id="saveAvatar">Save changes</button>
+                    <button type="button" class="btn btn-default admin-modal-btn-close" data-dismiss="modal">Close</button>
                 </div>
             </form>
 

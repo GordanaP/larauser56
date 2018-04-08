@@ -11,7 +11,7 @@
 
         <!-- Show avatar -->
         <div class="col-lg-4 col-sm-4 mb-12">
-            <img src="{{ asset(setAvatar($user)) }}" alt="{{ $user->name . ' Avatar' }}" class="image img-responsive">
+            <img src="{{ asset(setAvatar($user)) }}" alt="{{ $user->name . ' Avatar' }}" class="image img-responsive rounded-circle" style="width: 200px; height: 200px">
         </div>
 
         <div class="col-lg-8 col-sm-8">
@@ -48,7 +48,7 @@
 
             <!-- Button -->
             <div class="form-group">
-                <button type="submit" class="btn btn-warning mt-24">Save changes</button>
+                <button type="submit" class="btn btn-info mt-24">Save changes</button>
             </div>
         </div>
     </div>

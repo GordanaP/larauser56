@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', '| Save Profile')
+@section('title', '| My Profile')
 
 @section('links')
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
@@ -11,8 +11,7 @@
 @endsection
 
 @section('content')
-
-    <div class="card">
+    <div class="card user-panel">
         <div class="card-header">
             <h4>
                 <i class="fa fa-user"></i> My profile
@@ -23,7 +22,6 @@
             @include('users.profiles.forms._update')
         </div>
     </div>
-
 @endsection
 
 @section('scripts')

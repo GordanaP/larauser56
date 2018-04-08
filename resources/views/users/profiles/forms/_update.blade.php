@@ -44,7 +44,7 @@
     <!-- Update Button -->
     <div class="flex align-center">
         <div class="form-group">
-            <button type="submit" class="btn btn-warning">
+            <button type="submit" class="btn btn-info">
                 Save {{ $user->profile ? 'changes' : 'profile' }}
             </button>
         </div>

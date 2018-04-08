@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="roleModal">
+<div class="modal admin-modal" tabindex="-1" role="dialog" id="roleModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -20,14 +20,14 @@
                     <!-- Name -->
                     <div class="form-group">
                         <label for="name">Name  <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
-                        <input type="text" class="form-control name" id="name" name="name" placeholder="Enter role name">
+                        <input type="text" class="form-control name admin-modal-input" id="name" name="name" placeholder="Enter role name">
 
                         <span class="invalid-feedback name"></span>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-role"></button>
+                    <button type="submit" class="btn btn-primary btn-role admin-modal-btn"></button>
+                    <button type="button" class="btn btn-secondary  admin-modal-btn-close" data-dismiss="modal">Close</button>
                 </div>
             </form>
 

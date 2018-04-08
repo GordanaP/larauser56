@@ -11,10 +11,10 @@
 
 @section('content')
 
-    <div class="pb-2 mb-3 col-md-12">
-        <h1 class="h2 flex align-center justify-between">
+    <div class="pb-2 col-md-12">
+        <h1 class="h2 flex align-center justify-between admin-title">
             <span>Accounts</span>
-            <button class="btn btn-warning" id="createAccount">New account</button>
+            <button class="btn btn-warning text-uppercase" id="createAccount">New account</button>
         </h1>
         <hr>
     </div>
@@ -104,7 +104,7 @@
 
         revokeRolesModal.emptyModal(revokeFields, revokeRolesForm)
 
-        profileForm.setAutofocus('profileName')
+        profileModal.setAutofocus('profileName')
         profileModal.emptyModal(profileFields, profileForm)
 
         avatarModal.setAutofocus('avatar_options')

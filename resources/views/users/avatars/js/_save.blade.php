@@ -11,7 +11,6 @@ $.ajax({
     contentType: false,
     processData: false,
     success: function(response) {
-
         datatable.ajax.reload()
         successResponse(avatarModal, response.message)
     },

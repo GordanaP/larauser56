@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="editAccountModal">
+<div class="modal admin-modal" tabindex="-1" role="dialog" id="editAccountModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
 
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="name">Name <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="text" class="form-control name" id="_name" name="name" placeholder="Enter your name" />
+                        <input type="text" class="form-control name admin-modal-input" id="_name" name="name" placeholder="Enter your name" />
 
                         <span class="invalid-feedback name"></span>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label for="email">E-Mail Address <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="text" class="form-control email"  id="_email" name="email" placeholder="example@domain.com" />
+                        <input type="text" class="form-control email admin-modal-input"  id="_email" name="email" placeholder="example@domain.com" />
 
                         <span class="invalid-feedback email"></span>
                     </div>
@@ -52,7 +52,7 @@
                     <div class="form-group mb-0">
                         <label for="create_password" class="mb-0">Password <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="password" class="form-control mt-8 password" id="_password" name="password" placeholder="Give password to the user" />
+                        <input type="password" class="form-control mt-8 password admin-modal-input" id="_password" name="password" placeholder="Give password to the user" />
 
                         <span class="password invalid-feedback"></span>
                     </div>
@@ -82,8 +82,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary btn-account" id="updateAccount">Save changes</button>
+                    <button type="submit" class="btn btn-primary btn-account admin-modal-btn" id="updateAccount">Save changes</button>
+                    <button type="button" class="btn btn-secondary admin-modal-btn-close" data-dismiss="modal">Close</button>
                 </div>
             </form>
 

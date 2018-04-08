@@ -1,21 +1,35 @@
-<ul class="list-group list-group-flush">
-    <li class="list-group-item">
-        <a href="{{ route('users.accounts.edit', $user) }}">
-            Edit account
+<p class="side-list-label">My account</p>
+
+<ul class="list-group side-list">
+    <li class="list-group-item side-list-group-item {{ set_active_link('accounts', 2) }}">
+        <a href="{{ route('users.accounts.edit', $user) }}" class="ml-6">
+            Update account
         </a>
     </li>
-    <li class="list-group-item">
-        <a href="{{ route('users.profiles.edit', $user) }}">
-            Edit profile
+
+    <li class="list-group-item side-list-group-item">
+        <form action="{{ route('users.accounts.destroy', $user) }}" method="POST">
+            @csrf
+            @method("DELETE")
+
+            <button type="submit" class="btn-delete-account" onclick="return confirm('Are you sure you want to delete your account?')">
+                Delete account
+            </button>
+        </form>
+    </li>
+</ul>
+
+<p class="side-list-label">My profile</p>
+<ul class="list-group side-list">
+    <li class="list-group-item side-list-group-item {{ set_active_link('profiles', 2) }}">
+        <a href="{{ route('users.profiles.edit', $user) }}" class="ml-6">
+            {{ $user->profile ? 'Update' : 'Create' }} profile
         </a>
     </li>
-    <li class="list-group-item">
-        <a href="{{ route('users.avatars.edit', $user) }}">
+
+    <li class="list-group-item side-list-group-item {{ set_active_link('avatars', 2) }}">
+        <a href="{{ route('users.avatars.edit', $user) }}" class="ml-6">
             Change avatar
         </a>
     </li>
-    <li class="list-group-item">
-        @include('users.accounts.forms._delete')
-    </li>
-    <li class="list-group-item">Vestibulum at eros</li>
 </ul>

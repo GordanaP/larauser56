@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -52,6 +53,17 @@ class LoginController extends Controller
     {
         $response = message('Welcome, '.$user->name);
 
-        return redirect()->intended($this->redirectPath())->with($response);
+        return $this->redirectTo()->with($response);
     }
+
+    /**
+     * Set the URL to redirect to on login.
+     *
+     * @return string
+     */
+    public function redirectTo()
+    {
+        return Auth::user()->isAdmin() ? redirect()->route('admin.dashboard') : redirect()->route('home');
+    }
+
 }

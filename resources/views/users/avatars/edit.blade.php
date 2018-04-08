@@ -1,13 +1,9 @@
 @extends('layouts.app')
 
-@section('title', '| Save Avatar')
+@section('title', '| My Avatar')
 
 @section('links')
     <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
-
-    <style>
-        /*.form-control-feedback {display: block}*/
-    </style>
 @endsection
 
 @section('side')
@@ -15,8 +11,7 @@
 @endsection
 
 @section('content')
-
-    <div class="card" class="user-panem">
+    <div class="card user-panel">
         <div class="card-header">
             <h4>
                 <i class="fa fa-user-circle"></i> My avatar
@@ -27,7 +22,6 @@
             @include('users.avatars.forms._update')
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -92,7 +86,6 @@
                 fv.enableFieldValidators('avatar', false).revalidateField('avatar');
                 // $('.form-group-avatar').hide()
             }
-
         })
 
     </script>

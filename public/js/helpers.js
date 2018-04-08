@@ -463,7 +463,7 @@ function getMonthsNames()
  */
 function getAccountStatus(verified)
 {
-    return verified == true ? '<i class="fa fa-check-circle"></i> verified' : '<i class="fa fa-times-circle orange"></i> inactive'
+    return verified == true ? '<i class="fa fa-check-circle"></i> verified' : '<i class="fa fa-times-circle"></i> inactive'
 }
 
 /**

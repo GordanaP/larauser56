@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 admin-navbar">
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('index') }}">
         Company name
     </a>
