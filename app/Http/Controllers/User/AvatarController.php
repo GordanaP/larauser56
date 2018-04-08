@@ -6,6 +6,7 @@ use App\Avatar;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AvatarRequest;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class AvatarController extends Controller
 {
@@ -32,11 +33,11 @@ class AvatarController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        $this->authorize('view', $user);
-
-        return view('users.avatars.edit', compact('user'));
+        return view('users.avatars.edit')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**
@@ -48,13 +49,15 @@ class AvatarController extends Controller
      */
     public function update(AvatarRequest $request, User $user)
     {
-        Avatar::newOrUpdate($user, $request, public_path($this->avatarPath));
-
         if($request->ajax()) {
+
+            Avatar::newOrUpdate($user, $request, public_path($this->avatarPath));
             return message('The avatar has been saved.');
         }
 
-        return $this->updated($user);
+        Avatar::newOrUpdate(Auth::user(), $request, public_path($this->avatarPath));
+
+        return $this->updated();
     }
 
     /**
@@ -62,7 +65,7 @@ class AvatarController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function updated($user)
+    protected function updated()
     {
         $response = message('Your avatar has been saved.');
 

@@ -22,13 +22,13 @@
 <p class="side-list-label">My profile</p>
 <ul class="list-group side-list">
     <li class="list-group-item side-list-group-item {{ set_active_link('profiles', 2) }}">
-        <a href="{{ route('users.profiles.edit', $user) }}" class="ml-6">
+        <a href="{{ route('users.profiles.edit') }}" class="ml-6">
             {{ $user->profile ? 'Update' : 'Create' }} profile
         </a>
     </li>
 
     <li class="list-group-item side-list-group-item {{ set_active_link('avatars', 2) }}">
-        <a href="{{ route('users.avatars.edit', $user) }}" class="ml-6">
+        <a href="{{ route('users.avatars.edit') }}" class="ml-6">
             Change avatar
         </a>
     </li>

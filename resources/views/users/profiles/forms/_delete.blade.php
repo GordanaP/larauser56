@@ -1,4 +1,4 @@
-<form action="{{ route('users.profiles.destroy', $user) }}" method="POST">
+<form action="{{ route('users.profiles.destroy') }}" method="POST">
     @csrf
     @method('DELETE')
 

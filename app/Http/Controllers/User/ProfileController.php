@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileRequest;
 use App\Profile;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -30,11 +31,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit()
     {
-        $this->authorize('view', $user);
-
-        return view('users.profiles.edit', compact('user'));
+        return view('users.profiles.edit')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**
@@ -46,11 +47,13 @@ class ProfileController extends Controller
      */
     public function update(ProfileRequest $request, User $user)
     {
-        Profile::newOrUpdate($user, $request);
-
         if ($request->ajax()) {
+
+            Profile::newOrUpdate($user, $request);
             return message('The profile has been saved.');
         }
+
+        Profile::newOrUpdate(Auth::user(), $request);
 
         return $this->updated();
     }
@@ -63,11 +66,13 @@ class ProfileController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->deleteProfile();
-
         if (request()->ajax()) {
+
+            $user->deleteProfile();
             return message('The profile has been deleted.');
         }
+
+        Auth::user()->deleteProfile();
 
         return $this->deleted();
     }

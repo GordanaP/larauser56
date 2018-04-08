@@ -1,4 +1,4 @@
-<form action="{{ route('users.profiles.update', $user) }}" method="POST" id="userProfileForm" >
+<form action="{{ route('users.profiles.update') }}" method="POST" id="userProfileForm" >
 
     <p class="required-fields mb-18">Please fill in at least one of fields below.</p>
 

@@ -37,20 +37,17 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
     /**
      * Profile
      */
-    Route::resource('/profiles', 'ProfileController', [
-        'parameters' => ['profiles' => 'user'],
-        'only' => ['edit', 'update', 'destroy']
-    ]);
+    Route::get('/profiles', 'ProfileController@edit')->name('profiles.edit');
+    Route::put('/profiles', 'ProfileController@update')->name('profiles.update');
+    Route::delete('/profiles', 'ProfileController@destroy')->name('profiles.destroy');
+
 
     /**
      * Avatar
      */
-    Route::resource('avatars', 'AvatarController', [
-        'parameters' => ['avatars' => 'user'],
-        'only' => ['edit', 'update']
-    ]);
+    Route::get('/avatars', 'AvatarController@edit')->name('avatars.edit');
+    Route::put('/avatars', 'AvatarController@update')->name('avatars.update');
 });
-
 
 /**
  * Admin

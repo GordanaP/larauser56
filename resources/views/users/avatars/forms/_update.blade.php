@@ -1,4 +1,4 @@
-<form action="{{ route('users.avatars.update', $user) }}" method="POST" enctype="multipart/form-data" id="userAvatarForm">
+<form action="{{ route('users.avatars.update') }}" method="POST" enctype="multipart/form-data" id="userAvatarForm">
 
     <p class="required-fields mb-18">
         <sup><i class="fa fa-asterisk fa-form"></i></sup> Required field
