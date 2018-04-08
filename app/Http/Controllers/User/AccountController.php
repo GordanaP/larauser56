@@ -32,7 +32,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //$this->authorize('access', User::class);
+        $this->authorize('access', User::class);
 
         $users = $this->getUsers();
         $roles = $this->getRoles();
@@ -82,9 +82,9 @@ class AccountController extends Controller
             ]);
         }
 
-        $this->authorize('view', $user);
-
-        return view('users.accounts.edit', compact('user'));
+        return view('users.accounts.edit')->with([
+            'user' => Auth::user()
+        ]);
     }
 
     /**
@@ -96,20 +96,20 @@ class AccountController extends Controller
      */
     public function update(AccountRequest $request, User $user)
     {
-        $this->authorize('update', $user);
-
-        $user->updateAccount($request);
-
         if ($request->ajax()) {
 
             $this->authorize('access', User::class);
+
+            $user->updateAccount($request);
 
             event(new AccountUpdatedByAdmin($user, $request->password));
 
             return message('The account has been updated');
         }
 
-        return $this->updated($user);
+        Auth::user()->updateAccount($request);
+
+        return $this->updated();
     }
 
     /**
@@ -120,14 +120,16 @@ class AccountController extends Controller
      */
     public function destroy(User $user)
     {
-        $this->authorize('delete', $user);
-
-        $user->delete();
-
         if (request()->ajax()) {
+
+            $this->authorize('access', User::class);
+
+            $user->delete();
 
             return message('The account has been deleted.');
         }
+
+        Auth::user()->delete();
 
         return $this->deleted();
     }
@@ -137,11 +139,11 @@ class AccountController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    protected function updated($user)
+    protected function updated()
     {
         $response = message('Your account has been saved.');
 
-        return redirect()->route('users.accounts.edit', $user)->with($response);
+        return redirect()->route('users.accounts.edit')->with($response);
     }
 
     /**

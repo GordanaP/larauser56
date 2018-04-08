@@ -30,10 +30,9 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
     /**
      * Account
      */
-    Route::resource('/accounts', 'AccountController', [
-        'parameters' => ['accounts' => 'user'],
-        'only' => ['edit', 'update', 'destroy']
-    ]);
+    Route::get('/accounts', 'AccountController@edit')->name('accounts.edit');
+    Route::put('/accounts', 'AccountController@update')->name('accounts.update');
+    Route::delete('/accounts', 'AccountController@destroy')->name('accounts.destroy');
 
     /**
      * Profile
@@ -50,8 +49,8 @@ Route::prefix('users')->namespace('User')->name('users.')->group(function() {
         'parameters' => ['avatars' => 'user'],
         'only' => ['edit', 'update']
     ]);
-
 });
+
 
 /**
  * Admin

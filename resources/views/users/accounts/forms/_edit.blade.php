@@ -1,4 +1,4 @@
-<form action="{{ route('users.accounts.update', $user) }}" method="POST" class="account-form">
+<form action="{{ route('users.accounts.update') }}" method="POST" class="account-form">
 
     <p class="required-fields mb-18">
         Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.

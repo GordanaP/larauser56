@@ -2,13 +2,13 @@
 
 <ul class="list-group side-list">
     <li class="list-group-item side-list-group-item {{ set_active_link('accounts', 2) }}">
-        <a href="{{ route('users.accounts.edit', $user) }}" class="ml-6">
-            Update account
+        <a href="{{ route('users.accounts.edit') }}" class="ml-6">
+            Edit account
         </a>
     </li>
 
     <li class="list-group-item side-list-group-item">
-        <form action="{{ route('users.accounts.destroy', $user) }}" method="POST">
+        <form action="{{ route('users.accounts.destroy') }}" method="POST">
             @csrf
             @method("DELETE")
 
