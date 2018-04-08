@@ -12,6 +12,16 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     /**
+     * Create new controller instance.
+     *
+     * @return  void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -21,16 +31,6 @@ class RoleController extends Controller
         $roles = Role::all();
 
         return view('users.roles.index', compact('roles'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -44,17 +44,6 @@ class RoleController extends Controller
         Role::createNew($request);
 
         return message("A new role has been created");
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Role $role)
-    {
-        //
     }
 
     /**

@@ -13,6 +13,16 @@ class AvatarController extends Controller
     protected $avatarPath = 'images/avatars';
 
     /**
+     * Create new controller instance.
+     *
+     * @return  void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\User  $user
@@ -52,6 +62,7 @@ class AvatarController extends Controller
         if($request->ajax()) {
 
             Avatar::newOrUpdate($user, $request, public_path($this->avatarPath));
+
             return message('The avatar has been saved.');
         }
 

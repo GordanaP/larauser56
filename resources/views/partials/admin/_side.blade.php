@@ -12,7 +12,7 @@
             <div class="flex-2">
                 <p class="mb-8"><b>{{ Auth::user()->name }}</b></p>
                 <p class="mb-0 fs-11">
-                    <a href="{{ route('users.accounts.edit', Auth::user()) }}" class="mr-18"><i class="fa fa-cog"></i> Settings</a>
+                    <a href="{{ route('users.accounts.edit') }}" class="mr-18"><i class="fa fa-cog"></i> Settings</a>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"

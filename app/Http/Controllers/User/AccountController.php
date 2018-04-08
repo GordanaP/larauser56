@@ -32,8 +32,6 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $this->authorize('access', User::class);
-
         $users = $this->getUsers();
         $roles = $this->getRoles();
 
@@ -53,8 +51,6 @@ class AccountController extends Controller
      */
     public function store(AccountRequest $request)
     {
-        $this->authorize('access', User::class);
-
         $user = User::createAccount($request);
 
         event(new AccountCreatedByAdmin($user, $request->password));
@@ -71,8 +67,6 @@ class AccountController extends Controller
     public function edit(User $user)
     {
         if(request()->ajax()) {
-
-            $this->authorize('access', User::class);
 
             $html = view('users.roles.partials._html', compact('user'))->render();
 
@@ -98,8 +92,6 @@ class AccountController extends Controller
     {
         if ($request->ajax()) {
 
-            $this->authorize('access', User::class);
-
             $user->updateAccount($request);
 
             event(new AccountUpdatedByAdmin($user, $request->password));
@@ -121,8 +113,6 @@ class AccountController extends Controller
     public function destroy(User $user)
     {
         if (request()->ajax()) {
-
-            $this->authorize('access', User::class);
 
             $user->delete();
 

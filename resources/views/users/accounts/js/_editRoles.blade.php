@@ -1,7 +1,7 @@
 $(document).on('click', '#editRoles', function() {
 
     var user = $(this).attr('data-user');
-    var UserRolesUrl = '/users/accounts/' + user + '/edit'
+    var UserRolesUrl = '/admin/accounts/' + user + '/edit'
 
     revokeRolesModal.modal("show")
 

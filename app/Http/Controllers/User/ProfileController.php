@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     /**
+     * Create new controller instance.
+     *
+     * @return  void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  \App\User  $user
