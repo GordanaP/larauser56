@@ -19,55 +19,12 @@
     <div class="row mt-24">
         <div class="col-md-10 offset-md-1">
             <div class="row">
-                <div class="pb-2 col-md-3 offset-md-1 text-center">
-                    <div id="myAvatar">
-                        <img src="{{ asset(setAvatar($user)) }}" alt="" class="image img-responsive rounded-circle"  height="220px">
-                    </div>
-
-                    <a href="#" id="editAvatar" data-user="{{ Auth::user()->slug }}">Change</a>
+                <div class="pb-2 col-md-3 text-center">
+                    @include('admin.settings.partials._avatar')
                 </div>
 
-                <div class="pb-2 col-md-7">
-                    <div class="card mb-4 box-shadow bg-lightest-grey" id="adminSettings">
-                        <div class="card-body">
-                            <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
-                                <i class="fa fa-lock"></i> <span class="mr-15">My account</span>
-                                <button type="button" class="btn btn-warning btn-link" id="editMyAccount" value="{{Auth::user()->slug }}">
-                                    Edit
-                                </button>
-                            </h5>
-
-                            <div id="myAccount">
-                                <p class="card-text mb-8 ml-20">
-                                    <b>User name:</b> {{ Auth::user()->name }}
-                                </p>
-                                <p class="card-text ml-20">
-                                    <b>Email:</b> {{ Auth::user()->email }}
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card-body">
-                            <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
-                                <i class="fa fa-user"></i> <span class="mr-15">My profile</span>
-                                <button type="button" class="btn btn-warning btn-link" id="editProfile" value="{{Auth::user()->slug }}">
-                                    Edit
-                                </button>
-                            </h5>
-
-                            <div id="myProfile">
-                                <p class="card-text mb-8 ml-20">
-                                    <b>Profile name:</b> {{ optional(Auth::user()->profile)->name ?: 'N/A' }}
-                                </p>
-                                <p class="card-text mb-8 ml-20">
-                                    <b>About:</b> {{ optional(Auth::user()->profile)->about  ?: 'N/A' }}
-                                </p>
-                                <p class="card-text ml-20">
-                                    <b>Location:</b> {{ optional(Auth::user()->profile)->location  ?: 'N/A' }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="pb-2 col-md-9"  style="padding-left: 70px;">
+                    @include('admin.settings.partials._card')
                 </div>
             </div>
         </div>

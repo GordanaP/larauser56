@@ -5,7 +5,7 @@
             <form id="accountForm">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fa fa-lock"></i> Edit account
+                        <i class="fa fa-user"></i> Edit account
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
