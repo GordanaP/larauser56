@@ -98,7 +98,9 @@ class AccountController extends Controller
 
             $user->updateAccount($request);
 
-            event(new AccountUpdatedByAdmin($user, $request->password));
+            if(! $user->isAdmin()) {
+                event(new AccountUpdatedByAdmin($user, $request->password));
+            }
 
             return message('The account has been updated');
         }

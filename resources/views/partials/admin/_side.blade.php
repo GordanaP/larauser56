@@ -6,11 +6,7 @@
     <div class="sidebar-sticky pt-0">
         <div id="adminDetails" class="flex">
             <div class="flex-1" id="displayUserAvatar">
-                <a href="#" class="mr-6 fs-11" id="editAvatar" data-user="{{ Auth::user()->slug }}" >
-                    <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 50px; height: 50px;">
-
-                    <span style="position:absolute; left: 20px; top:45px">Change</span>
-                </a>
+                <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 50px; height: 50px;">
             </div>
 
             <div class="flex-2">
@@ -19,15 +15,9 @@
                 </p>
 
                 <p class="mb-12 fs-11">
-                    <a href="#" class="mr-18" id="editAccount" data-user="{{ Auth::user()->slug }}">
-                        <i class="fa fa-cog"></i> Account
+                    <a href="{{ route('admin.settings') }}" class="mr-18">
+                        <i class="fa fa-cog"></i> Settings
                     </a>
-                    <a href="#" id="editProfile" data-user="{{ Auth::user()->slug }}">
-                        <i class="fa fa-user"></i> Profile
-                    </a>
-                    {{-- <a href="#" class="mr-6" id="editAvatar" data-user="{{ Auth::user()->slug }}">
-                        <i class="fa fa-user-circle"></i> Avatar
-                    </a> --}}
                 </p>
             </div>
         </div>

@@ -11,9 +11,11 @@ $.ajax({
     contentType: false,
     processData: false,
     success: function(response) {
-
-        datatable.ajax.reload()
+        if(datatable) {
+            datatable.ajax.reload()
+        }
         $('#displayUserAvatar').load(location.href + ' #displayUserAvatar')
+        $('#myAvatar').load(location.href + ' #myAvatar')
         successResponse(avatarModal, response.message)
     },
     error: function(response)

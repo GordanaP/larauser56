@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -13,7 +14,8 @@ class PageController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only('home');
+        $this->middleware('auth')->only('home', 'settings');
+        $this->middleware('auth.admin')->only('dashboard', 'settings');
     }
 
     /**
@@ -44,5 +46,17 @@ class PageController extends Controller
     public function dashboard()
     {
         return view('admin.dashboard');
+    }
+
+    /**
+     * Show the admin account settings.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings()
+    {
+        return view('admin.settings.edit')->with([
+            'user' => Auth::user()
+        ]);
     }
 }

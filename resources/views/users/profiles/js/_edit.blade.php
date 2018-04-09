@@ -3,7 +3,7 @@ $(document).on('click', '#editProfile', function(){
     $('#profileModal').modal('show')
     $('#deleteProfile').hide()
 
-    var user = $(this).attr('data-user')
+    var user = $(this).attr('data-user') || $(this).val()
     var showProfileUrl = '/admin/profiles/' + user
 
     $('.modal-title i').addClass('fa-user')

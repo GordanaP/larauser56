@@ -12,6 +12,8 @@ $.ajax({
     type: "PUT",
     data: data,
     success: function(response) {
+        $('#myProfile').load(location.href + ' #myProfile')
+        $('#myProfileName').load(location.href + ' #myProfileName')
         successResponse(profileModal, response.message)
     },
     error: function(response) {
