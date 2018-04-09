@@ -45,8 +45,6 @@
         @include('users.avatars.partials._modal')
     {{-- @endcan --}}
 
-
-
 @endsection
 
 @section('scripts')
@@ -59,7 +57,6 @@
 
     <script>
 
-        // Table
         var table = $('#accountsTable')
 
         // ACCOUNT //
@@ -73,6 +70,9 @@
         var password = $("#password")
         password.hide()
 
+        createAccountModal.setAutofocus('role_id')
+        createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
+
         // Edit
         var editAccountModal = $('#editAccountModal')
         var editAccountForm = $('#editAccountForm')
@@ -80,45 +80,36 @@
         var _password = $("#_password")
         _password.hide()
 
+        editAccountModal.setAutofocus('_role_id')
+        editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
+
         // Revoke roles
         var revokeRolesModal = $('#revokeRolesModal')
         var revokeRolesForm = $('#revokeRolesForm')
         var revokeFields = ['role_id']
+
+        revokeRolesModal.emptyModal(revokeFields, revokeRolesForm)
 
         // Profile
         var profileModal = $('#profileModal')
         var profileForm = $('#adminProfileForm')
         var profileFields = ['name', 'about', 'location']
 
-        // Avatar
-        var avatarModal = $('#avatarModal')
-        var avatarForm = $('#adminAvatarForm')
-        var avatarFields = ['avatar_options', 'avatar']
-
-        // Modals
-        createAccountModal.setAutofocus('role_id')
-        createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
-
-        editAccountModal.setAutofocus('_role_id')
-        editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
-
-        revokeRolesModal.emptyModal(revokeFields, revokeRolesForm)
-
         profileModal.setAutofocus('profileName')
         profileModal.emptyModal(profileFields, profileForm)
+
+
+        // Avatar
+        var avatarModal = $('#avatarModal')
+        var avatarForm = $('#userAvatarForm')
+        var avatarFields = ['avatar_options', 'avatar']
 
         avatarModal.setAutofocus('avatar_options')
         avatarModal.emptyModal(avatarFields, avatarForm)
 
 
-        // DataTable
+        // Datatable
         @include('users.accounts.partials._datatable')
-
-        // Edit avatar
-        @include('users.avatars.js._edit')
-
-        // Update avatar
-        @include('users.avatars.js._JSvalidate')
 
         // Edit user roles
         @include('users.accounts.js._editRoles')
@@ -150,5 +141,16 @@
         // Delete profile
         @include('users.profiles.js._delete')
 
+
+        // Edit Avatar
+        @include('users.avatars.js._edit')
+
+        // Save Avatar
+        @include('users.avatars.js._JSvalidate')
+
     </script>
+
 @endsection
+
+
+

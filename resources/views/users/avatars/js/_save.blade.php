@@ -11,7 +11,9 @@ $.ajax({
     contentType: false,
     processData: false,
     success: function(response) {
+
         datatable.ajax.reload()
+        $('.avatarImage').load(location.href + ' .avatarImage')
         successResponse(avatarModal, response.message)
     },
     error: function(response)

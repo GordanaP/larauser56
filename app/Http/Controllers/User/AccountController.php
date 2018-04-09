@@ -33,12 +33,16 @@ class AccountController extends Controller
     public function index()
     {
         $users = $this->getUsers();
-        $roles = $this->getRoles();
 
         if (request()->ajax()) {
 
             return [ 'data' => $users ];
         }
+    }
+
+    public function accountsList()
+    {
+        $roles = $this->getRoles();
 
         return view('users.accounts.index', compact('roles'));
     }

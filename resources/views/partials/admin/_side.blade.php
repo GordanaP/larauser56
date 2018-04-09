@@ -5,7 +5,7 @@
 
     <div class="sidebar-sticky pt-0">
         <div id="adminDetails" class="flex">
-            <div class="flex-1">
+            <div class="flex-1 avatarImage">
                 <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 45px; height: 45px;">
             </div>
 
@@ -35,7 +35,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ set_active_link('accounts', 2) }}" href="{{ route('admin.accounts.index') }}">
+                <a class="nav-link {{ set_active_link('accounts', 2) }}" href="{{ route('admin.accounts.list') }}">
                     <span data-feather="users"></span>
                     Accounts
                 </a>

@@ -1,6 +1,10 @@
 <?php
 
-Route::view('/test', 'test');
+Route::get('/test', function(){
+    return view('test')->with([
+        'roles' => \App\Role::all()
+    ]);
+});
 
 /**
  * Auth
@@ -56,6 +60,8 @@ Route::prefix('admin')->namespace('User')->name('admin.')->middleware('auth.admi
     /**
      * Account
      */
+    Route::get('/accounts/list', 'AccountController@accountsList')->name('accounts.list');
+
     Route::resource('/accounts', 'AccountController', [
         'parameters' => ['accounts' => 'user'],
         'only' => ['index', 'store', 'edit', 'update', 'destroy'],

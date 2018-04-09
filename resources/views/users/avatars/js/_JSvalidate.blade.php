@@ -49,7 +49,6 @@ avatarForm.formValidation({
     else {
         fv.enableFieldValidators('avatar', false).revalidateField('avatar');
     }
-
 })
 .on('success.form.fv', function(e) {
 
