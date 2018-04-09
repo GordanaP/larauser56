@@ -13,7 +13,7 @@ $.ajax({
     success: function(response) {
 
         datatable.ajax.reload()
-        $('.avatarImage').load(location.href + ' .avatarImage')
+        $('#displayUserAvatar').load(location.href + ' #displayUserAvatar')
         successResponse(avatarModal, response.message)
     },
     error: function(response)

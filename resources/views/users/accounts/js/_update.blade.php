@@ -119,7 +119,7 @@ editAccountForm
         type : "PUT",
         data: data,
         success : function(response) {
-
+            $('#displayUserName').load(location.href + ' #displayUserName')
             datatable.ajax.reload()
             successResponse(editAccountModal, response.message)
         },

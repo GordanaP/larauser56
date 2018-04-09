@@ -5,24 +5,29 @@
 
     <div class="sidebar-sticky pt-0">
         <div id="adminDetails" class="flex">
-            <div class="flex-1 avatarImage">
-                <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 45px; height: 45px;">
+            <div class="flex-1" id="displayUserAvatar">
+                <a href="#" class="mr-6 fs-11" id="editAvatar" data-user="{{ Auth::user()->slug }}" >
+                    <img src="{{ asset(setAvatar(Auth::user())) }}" alt="" class="image img-responsive rounded-circle" style="width: 50px; height: 50px;">
+
+                    <span style="position:absolute; left: 20px; top:45px">Change</span>
+                </a>
             </div>
 
             <div class="flex-2">
-                <p class="mb-8"><b>{{ Auth::user()->name }}</b></p>
-                <p class="mb-0 fs-11">
-                    <a href="{{ route('users.accounts.edit') }}" class="mr-18"><i class="fa fa-cog"></i> Settings</a>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        document.getElementById('logout-form').submit();"
-                    >
-                        <i class="fa fa-sign-out"></i> Logout
-                    </a>
+                <p class="mb-12" id="displayUserName">
+                    <b class="mr-18">{{ Auth::user()->name }}</b>
+                </p>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                <p class="mb-12 fs-11">
+                    <a href="#" class="mr-18" id="editAccount" data-user="{{ Auth::user()->slug }}">
+                        <i class="fa fa-cog"></i> Account
+                    </a>
+                    <a href="#" id="editProfile" data-user="{{ Auth::user()->slug }}">
+                        <i class="fa fa-user"></i> Profile
+                    </a>
+                    {{-- <a href="#" class="mr-6" id="editAvatar" data-user="{{ Auth::user()->slug }}">
+                        <i class="fa fa-user-circle"></i> Avatar
+                    </a> --}}
                 </p>
             </div>
         </div>
