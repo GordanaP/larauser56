@@ -26,9 +26,12 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($userId)
     {
         if(request()->ajax()){
+
+            $user = User::findBy($userId, 'id');
+
             return [
                 'profile' => $user->profile ?? '',
             ];
@@ -55,17 +58,20 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileRequest $request, User $user)
+    public function update(ProfileRequest $request, $userId = null)
     {
         if ($request->ajax()) {
+
+            $user = User::findBy($userId, 'id');
 
             Profile::newOrUpdate($user, $request);
             return message('The profile has been saved.');
         }
+        else {
+            Profile::newOrUpdate(Auth::user(), $request);
 
-        Profile::newOrUpdate(Auth::user(), $request);
-
-        return $this->updated();
+            return $this->updated();
+        }
     }
 
     /**
@@ -74,9 +80,11 @@ class ProfileController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($userId = null)
     {
         if (request()->ajax()) {
+
+            $user = User::findBy($userId, 'id');
 
             $user->deleteProfile();
             return message('The profile has been deleted.');
@@ -85,6 +93,7 @@ class ProfileController extends Controller
         Auth::user()->deleteProfile();
 
         return $this->deleted();
+
     }
 
     /**

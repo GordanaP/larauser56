@@ -33,7 +33,8 @@
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('users.accounts.edit') }}">
+                            <a class="dropdown-item"
+                                href="{{ Auth::check() && ! Auth::user()->isAdmin() ? route('users.accounts.edit') : route('admin.settings') }}">
                                 <i class="fa fa-cog mr-6"></i> Settings
                             </a>
                             <a class="dropdown-item" href="{{ route('logout') }}"

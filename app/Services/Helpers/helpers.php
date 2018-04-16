@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 /**
  * Create the response message.
  *
@@ -63,15 +65,4 @@ function setAvatar($user)
     $avatar = optional($user->avatar)->filename ?: 'default.jpg';
 
     return 'images/avatars/'.$avatar;
-}
-
-/**
- * Set user id.
- *
- * @param \App\User $user
- * @return  integer
- */
-function setUserId($user)
-{
-    return optional($user)->id ?: \Auth::id();
 }

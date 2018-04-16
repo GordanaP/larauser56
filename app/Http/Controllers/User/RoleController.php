@@ -93,8 +93,10 @@ class RoleController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function revoke(RevokeRolesRequest $request, User $user)
+    public function revoke(RevokeRolesRequest $request, $userId)
     {
+        $user = User::findBy($userId, 'id');
+
         $user->revokeRole($request->role_id);
 
         return message("The selected role(s) have been revoked.'");

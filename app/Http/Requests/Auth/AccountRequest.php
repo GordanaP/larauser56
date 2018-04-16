@@ -24,6 +24,8 @@ class AccountRequest extends FormRequest
      */
     public function rules()
     {
+        $userId = $this->route()->parameter('userId') ?: \Auth::id();
+
         switch ($this->method())
         {
             case 'POST':
@@ -46,7 +48,7 @@ class AccountRequest extends FormRequest
                 return [
                     'role_id' => 'exists:roles,id',
                     'name' => 'required|string|alpha_num|max:30',
-                    'email' => 'required|string|email|max:100|unique:users,email,'.setUserId($this->user),
+                    'email' => 'required|string|email|max:100|unique:users,email,'.$userId,
                     'password' => [
                         'nullable',
                         'required_if:create_password,manual',

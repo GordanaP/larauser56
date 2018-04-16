@@ -15,7 +15,7 @@ var datatable = table.DataTable({
         {
             data: 'name',
             render: function(data, type, row, meta) {
-                return '<a href="#" data-user="' + row.slug + '"  id="editProfile">' + data +'</a>'
+                return '<a href="#" data-user="' + row.id + '"  id="editProfile">' + data +'</a>'
             }
         },
         { data: 'email' },
@@ -25,7 +25,7 @@ var datatable = table.DataTable({
 
                 var filename = data ? data.filename : 'default.jpg'
 
-                return '<a href="#" data-user="' + row.slug + '"  id="editAvatar">' + setAvatar(filename, 'dt-avatar') + '</a>'
+                return '<a href="#" data-user="' + row.id + '"  id="editAvatar">' + setAvatar(filename, 'dt-avatar') + '</a>'
             },
             searchable: false,
             orderable: false
@@ -33,7 +33,7 @@ var datatable = table.DataTable({
         {
             data: 'roles',
             render: function(data, type, row, meta) {
-                return getRoleNames(data).length > 0 ? getRoleNames(data) + ' <a href="#" data-user="' + row.slug + '" id="editRoles">Revoke</a>' : '';
+                return getRoleNames(data).length > 0 ? getRoleNames(data) + ' <a href="#" data-user="' + row.id + '" id="editRoles">Revoke</a>' : '';
             }
         },
         {
@@ -50,13 +50,13 @@ var datatable = table.DataTable({
         },
         {
           render: function(data, type, row, meta) {
-            return '<div class="flex justify-center align-center"><button class="btn btn-xs btn-edit" id="editAccount" value="' + row.slug + '"><i class="fa fa-pencil mr-12"></i></button><button class="btn btn-xs btn-link btn-primary btn-link-delete" id="deleteAccount" value="' + row.slug + '"><i class="fa fa-trash"></i></button>'
+            return '<div class="flex justify-center align-center"><button class="btn btn-xs btn-edit" id="editAccount" value="' + row.id + '"><i class="fa fa-pencil mr-12"></i></button><button class="btn btn-xs btn-link btn-primary btn-link-delete" id="deleteAccount" value="' + row.id + '"><i class="fa fa-trash"></i></button>'
           },
           searchable: false,
           sortable: false,
         },
         {
-            data: 'slug',
+            data: 'id',
             visible: false
         }
     ],

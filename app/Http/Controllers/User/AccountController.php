@@ -10,6 +10,7 @@ use App\Role;
 use App\Traits\ModelFinder;
 use App\User;
 use Auth;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
@@ -40,6 +41,11 @@ class AccountController extends Controller
         }
     }
 
+    /**
+     * Display a listing of the users' accounts
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function accountsList()
     {
         $roles = $this->getRoles();
@@ -50,7 +56,7 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\AccountRequest  $request
+     * @userId  \App\Http\Requests\AccountRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(AccountRequest $request)
@@ -62,24 +68,29 @@ class AccountController extends Controller
         return message("A new account has been created");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
+    public function show($userId)
     {
+        $user = User::findBy($userId, 'id');
+
         if(request()->ajax()) {
 
             $html = view('users.roles.partials._html', compact('user'))->render();
 
             return response([
-                'data' => $user,
+                'user' => $user->load('roles'),
                 'html' => $html
             ]);
         }
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @userId  \App\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(User $user)
+    {
         return view('users.accounts.edit')->with([
             'user' => Auth::user()
         ]);
@@ -88,15 +99,17 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $user
+     * @userId  \Illuminate\Http\Request  $request
+     * @userId  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(AccountRequest $request, User $user)
+    public function update(AccountRequest $request, $userId = null)
     {
         if ($request->ajax()) {
 
-            $user->updateAccount($request);
+            $user = User::findBy($userId, 'id');
+
+            $user->load('roles')->updateAccount($request);
 
             if(! $user->isAdmin()) {
                 event(new AccountUpdatedByAdmin($user, $request->password));
@@ -113,12 +126,14 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $user
+     * @userId  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($userId = null)
     {
         if (request()->ajax()) {
+
+            $user = User::findBy($userId, 'id');
 
             $user->delete();
 

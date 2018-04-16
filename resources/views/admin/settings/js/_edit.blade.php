@@ -3,7 +3,8 @@ $(document).on('click', '#editMyAccount', function(){
     accountModal.modal('show')
 
     var user = $(this).val()
-    var editAccountUrl = '/admin/accounts/' + user + '/edit'
+    // var editAccountUrl = '/admin/accounts/' + user + '/edit'
+    var editAccountUrl = '/admin/accounts/' + user
 
     $('#updateMyAccount').val(user)
 
@@ -12,10 +13,8 @@ $(document).on('click', '#editMyAccount', function(){
         type: "GET",
         success: function(response) {
 
-            var user = response.data
-
-            $('#myName').val(user.name)
-            $('#myEmail').val(user.email)
+            $('#myName').val(response.user.name)
+            $('#myEmail').val(response.user.email)
         }
     })
 })

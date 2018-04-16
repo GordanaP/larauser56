@@ -62,26 +62,25 @@ Route::prefix('admin')->namespace('User')->name('admin.')->middleware('auth.admi
      * Account
      */
     Route::get('/accounts/list', 'AccountController@accountsList')->name('accounts.list');
-
     Route::resource('/accounts', 'AccountController', [
-        'parameters' => ['accounts' => 'user'],
-        'only' => ['index', 'store', 'edit', 'update', 'destroy'],
+        'parameters' => ['accounts' => 'userId'],
+        'only' => ['index','store', 'show', 'update', 'destroy']
     ]);
 
     /**
      * Role
      */
-    Route::delete('/roles-revoke/{user}', 'RoleController@revoke')->name('roles.revoke');
+    Route::delete('/roles-revoke/{userId}', 'RoleController@revoke')->name('roles.revoke');
     Route::resource('/roles', 'RoleController', [
-        'only' => ['index', 'store', 'edit', 'update', 'destroy'],
+        'only' => ['index', 'store', 'edit', 'update', 'destroy']
     ]);
 
     /**
      * Profile
      */
     Route::resource('/profiles', 'ProfileController', [
-        'parameters' => ['profiles' => 'user'],
-        'only' => ['show', 'update', 'destroy'],
+        'parameters' => ['profiles' => 'userId'],
+        'only' => ['show', 'update', 'destroy']
     ]);
 
     /**
@@ -89,6 +88,6 @@ Route::prefix('admin')->namespace('User')->name('admin.')->middleware('auth.admi
      */
     Route::resource('avatars', 'AvatarController', [
         'parameters' => ['avatars' => 'user'],
-        'only' => ['show', 'update'],
+        'only' => ['show', 'update']
     ]);
 });

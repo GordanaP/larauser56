@@ -41,6 +41,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -93,16 +94,6 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the verified user.
-     *
-     * @return mixed
-     */
-    // public function scopeByResetPasswordCredentials($query, $email)
-    // {
-    //     return $query->whereEmail($email)->where('verified', true);
-    // }
-
-    /**
      * Find the user by the attribute.
      *
      * @param string $value
@@ -111,6 +102,6 @@ class User extends Authenticatable
      */
     public static function findBy($value, $field='email')
     {
-        return static::where($field, $value)->first();
+        return static::where($field, $value)->firstOrFail();
     }
 }
