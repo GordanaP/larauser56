@@ -274,5 +274,7 @@ div#adminDetails a i { color: #a6a6a6; }
 div.card#adminSettings {padding: 4px}
 div.card#adminSettings button {padding: 3px 12px; background: #fff; text-decoration: none; color: inherit;}
 div.card#adminSettings button:hover {background: orange; color: #fff; border: 1px solid orange;}
+div.card button#destroyProfile { color: #C25451; border: none; background: none }
+div.card button#destroyProfile:hover { color: #c32232; font-weight: bold; border: none; background: none}
 
 div#myAccount p, div#myProfile p {margin-left: 26px;}

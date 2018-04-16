@@ -2,6 +2,6 @@
     <img src="{{ asset(setAvatar($user)) }}" alt="" class="image img-responsive rounded-circle">
 </div>
 
-<a href="#" id="editAvatar" data-user="{{ Auth::user()->slug }}">
+<a href="#" id="editAvatar" data-user="{{ Auth::user()->id }}">
     Change
 </a>

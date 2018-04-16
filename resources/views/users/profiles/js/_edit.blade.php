@@ -11,6 +11,7 @@ $(document).on('click', '#editProfile', function(){
     $('#saveProfile').val(user)
     $('#deleteProfile').val(user)
 
+
     $.ajax({
         url: showProfileUrl,
         type: "GET",

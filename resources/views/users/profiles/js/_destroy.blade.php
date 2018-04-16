@@ -1,4 +1,4 @@
-$(document).on('click', '#deleteProfile', function(){
+$(document).on('click', '#destroyProfile', function(){
 
     var user = $(this).val()
     var deleteProfileUrl = '/admin/profiles/' + user
@@ -7,9 +7,8 @@ $(document).on('click', '#deleteProfile', function(){
         url: deleteProfileUrl,
         type: "DELETE",
         success: function(response) {
-            successResponse(profileModal, response.message)
+            userNotification(response.message)
             $('#myProfile').load(location.href + " #myProfile")
-
         }
     })
 })

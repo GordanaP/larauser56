@@ -30,7 +30,6 @@
         </div>
     </div>
 
-
     @include('users.avatars.partials._modal')
     @include('users.profiles.partials._modal')
     @include('admin.settings.partials._modal')
@@ -73,9 +72,13 @@
         @include('admin.settings.js._edit')
         @include('admin.settings.js._JSvalidate')
 
-
         // Edit profile
         @include('users.profiles.js._edit')
+
+        // Delete profile
+        @include('users.profiles.js._delete')
+
+        @include('users.profiles.js._destroy')
 
         // Save profile
         @include('users.profiles.js._JSvalidation')
@@ -89,6 +92,4 @@
     </script>
 
 @endsection
-
-
 

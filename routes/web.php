@@ -87,7 +87,7 @@ Route::prefix('admin')->namespace('User')->name('admin.')->middleware('auth.admi
      * Avatar
      */
     Route::resource('avatars', 'AvatarController', [
-        'parameters' => ['avatars' => 'user'],
+        'parameters' => ['avatars' => 'userId'],
         'only' => ['show', 'update']
     ]);
 });

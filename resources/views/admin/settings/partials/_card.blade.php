@@ -21,14 +21,20 @@
     </div>
 
     <div class="card-body">
-        <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
-            <i class="fa fa-user-o mr-6"></i> <span class="mr-15">My profile</span>
-            <button type="button" class="btn btn-warning btn-link" id="editProfile" value="{{Auth::user()->id }}">
-                Edit
-            </button>
-        </h5>
-
         <div id="myProfile">
+            <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
+                <i class="fa fa-user-o mr-6"></i> <span class="mr-15">My profile</span>
+                <button type="button" class="btn btn-warning btn-link" id="editProfile" value="{{Auth::user()->id }}">
+                    {{ Auth::user()->hasProfile() ? 'Edit' : 'Create' }}
+                </button>
+
+                @if (Auth::user()->hasProfile())
+                    <button type="button" class="btn btn-danger btn-link" id="destroyProfile" value="{{Auth::user()->id }}">
+                        Delete
+                    </button>
+                @endif
+            </h5>
+
             <p class="card-text mb-8">
                 <b>Profile name:</b> {{ optional(Auth::user()->profile)->name ?: 'N/A' }}
             </p>

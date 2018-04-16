@@ -28,9 +28,12 @@ class AvatarController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($userId)
     {
         if(request()->ajax()) {
+
+            $user = User::findBy($userId, 'id');
+
             return response([
                 'filename' => optional($user->avatar)->filename
             ]);
@@ -57,9 +60,11 @@ class AvatarController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(AvatarRequest $request, User $user)
+    public function update(AvatarRequest $request, $userId = null)
     {
         if($request->ajax()) {
+
+            $user = User::findBy($userId, 'id');
 
             Avatar::newOrUpdate($user, $request, public_path($this->avatarPath));
 
