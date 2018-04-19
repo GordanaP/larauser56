@@ -4,7 +4,6 @@ createAccountForm
     placeholder: "Select roles",
     width: "100%"
 })
-// Revalidate the color when it is changed
 .change(function(e) {
     createAccountForm.formValidation('revalidateField', 'role_id[]');
 })
@@ -107,7 +106,6 @@ createAccountForm
         name : $("#name").val(),
         email : $("#email").val(),
         password: password,
-        password_confirmation: password,
     }
 
     $.ajax({

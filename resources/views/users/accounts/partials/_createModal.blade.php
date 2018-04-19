@@ -52,12 +52,12 @@
                     <div class="form-group mb-0">
                         <label for="create_password" class="mb-0">Password <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>
 
-                        <input type="password" class="form-control mt-8 password  admin-modal-input" id="password" name="password" placeholder="Give password to the user" />
+                        <input type="password" class="form-control mt-8 password admin-modal-input" id="password" name="password" placeholder="Give password to the user" />
 
                         <span class="invalid-feedback password"></span>
                     </div>
 
-                    <div class="form-group mt-12" id="check-password">
+                    <div class="form-group mt-12">
                         <div class="form-check">
                             <input class="form-check-input admin-modal-input" type="checkbox" name="create-password" id="auto_password" value="auto"  checked />
                             <label class="form-check-label" for="auto_password">

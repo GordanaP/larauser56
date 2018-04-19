@@ -6,7 +6,7 @@ $(document).on('click', '#revokeRoles', function(){
     var roleIds = checkedValues('role_id')
 
     var data = {
-    role_id: roleIds
+        role_id: roleIds
     }
 
     $.ajax({
@@ -19,7 +19,7 @@ $(document).on('click', '#revokeRoles', function(){
             successResponse(revokeRolesModal, response.message)
         },
         error: function(response) {
-        errorResponse(response.responseJSON.errors, revokeRolesModal)
+            errorResponse(response.responseJSON.errors, revokeRolesModal)
         }
     })
 })

@@ -2,7 +2,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">
+                    <i class="fa fa-user-circle"></i>
+                    <span></span>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,9 +13,8 @@
             <form enctype="multipart/form-data" id="userAvatarForm">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-4 col-sm-4 mb-12" id="showAvatar">
-                            {{-- <img src="{{ asset(setAvatar($user)) }}" alt="{{ $user->name . ' Avatar' }}" class="image img-responsive rounded-circle" style="width: 100px; height: 100px"> --}}
-                        </div>
+                        <div class="col-lg-4 col-sm-4 mb-12" id="showAvatar"></div>
+
                         <div class="col-lg-8 col-sm-8">
                             <div class="form-group">
                                 <label for="avatar_options">Avatar <sup><i class="fa fa-asterisk fa-form red"></i></sup></label>

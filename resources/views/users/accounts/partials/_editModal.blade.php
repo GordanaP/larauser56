@@ -1,16 +1,16 @@
 <div class="modal admin-modal" tabindex="-1" role="dialog" id="editAccountModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fa fa-lock"></i> Edit user
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
             <form id="editAccountForm">
-                <div class="modal-header">
-                    <h5 class="modal-title">
-                        <i class="fa fa-lock"></i> Edit user
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
                 <div class="modal-body">
                     <p class="required-fields mb-18">
                         Fields marked with <sup><i class="fa fa-asterisk fa-form"></i></sup> are required.

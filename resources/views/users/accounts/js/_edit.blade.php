@@ -3,9 +3,7 @@ $(document).on('click', '#editAccount', function(){
     editAccountModal.modal('show')
 
     var user = $(this).val() || $(this).attr('data-user')
-    // var adminAccountsEditUrl = adminAccountsUrl + '/' + user + '/edit'
     var editAccountUrl = '/admin/accounts/' + user
-
 
     $('#updateAccount').val(user)
 
@@ -17,11 +15,7 @@ $(document).on('click', '#editAccount', function(){
         success: function(response) {
 
             var user = response.user
-            var roleIds = []
-
-            $.each(user.roles, function(key, role) {
-                roleIds.push(role.id)
-            })
+            var roleIds = getUserRoles(user.roles)
 
             $("#_role_id").val(roleIds).trigger("change");
             $('#_name').val(user.name)

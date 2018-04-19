@@ -8,7 +8,7 @@ trait HasAccount
      * Create a new account.
      *
      * @param array $data
-     * @return \App\User
+     * @return \App\User $user
      */
     public static function createAccount($data)
     {

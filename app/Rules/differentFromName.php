@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class differentFromName implements Rule
+class DifferentFromName implements Rule
 {
     public $name;
     public $password;

@@ -12,10 +12,10 @@
         <label for="name" class="col-md-4 col-form-label text-md-right"><sup><i class="fa fa-asterisk fa-form red"></i></sup> Name</label>
 
         <div class="col-md-6">
-            <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Enter your name" value="{{ old('name') ?: $user->name }}" autofocus />
+            <input type="text" class="name form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Enter your name" value="{{ old('name') ?: $user->name }}" autofocus />
 
             @if ($errors->has('name'))
-                <span class="invalid-feedback">
+                <span class="name invalid-feedback">
                     <strong>{{ $errors->first('name') }}</strong>
                 </span>
             @endif
@@ -27,10 +27,10 @@
         <label for="email" class="col-md-4 col-form-label text-md-right"><sup><i class="fa fa-asterisk fa-form red"></i></sup> E-Mail Address</label>
 
         <div class="col-md-6">
-            <input type="text" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  id="email" name="email" placeholder="example@domain.com" value="{{ old('email') ?: $user->email }}" />
+            <input type="text" class="email form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"  id="email" name="email" placeholder="example@domain.com" value="{{ old('email') ?: $user->email }}" />
 
             @if ($errors->has('email'))
-                <span class="invalid-feedback">
+                <span class="invalid-feedback email">
                     <strong>{{ $errors->first('email') }}</strong>
                 </span>
             @endif
@@ -42,10 +42,10 @@
         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
 
         <div class="col-md-6">
-            <input type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"  id="password" name="password" placeholder="Choose your password" />
+            <input type="password" class="password form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"  id="password" name="password" placeholder="Choose your password" />
 
             @if ($errors->has('password'))
-                <span class="invalid-feedback">
+                <span class="password invalid-feedback">
                     <strong>{{ $errors->first('password') }}</strong>
                 </span>
             @endif

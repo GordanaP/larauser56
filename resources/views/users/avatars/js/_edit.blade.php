@@ -3,9 +3,10 @@ $(document).on('click', '#editAvatar', function(){
     avatarModal.modal('show')
 
     var user = $(this).attr('data-user')
+    var username = $(this).attr('data-name')
     var editAvatarUrl = '/admin/avatars/' + user
 
-    $('.modal-title span').text(user)
+    $('.modal-title span').text(username)
     $('#saveAvatar').val(user)
 
     $.ajax({

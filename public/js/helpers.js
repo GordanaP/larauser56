@@ -56,7 +56,7 @@ function removeServerSideValidationFeedback(fields)
 
         var inputId = value.id
 
-        $('input#'+inputId+'.form-control').removeClass('is-invalid')
+        clearError(inputId)
     })
 }
 
@@ -199,17 +199,17 @@ function displayErrors(errors)
  */
 function checkedValues(checkbox)
 {
-    var array = [];
+    var checkedValues = [];
 
-    var items = $('input[name*="'+checkbox+'"]:checked')
+    var checked = $('input[name*="'+checkbox+'"]:checked')
 
-    $.each(items, function(key, value) {
+    $.each(checked, function(key, value) {
 
         var value = $(this).val()
-        array.push(value)
+        checkedValues.push(value)
     })
 
-    return array;
+    return checkedValues;
 }
 
 /**
@@ -242,12 +242,14 @@ function clearErrorOnNewInput()
     $("input[type=checkbox], input[type=radio]").click(function() {
 
         var id = $(this).parents(':eq(1)').attr('id');
-        var name = $(this).attr('name');
+        var name = $(this).parents(':eq(1)').attr('name');
+        // var name = $(this).attr('name');
 
-        var splitted = $(this).attr('name').split("-")
+        var splitted = name.split("-")
         var splitted_name = splitted[1]
 
-        clearError(splitted_name)
+        // clearError(splitted_name)
+        clearError(name)
         clearError(id)
     })
 }
@@ -389,10 +391,13 @@ function clearForm(form, checked_field, hidden_field)
     $(form)
         .find("input[type=text], input[type=password], input[type=file], textarea")
         .val('').end()
-        .find("select").val(null).trigger('change')
+        .find("select")
+        .val(null).trigger('change')
         .find("input[type=checkbox], input[type=radio]")
         .prop("checked", "").end()
-        .find(checked_field).prop('checked', true);
+
+    $(form)
+        .find(checked_field).prop('checked', true)
 
     hidden_field ? hidden_field.hide() : ''
 }
@@ -493,4 +498,21 @@ function getRoleNames(roles)
 function setAvatar(avatarFilename, className)
 {
     return '<img src="/images/avatars/'+ avatarFilename +'" class="'+className+'">';
+}
+
+/**
+ * Get the user roles.
+ *
+ * @param  {array} roles
+ * @return {array}
+ */
+function getUserRoles(roles)
+{
+    var roleIds = []
+
+    $.each(roles, function(key, role) {
+        roleIds.push(role.id)
+    })
+
+    return roleIds
 }

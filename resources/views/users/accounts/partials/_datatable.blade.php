@@ -15,7 +15,7 @@ var datatable = table.DataTable({
         {
             data: 'name',
             render: function(data, type, row, meta) {
-                return '<a href="#" data-user="' + row.id + '"  id="editProfile">' + data +'</a>'
+                return '<a href="#" data-user="' + row.id + '" data-name="' + row.name + '" id="editProfile">' + data +'</a>'
             }
         },
         { data: 'email' },
@@ -25,7 +25,7 @@ var datatable = table.DataTable({
 
                 var filename = data ? data.filename : 'default.jpg'
 
-                return '<a href="#" data-user="' + row.id + '"  id="editAvatar">' + setAvatar(filename, 'dt-avatar') + '</a>'
+                return '<a href="#" data-user="' + row.id + '" data-name="' + row.name + '" id="editAvatar">' + setAvatar(filename, 'dt-avatar') + '</a>'
             },
             searchable: false,
             orderable: false
@@ -33,7 +33,7 @@ var datatable = table.DataTable({
         {
             data: 'roles',
             render: function(data, type, row, meta) {
-                return getRoleNames(data).length > 0 ? getRoleNames(data) + ' <a href="#" data-user="' + row.id + '" id="editRoles">Revoke</a>' : '';
+                return getRoleNames(data).length > 0 ? getRoleNames(data) + ' <a href="#" data-user="' + row.id + '" data-name="' + row.name + '" id="editRoles">Revoke</a>' : '';
             }
         },
         {

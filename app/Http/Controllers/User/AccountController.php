@@ -33,9 +33,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $users = $this->getUsers();
-
         if (request()->ajax()) {
+
+            $users = $this->getUsers();
 
             return [ 'data' => $users ];
         }
@@ -68,11 +68,17 @@ class AccountController extends Controller
         return message("A new account has been created");
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $userId
+     * @return \Illuminate\Http\Response
+     */
     public function show($userId)
     {
-        $user = User::findBy($userId, 'id');
-
         if(request()->ajax()) {
+
+            $user = User::findBy($userId, 'id');
 
             $html = view('users.roles.partials._html', compact('user'))->render();
 
@@ -100,7 +106,7 @@ class AccountController extends Controller
      * Update the specified resource in storage.
      *
      * @userId  \Illuminate\Http\Request  $request
-     * @userId  \App\User  $user
+     * @userId  int  $userId
      * @return \Illuminate\Http\Response
      */
     public function update(AccountRequest $request, $userId = null)
@@ -126,7 +132,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @userId  \App\User  $user
+     * @userId  int  $userId
      * @return \Illuminate\Http\Response
      */
     public function destroy($userId = null)

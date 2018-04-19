@@ -23,6 +23,7 @@ profileForm.formValidation({
                 }
             },
             about: {
+                enabled: false,
                 validators: {
                     notEmpty: {
                         message: 'Please provide at least one field value'
@@ -34,13 +35,14 @@ profileForm.formValidation({
                 }
             },
             location: {
+                enabled: false,
                 validators: {
                     notEmpty: {
                         message: 'Please provide at least one field value'
                     },
                     stringLength: {
                         max: 50,
-                        message: 'Please provide at least one field value'
+                        message: 'The value must be less than 50 characters long'
                     }
                 }
             }
@@ -50,8 +52,8 @@ profileForm.formValidation({
 
         var name        = profileForm.find('#profileName').val(),
             about       = profileForm.find('#about').val(),
-            location     = profileForm.find('#location').val(),
-            fv           = profileForm.data('formValidation');
+            location    = profileForm.find('#location').val(),
+            fv          = profileForm.data('formValidation');
 
         switch ($(this).attr('id')) {
 
