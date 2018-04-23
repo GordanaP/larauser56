@@ -56,7 +56,8 @@ class PageController extends Controller
     public function settings()
     {
         return view('admin.settings.edit')->with([
-            'user' => Auth::user()
+            'user' => Auth::user(),
+            'roles' => ''
         ]);
     }
 }

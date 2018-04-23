@@ -98,7 +98,6 @@
         profileModal.setAutofocus('profileName')
         profileModal.emptyModal(profileFields, profileForm)
 
-
         // Avatar
         var avatarModal = $('#avatarModal')
         var avatarForm = $('#userAvatarForm')
@@ -121,13 +120,13 @@
         @include('users.accounts.js._create')
 
         // Store account
-        @include('users.accounts.js._store')
+        @include('users.accounts.js._JSvalidationStore')
 
         // Edit account
         @include('users.accounts.js._edit')
 
         // Update account
-        @include('users.accounts.js._update')
+        @include('users.accounts.js._JSvalidatationUpdate')
 
         // Delete account
         @include('users.accounts.js._delete')
@@ -150,6 +149,3 @@
     </script>
 
 @endsection
-
-
-

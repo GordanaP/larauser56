@@ -61,9 +61,7 @@ trait HasSlug
      */
     protected function getSlug($name)
     {
-        $currName = $name ?: Auth::user()->name;
-
-        return strtolower($this->name) === strtolower($currName) ?  $this->slug : static::uniqueNameSlug($currName);
+        return strtolower($this->name) === strtolower($name) ?  $this->slug : static::uniqueNameSlug($name);
     }
 
 }

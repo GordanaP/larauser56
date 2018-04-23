@@ -243,12 +243,10 @@ function clearErrorOnNewInput()
 
         var id = $(this).parents(':eq(1)').attr('id');
         var name = $(this).parents(':eq(1)').attr('name');
-        // var name = $(this).attr('name');
 
-        var splitted = name.split("-")
+        var splitted = name ? name.split("-") : ''
         var splitted_name = splitted[1]
 
-        // clearError(splitted_name)
         clearError(name)
         clearError(id)
     })
@@ -515,4 +513,9 @@ function getUserRoles(roles)
     })
 
     return roleIds
+}
+
+function getCheckedValue(form)
+{
+    return form.find('[name="create-password"]:checked').val()
 }

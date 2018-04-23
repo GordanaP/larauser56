@@ -17,6 +17,7 @@
                     </p>
 
                     <!-- Role -->
+                    @if ($roles)
                     <div class="form-group">
                         <label for="_role_id">Role</label>
                         <select class="role_id form-control req_place" name="role_id[]" id="_role_id" multiple="multiple">
@@ -29,6 +30,7 @@
 
                         <span class="invalid-feedback role_id"></span>
                     </div>
+                    @endif
 
                     <!-- Name -->
                     <div class="form-group">

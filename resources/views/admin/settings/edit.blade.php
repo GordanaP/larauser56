@@ -32,7 +32,7 @@
 
     @include('users.avatars.partials._modal')
     @include('users.profiles.partials._modal')
-    @include('admin.settings.partials._modal')
+    @include('users.accounts.partials._editModal')
 
 @endsection
 
@@ -45,12 +45,16 @@
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
 
         // Edit
-        var accountModal = $('#accountModal')
-        var accountForm = $('#accountForm')
+        var editAccountModal = $('#editAccountModal')
+        var editAccountForm = $('#editAccountForm')
         var accountFields = ['name', 'email', 'password']
 
-        accountModal.setAutofocus('_role_id')
-        accountModal.emptyModal(accountFields, accountForm)
+        var _unchanged_password = $('#_unchanged_password')
+        var _password = $("#_password")
+        _password.hide()
+
+        editAccountModal.setAutofocus('_role_id')
+        editAccountModal.emptyModal(accountFields, editAccountForm, _unchanged_password, _password)
 
         // Profile
         var profileModal = $('#profileModal')
@@ -70,7 +74,7 @@
         avatarModal.emptyModal(avatarFields, avatarForm)
 
         @include('admin.settings.js._edit')
-        @include('admin.settings.js._JSvalidate')
+        @include('admin.settings.js._JSvalidation')
 
         // Edit profile
         @include('users.profiles.js._edit')

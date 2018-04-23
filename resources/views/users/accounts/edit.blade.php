@@ -29,10 +29,16 @@
 
     <script>
 
-        $('.account-form').formValidation({
-            framework: 'bootstrap4',
+        var createAccountForm = $('.account-form')
 
-            @include('validators.accounts._fields')
+        createAccountForm.formValidation({
+            @include('validators.general._framework'),
+            fields: {
+                @include('validators.accounts.fields._name'),
+                @include('validators.accounts.fields._email'),
+                @include('validators.accounts.fields._password'),
+                @include('validators.accounts.fields._password_confirmation'),
+            }
         })
 
         @include('validators.accounts._removeSSfeedback')

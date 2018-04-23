@@ -1,4 +1,4 @@
-$(document).on('click', '#editAccount', function(){
+$(document).on('click', '#editAccount', function() {
 
     editAccountModal.modal('show')
 

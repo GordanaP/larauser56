@@ -16,10 +16,10 @@ class AccountPolicy
      * @param  \App\User  $model
      * @return mixed
      */
-    public function view(User $auth, User $model)
-    {
-        return $auth->is($model);
-    }
+    // public function view(User $auth, User $model)
+    // {
+    //     return $auth->is($model);
+    // }
 
     /**
      * Determine whether the user can access models.
@@ -41,7 +41,8 @@ class AccountPolicy
      */
     public function update(User $auth, User $model)
     {
-        return $auth->isAdmin() || $auth->is($model);
+        return $auth->isAdmin();
+        // return $auth->isAdmin() || $auth->is($model);
     }
 
     /**
@@ -53,6 +54,7 @@ class AccountPolicy
      */
     public function delete(User $auth, User $model)
     {
-        return $auth->isAdmin() || $auth->is($model);
+        return $auth->isAdmin();
+        // return $auth->isAdmin() || $auth->is($model);
     }
 }
