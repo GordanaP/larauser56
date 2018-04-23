@@ -25,16 +25,6 @@
     <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
-
-        $('.account-form').formValidation({
-            framework: 'bootstrap4',
-
-            @include('validators.accounts._fields')
-
-        })
-
-        @include('validators.accounts._removeSSfeedback')
-
+        @include('validators.auth._register')
     </script>
-
 @endsection

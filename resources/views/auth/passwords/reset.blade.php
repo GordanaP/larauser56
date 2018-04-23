@@ -27,9 +27,6 @@
     <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
 
     <script>
-
         @include('validators.auth._reset')
-
     </script>
-
 @endsection

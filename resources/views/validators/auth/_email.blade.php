@@ -1,10 +1,5 @@
 $('.request-token-form, .forgot-password-form').formValidation({
-    framework: 'bootstrap4',
-    icon: {
-        valid: 'fa fa-check',
-        invalid: 'fa fa-times',
-        validating: 'fa fa-refresh'
-    },
+    @include('validators.general._framework'),
     fields: {
         email: {
             validators: {
@@ -18,5 +13,16 @@ $('.request-token-form, .forgot-password-form').formValidation({
         },
     }
 })
+.on('err.field.fv', function(e, data) {
 
-@include('validators.accounts._removeSSfeedback')
+    var invalidFields = data.fv.getInvalidFields()
+
+    removeServerSideValidationFeedback(invalidFields)
+
+})
+.on('success.field.fv', function(e, data) {
+
+    var validFields = data.element
+
+    removeServerSideValidationFeedback(validFields)
+});

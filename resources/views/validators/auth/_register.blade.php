@@ -1,14 +1,10 @@
-$('.login-form').formValidation({
+$('.account-form').formValidation({
     @include('validators.general._framework'),
     fields: {
+        @include('validators.accounts.fields._name'),
         @include('validators.accounts.fields._email'),
-        password: {
-            validators: {
-                notEmpty: {
-                    message: 'The password is required.'
-                },
-            }
-        },
+        @include('validators.accounts.fields._password_register'),
+        @include('validators.accounts.fields._password_confirmation'),
     }
 })
 .on('err.field.fv', function(e, data) {

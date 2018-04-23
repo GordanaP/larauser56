@@ -1,10 +1,5 @@
 $('.reset-password-form').formValidation({
-    framework: 'bootstrap4',
-    icon: {
-        valid: 'fa fa-check',
-        invalid: 'fa fa-times',
-        validating: 'fa fa-refresh'
-    },
+    @include('validators.general._framework'),
     fields: {
         email: {
             validators: {
@@ -16,23 +11,20 @@ $('.reset-password-form').formValidation({
                 },
             }
         },
-        password: {
-            validators: {
-                stringLength: {
-                    min: 6,
-                    message: 'The password must be at least 6 characters long.'
-                }
-            }
-        },
-        password_confirmation: {
-            validators: {
-                identical: {
-                    field: 'password',
-                    message: 'This value must match the password.'
-                }
-            }
-        },
+        @include('validators.accounts.fields._password_register'),
+        @include('validators.accounts.fields._password_confirmation'),
     }
 })
+.on('err.field.fv', function(e, data) {
 
-@include('validators.accounts._removeSSfeedback')
+    var invalidFields = data.fv.getInvalidFields()
+
+    removeServerSideValidationFeedback(invalidFields)
+
+})
+.on('success.field.fv', function(e, data) {
+
+    var validFields = data.element
+
+    removeServerSideValidationFeedback(validFields)
+})

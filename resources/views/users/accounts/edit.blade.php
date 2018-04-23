@@ -40,8 +40,19 @@
                 @include('validators.accounts.fields._password_confirmation'),
             }
         })
+        .on('err.field.fv', function(e, data) {
 
-        @include('validators.accounts._removeSSfeedback')
+            var invalidFields = data.fv.getInvalidFields()
+
+            removeServerSideValidationFeedback(invalidFields)
+
+        })
+        .on('success.field.fv', function(e, data) {
+
+            var validFields = data.element
+
+            removeServerSideValidationFeedback(validFields)
+        });
 
     </script>
 

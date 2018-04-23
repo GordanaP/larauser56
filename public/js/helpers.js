@@ -519,3 +519,5 @@ function getCheckedValue(form)
 {
     return form.find('[name="create-password"]:checked').val()
 }
+
+
