@@ -515,9 +515,9 @@ function getUserRoles(roles)
     return roleIds
 }
 
-function getCheckedValue(form)
+function getCheckedValue(form, fieldName)
 {
-    return form.find('[name="create-password"]:checked').val()
+    return form.find('input[name="'+fieldName+'"]:checked').val()
 }
 
 

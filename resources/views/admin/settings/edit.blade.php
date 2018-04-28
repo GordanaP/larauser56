@@ -73,19 +73,19 @@
         avatarModal.setAutofocus('avatar_options')
         avatarModal.emptyModal(avatarFields, avatarForm)
 
-        @include('admin.settings.js._edit')
+        @include('users.accounts.js._edit')
         @include('admin.settings.js._JSvalidation')
 
         // Edit profile
         @include('users.profiles.js._edit')
 
+        // Update profile
+        @include('users.profiles.js._JSvalidation')
+
         // Delete profile
         @include('users.profiles.js._delete')
 
         @include('users.profiles.js._destroy')
-
-        // Save profile
-        @include('users.profiles.js._JSvalidation')
 
         //Edit avatar
         @include('users.avatars.js._edit')

@@ -4,7 +4,7 @@ password: {
             message: 'Please give the password to the user',
             callback: function(value, validator, $field) {
 
-                var checked = getCheckedValue(editAccountForm)
+                var checked = getCheckedValue(editAccountForm, 'create-password')
 
                 return (checked !== 'manual') ? true : (value !== '')
             }

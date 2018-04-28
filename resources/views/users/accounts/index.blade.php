@@ -59,11 +59,11 @@
 
         var table = $('#accountsTable')
 
-        // ACCOUNT //
+        // ACCOUNT
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
         var accountFields = ['role_id', 'name', 'email', 'password']
 
-        // Create
+        // Create account
         var createAccountModal = $('#createAccountModal')
         var createAccountForm = $('#createAccountForm')
         var auto_password = $('#auto_password')
@@ -73,7 +73,7 @@
         createAccountModal.setAutofocus('role_id')
         createAccountModal.emptyModal(accountFields, createAccountForm, auto_password, password)
 
-        // Edit
+        // Edit account
         var editAccountModal = $('#editAccountModal')
         var editAccountForm = $('#editAccountForm')
         var _unchanged_password = $('#_unchanged_password')

@@ -2,7 +2,7 @@
     @csrf
     @method('DELETE')
 
-    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the account?')">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete the profile?')">
         Delete profile
     </button>
 </form>

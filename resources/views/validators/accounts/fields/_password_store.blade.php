@@ -4,7 +4,7 @@ password: {
             message: 'Please give the password to the user',
             callback: function(value, validator, $field) {
 
-                var checked = getCheckedValue(createAccountForm)
+                var checked = getCheckedValue(createAccountForm, 'create-password')
 
                 return (checked == 'auto') ? true : (value !== '')
             }

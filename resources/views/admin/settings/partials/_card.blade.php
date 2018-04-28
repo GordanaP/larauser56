@@ -2,7 +2,7 @@
     <div class="card-body">
         <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
             <i class="fa fa-user mr-6"></i> <span class="mr-15">My account</span>
-            <button type="button" class="btn btn-warning btn-link" id="editMyAccount" value="{{Auth::user()->id }}">
+            <button type="button" class="btn btn-warning btn-link" id="editAccount" value="{{Auth::user()->id }}">
                 Edit
             </button>
         </h5>

@@ -3,7 +3,7 @@ $(document).on('click', '#editAccount', function() {
     editAccountModal.modal('show')
 
     var user = $(this).val() || $(this).attr('data-user')
-    var editAccountUrl = '/admin/accounts/' + user
+    var editAccountUrl = adminAccountsUrl + '/' + user
 
     $('#updateAccount').val(user)
 

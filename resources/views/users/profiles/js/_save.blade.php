@@ -14,7 +14,6 @@ $.ajax({
     success: function(response) {
         $('#myProfile').load(location.href + ' #myProfile')
         $('#myProfileName').load(location.href + ' #myProfileName')
-        $('#myProfile').load(location.href + ' #myProfile')
         successResponse(profileModal, response.message)
     },
     error: function(response) {

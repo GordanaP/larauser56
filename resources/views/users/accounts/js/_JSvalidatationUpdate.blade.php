@@ -13,7 +13,7 @@ editAccountForm
 })
 .on('change', '[name="create-password"]', function(e) {
 
-    // Revalidate the field on the opening
+    // Revalidate the field on display
     editAccountForm.formValidation('revalidateField', 'password');
 })
 .on('success.form.fv', function(e, data) {
