@@ -2,7 +2,7 @@
     <div class="card-body">
         <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
             <i class="fa fa-user mr-6"></i> <span class="mr-15">My account</span>
-            <button type="button" class="btn btn-warning btn-link" id="editAccount" value="{{Auth::user()->id }}">
+            <button type="button" class="btn btn-warning btn-link" id="editAccount" data-name="{{ Auth::user()->name }}" value="{{Auth::user()->id }}">
                 Edit
             </button>
         </h5>
@@ -24,7 +24,7 @@
         <div id="myProfile">
             <h5 class="card-title ls-1 text-uppercase text-bold-grey mb-15">
                 <i class="fa fa-user-o mr-6"></i> <span class="mr-15">My profile</span>
-                <button type="button" class="btn btn-warning btn-link" id="editProfile" value="{{Auth::user()->id }}">
+                <button type="button" class="btn btn-warning btn-link" id="editProfile"  data-name="{{ Auth::user()->name }}" value="{{Auth::user()->id }}">
                     {{ Auth::user()->hasProfile() ? 'Edit' : 'Create' }}
                 </button>
 

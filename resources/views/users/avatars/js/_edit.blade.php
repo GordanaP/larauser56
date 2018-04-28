@@ -16,7 +16,7 @@ $(document).on('click', '#editAvatar', function(){
         {
             var filename = response.filename ? response.filename : 'default.jpg'
 
-            avatarModal.find('#showAvatar').html(setAvatar(filename, 'image'))
+            avatarModal.find('#showAvatar').html(setAvatar(filename, 'image img-responsive rounded-circle'))
         }
     })
 })

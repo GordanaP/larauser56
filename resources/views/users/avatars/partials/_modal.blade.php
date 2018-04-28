@@ -1,4 +1,4 @@
-<div class="modal" tabindex="-1" role="dialog" id="avatarModal">
+<div class="modal admin-modal" tabindex="-1" role="dialog" id="avatarModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,8 +39,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-info" id="saveAvatar">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary btn-account admin-modal-btn" id="saveAvatar">Save changes</button>
+                    <button type="button" class="btn  btn-secondary admin-modal-btn-close" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>

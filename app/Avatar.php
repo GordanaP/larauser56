@@ -30,7 +30,7 @@ class Avatar extends Model
     {
         if ($data['avatar_options'] == 1)
         {
-            $user->addAvatar($data, $path);
+            $user->addAvatar($user, $data, $path);
         }
         else if($data['avatar_options'] == 2)
         {

@@ -22,11 +22,11 @@ trait HasAvatar
      * @param array $data
      * @param string $path
      */
-    public function addAvatar($data, $path)
+    public function addAvatar($user, $data, $path)
     {
-        $this->changeAvatarPath($data, $path);
+        $this->changeAvatarPath($user, $data, $path);
 
-        $this->changeAvatar($data);
+        $this->changeAvatar($user, $data);
     }
 
     /**
@@ -46,12 +46,12 @@ trait HasAvatar
      *
      * @param  array $data
      */
-    protected function changeAvatarPath($data, $path)
+    protected function changeAvatarPath($user, $data, $path)
     {
         $myArray = $data->all();
 
         $file = $data['avatar'];
-        $fileName = $file->getClientOriginalName();
+        $fileName = setAvatarName($user->id, $file);
 
         $this->removeAvatarFromDestination($path);
         $file->move($path, $fileName);
@@ -62,11 +62,11 @@ trait HasAvatar
      *
      * @param  array $data
      */
-    protected function changeAvatar($data)
+    protected function changeAvatar($user, $data)
     {
         $avatar = $this->avatar ?: new Avatar;
 
-        $avatar->filename = $data['avatar']->getClientOriginalName();
+        $avatar->filename = setAvatarName($user->id, $data['avatar']);
 
         $this->saveAvatar($avatar);
     }

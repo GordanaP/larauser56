@@ -66,3 +66,8 @@ function setAvatar($user)
 
     return 'images/avatars/'.$avatar;
 }
+
+function setAvatarName($userId, $file)
+{
+    return $userId.'-'.$file->getClientOriginalName();
+}
