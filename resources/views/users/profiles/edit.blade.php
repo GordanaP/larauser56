@@ -19,7 +19,7 @@
         </div>
 
         <div class="card-body">
-            @include('users.profiles.forms._update')
+            @include('users.profiles.forms._edit')
         </div>
     </div>
 

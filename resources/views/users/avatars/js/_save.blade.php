@@ -10,12 +10,15 @@ $.ajax({
     data : formData,
     contentType: false,
     processData: false,
-    success: function(response) {
+    success: function(response)
+    {
         if(datatable) {
             datatable.ajax.reload()
         }
+
         $('#displayUserAvatar').load(location.href + ' #displayUserAvatar')
         $('#myAvatar').load(location.href + ' #myAvatar')
+
         successResponse(avatarModal, response.message)
     },
     error: function(response)

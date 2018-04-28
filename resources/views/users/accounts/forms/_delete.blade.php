@@ -1,7 +1,7 @@
-<form action="{{ route('users.accounts.destroy', $user) }}" method="POST">
+<form action="{{ route('users.accounts.destroy') }}" method="POST">
 
-    @method('DELETE')
     @csrf
+    @method('DELETE')
 
     <button type="submit" class="btn" onclick="return confirm('Are you sure you want to delete the account?')">
         Delete account
