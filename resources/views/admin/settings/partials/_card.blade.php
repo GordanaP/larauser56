@@ -29,7 +29,7 @@
                 </button>
 
                 @if (Auth::user()->hasProfile())
-                    <button type="button" class="btn btn-danger btn-link" id="destroyProfile" value="{{Auth::user()->id }}">
+                    <button type="button" class="btn btn-danger btn-link admin-modal-btn-delete" value="{{Auth::user()->id }}">
                         Delete
                     </button>
                 @endif

@@ -10,7 +10,7 @@
 
 @section('content')
 
-    @component('components.admin.main_content')
+    @component('components.admin.main')
         @slot('title')
             <span>Accounts</span>
             <button class="btn btn-warning text-uppercase" id="createAccount">New account</button>
@@ -21,7 +21,6 @@
         @endslot
     @endcomponent
 
-    <!-- Account Modals -->
     @can('access', 'App\User')
         @include('users.accounts.partials.modals._create')
         @include('users.accounts.partials.modals._edit')

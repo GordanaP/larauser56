@@ -2,10 +2,6 @@
 
 @section('title', '| Admin | Settings')
 
-@section('links')
-    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
-@endsection
-
 @section('content')
 
     <div class="pb-2 col-md-12">
@@ -37,14 +33,11 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
-    <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
-
     <script>
 
         var adminAccountsUrl = "{{ route('admin.accounts.index') }}"
 
-        // Edit
+        // Edit Account
         var editAccountModal = $('#editAccountModal')
         var editAccountForm = $('#editAccountForm')
         var accountFields = ['name', 'email', 'password']
@@ -73,7 +66,10 @@
         avatarModal.setAutofocus('avatar_options')
         avatarModal.emptyModal(avatarFields, avatarForm)
 
+        // Edit account
         @include('users.accounts.js._edit')
+
+        // Update account
         @include('admin.settings.js._JSvalidation')
 
         // Edit profile
@@ -85,8 +81,6 @@
         // Delete profile
         @include('users.profiles.js._delete')
 
-        @include('users.profiles.js._destroy')
-
         //Edit avatar
         @include('users.avatars.js._edit')
 
@@ -94,6 +88,5 @@
         @include('users.avatars.js._JSvalidate')
 
     </script>
-
 @endsection
 

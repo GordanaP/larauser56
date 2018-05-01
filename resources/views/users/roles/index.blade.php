@@ -2,13 +2,9 @@
 
 @section('title', '| Admin | Roles')
 
-@section('links')
-    <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
-@endsection
-
 @section('content')
 
-    @component('components.admin.main_content')
+    @component('components.admin.main')
         @slot('title')
             <span>Roles</span>
             <button class="btn btn-warning" id="createRole">New role</button>
@@ -25,9 +21,6 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
-    <script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
-
     <script>
 
         var roleModal = $("#roleModal")
