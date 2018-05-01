@@ -8,18 +8,12 @@
     </li>
 
     <li class="list-group-item side-list-group-item">
-        <form action="{{ route('users.accounts.destroy') }}" method="POST">
-            @csrf
-            @method("DELETE")
-
-            <button type="submit" class="btn-delete-account" onclick="return confirm('Are you sure you want to delete your account?')">
-                Delete account
-            </button>
-        </form>
+        @include('users.accounts.partials.forms._delete')
     </li>
 </ul>
 
 <p class="side-list-label">My profile</p>
+
 <ul class="list-group side-list">
     <li class="list-group-item side-list-group-item {{ set_active_link('myprofile', 2) }}">
         <a href="{{ route('users.profiles.edit') }}" class="ml-6">

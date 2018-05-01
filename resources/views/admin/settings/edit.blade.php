@@ -30,9 +30,9 @@
         </div>
     </div>
 
-    @include('users.avatars.partials._modal')
-    @include('users.profiles.partials._modal')
-    @include('users.accounts.partials._editModal')
+    @include('users.avatars.partials.modals._edit')
+    @include('users.profiles.partials.modals._edit')
+    @include('users.accounts.partials.modals._edit')
 
 @endsection
 

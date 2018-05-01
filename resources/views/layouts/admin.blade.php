@@ -3,6 +3,7 @@
     <head>
         @include('partials.top._header')
 
+        <link rel="stylesheet" href="{{ asset('vendor/formvalidation/dist/css/formValidation.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
 
         @yield('links')

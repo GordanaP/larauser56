@@ -51,4 +51,17 @@ trait HasAccount
 
         $this->save();
     }
+
+    /**
+     * Delete the account.
+     *
+     * @param  string $path
+     * @return void
+     */
+    public function deleteAccount($path)
+    {
+        $this->removeAvatarFromDestination($path);
+
+        $this->delete();
+    }
 }

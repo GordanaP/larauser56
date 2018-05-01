@@ -77,10 +77,11 @@ trait HasAvatar
      * @param string $path
      *
      */
-    protected function removeAvatarFromDestination($path)
+    public function removeAvatarFromDestination($path)
     {
         $this->avatar ? unlink($path .'/' .$this->avatar->filename) : '';
     }
+
 
     /**
      * Save the avatar in the database.

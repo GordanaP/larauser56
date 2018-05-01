@@ -51,7 +51,7 @@
 <!-- Delete button -->
 @if ($user->profile)
          <div class="form-group ml-6">
-            @include('users.profiles.forms._delete')
+            @include('users.profiles.partials.forms._delete')
         </div>
     </div>
 @endif

@@ -22,4 +22,4 @@ editAccountForm
     e.preventDefault();
 
     @include('users.accounts.js._update')
-});
+})

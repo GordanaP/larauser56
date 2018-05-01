@@ -16,6 +16,8 @@ class AccountController extends Controller
 {
     use ModelFinder;
 
+    protected $avatarPath = 'images/avatars';
+
     /**
      * Create new controller instance.
      *
@@ -141,12 +143,12 @@ class AccountController extends Controller
 
             $user = User::findBy($userId, 'id');
 
-            $user->delete();
+            $user->deleteAccount($this->avatarPath);
 
             return message('The account has been deleted.');
         }
 
-        Auth::user()->delete();
+        Auth::user()->deleteAccount($this->avatarPath);
 
         return $this->deleted();
     }

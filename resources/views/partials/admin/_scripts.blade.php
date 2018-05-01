@@ -1,3 +1,6 @@
+<script src="{{ asset('vendor/formvalidation/dist/js/formValidation.min.js') }}"></script>
+<script src="{{ asset('vendor/formvalidation/dist/js/framework/bootstrap4.min.js') }}"></script>
+
 <script>
     $.ajaxSetup({
         headers: {
