@@ -12,6 +12,16 @@
     </li>
 </ul>
 
+<p class="side-list-label">My addresses</p>
+
+<ul class="list-group side-list">
+    <li class="list-group-item side-list-group-item {{ set_active_link('myaddresses', 2) }}">
+        <a href="#" class="ml-6">
+            Edit addresses
+        </a>
+    </li>
+</ul>
+
 <p class="side-list-label">My profile</p>
 
 <ul class="list-group side-list">

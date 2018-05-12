@@ -51,6 +51,14 @@ Route::prefix('settings')->namespace('User')->name('users.')->group(function() {
      */
     Route::get('/myavatar', 'AvatarController@edit')->name('avatars.edit');
     Route::put('/myavatar', 'AvatarController@update')->name('avatars.update');
+
+    /**
+     * Address
+     */
+    Route::get('/myaddresses', 'AddressController@show')->name('addresses.show');
+    Route::put('/myaddresses', 'AddressController@update')->name('addresses.update');
+    Route::delete('/myaddresses', 'AddressController@destroy')->name('addresses.destroy');
+    Route::get('/myaddresses/edit', 'AddressController@edit')->name('addresses.edit');
 });
 
 /**

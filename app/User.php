@@ -93,6 +93,21 @@ class User extends Authenticatable
         return $this->hasOne(ActivationToken::class);
     }
 
+    public function getIdentifierAttribute()
+    {
+        return hash('sha256', $this->id .config('app.key'));
+    }
+
+    /**
+     * Get the addresses that belong to the user.
+     *
+     * @return  \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'identifier', 'identifier');
+    }
+
     /**
      * Find the user by the attribute.
      *
